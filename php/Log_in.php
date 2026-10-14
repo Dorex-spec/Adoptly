@@ -1,0 +1,590 @@
+<?php
+session_start();
+
+$popupType = '';
+$popupTitle = '';$popupMessage = '';
+
+// 1. GET Request: Check if an account is already signed in for this session
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['loggedInUser'])) {$popupType = 'error';
+    $popupTitle = 'Already Signed In';$popupMessage = 'Account has already signed in.';
+}
+
+// 2. POST Request: Process login form or social prompt submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+
+    if (isset($_SESSION['loggedInUser'])) {$popupType = 'error';
+        $popupTitle = 'Log In Error';$popupMessage = 'Account has already signed in.';
+    } elseif (empty($email) || !str_ends_with(strtolower($email), '@gmail.com')) {$popupType = 'error';
+        $popupTitle = 'Log In Error';$popupMessage = 'Invalid account. You must use an @gmail.com address.';
+    } else {
+        $_SESSION['loggedInUser'] = strtolower($email);$popupType = 'success';
+        $popupTitle = 'Login Successful';$popupMessage = '✔️ Your account is now logged in for this session.';
+    }
+}
+?>
+<!DOCTYPE html>
+<html class="h-full bg-[#F5F2F0]" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Adoptly - Log In &amp; Journey Continuation</title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
+  <!-- Tailwind CSS v3 with Forms & Container Queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#E05A4F',
+              hover: '#C94B41',
+              tint: '#FFE1DD',
+              subtle: '#FFF5F4',
+            },
+            charcoal: {
+              DEFAULT: '#1F1F1F',
+              secondary: '#2A2A2A',
+              muted: '#5A5550',
+              border: '#E5E0DC',
+              borderDark: '#D4CECA',
+            }
+          },
+          boxShadow: {
+            'soft-card': '0 20px 40px -15px rgba(42, 36, 33, 0.07), 0 0 1px 1px rgba(229, 224, 220, 0.8)',
+            'btn-glow': '0 8px 20px -4px rgba(224, 90, 79, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+  <style data-purpose="custom-wireframe-aesthetics">
+    .wireframe-pattern {
+      background-color: #F8F5F2;
+      background-image:
+        linear-gradient(to top right, transparent calc(50% - 1px), #E2DDD8 calc(50% - 1px), #E2DDD8 calc(50% + 1px), transparent calc(50% + 1px)),
+        linear-gradient(to bottom right, transparent calc(50% - 1px), #E2DDD8 calc(50% - 1px), #E2DDD8 calc(50% + 1px), transparent calc(50% + 1px));
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #E5E0DC;
+      border-radius: 9999px;
+    }
+
+    :root {
+      --coral: #E05A4F;
+    }
+
+    /* Heart button (same as Adoption Process) */
+      .fav { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        width: 36px; 
+        height: 36px; 
+        border: 0; 
+        border-radius: 50%; 
+        background: #FFE1DD; 
+        color: var(--coral); 
+        cursor: pointer; 
+        transition: all .2s ease; 
+      }
+
+      .fav:hover { 
+        background: var(--coral); 
+        color: #fff; 
+      }
+
+    /* Suppress browser's native built-in password reveal icon */
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear,
+    input[type="text"]::-ms-reveal,
+    input[type="text"]::-ms-clear {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    /* Modal / Popup Styles */
+    .popup-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background-color: rgba(0, 0, 0, 0.45) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      display: none;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 99999 !important;
+    }
+
+    .popup-card {
+      background: #ffffff !important;
+      border-radius: 20px !important;
+      padding: 28px !important;
+      max-width: 400px !important;
+      width: 100% !important;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
+      animation: popupFadeIn 0.2s ease-out;
+    }
+
+    @keyframes popupFadeIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .prompt-input {
+      width: 100% !important;
+      padding: 12px 14px !important;
+      border: 1px solid #e05a4f !important;
+      border-radius: 10px !important;
+      font-size: 14px !important;
+      outline: none !important;
+      margin-top: 12px !important;
+      margin-bottom: 20px !important;
+      box-sizing: border-box !important;
+    }
+
+    .prompt-input:focus {
+      box-shadow: 0 0 0 3px rgba(224, 90, 79, 0.15) !important;
+    }
+
+    .popup-cancel-btn {
+      background: #f3f4f6 !important;
+      color: #4b5563 !important;
+      border: none !important;
+      padding: 10px 18px !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+    }
+
+    .popup-submit-btn {
+      background: #e05a4f !important;
+      color: #ffffff !important;
+      border: none !important;
+      padding: 10px 18px !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      font-weight: 600 !important;
+      font-size: 13px !important;
+    }
+
+    .popup-close-btn {
+      background: #e05a4f !important;
+      color: #ffffff !important;
+      border: none !important;
+      padding: 10px 24px !important;
+      border-radius: 10px !important;
+      cursor: pointer !important;
+      font-weight: 600 !important;
+      width: 100% !important;
+      font-size: 14px !important;
+    }
+  </style>
+</head>
+
+<body class="min-h-full flex flex-col font-sans text-charcoal bg-[#FAF7F5] antialiased selection:bg-brand selection:text-white">
+  <!-- MAIN HEADER SECTION -->
+  <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+
+      <!-- Brand Logo -->
+      <a class="flex items-center" href="#">
+        <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+          href="../php/Browse_page.php">Browse pets</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+          href="../php/Adoption_process.php">Adoption Process</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+          href="../php/DOnation.php">Donate</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+          href="../php/About_us.php">About</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4">
+        <!-- Homepage Coral Round Heart Button -->
+        <button class="fav" type="button" aria-label="View Saved Pets">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+          </svg>
+        </button>
+
+        <!-- Sign In Button -->
+        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition"
+          href="../php/Sign_in.php">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex items-center justify-center">
+    <!-- Unified Split Card Container -->
+    <div class="w-full bg-white rounded-3xl border border-charcoal-border shadow-soft-card overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[700px]">
+      
+      <!-- LEFT COLUMN: Form & Interactive Log In Experience (7 cols) -->
+      <section aria-labelledby="signin-heading" class="lg:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-between">
+        <div>
+          <!-- Top Community Badge & Status -->
+          <div class="flex items-center justify-between mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-subtle border border-brand-tint text-brand">
+              <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+              Welcome Back • Adoptly Community
+            </div>
+          </div>
+
+          <!-- Headings -->
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-charcoal tracking-tight" id="signin-heading">Log In to Adoptly</h1>
+          <p class="mt-2 text-[15px] text-charcoal-muted leading-relaxed">
+            Enter your credentials to access your saved animals, ongoing applications, and shelter chats.
+          </p>
+
+          <!-- Social Authentication Buttons -->
+          <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Google Log-In Button -->
+            <button onclick="openSocialPrompt('Google')"
+              class="flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-charcoal-border hover:border-charcoal-borderDark hover:bg-[#FAF8F6] text-sm font-medium text-charcoal transition-all cursor-pointer"
+              type="button">
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.67v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.16z" fill="#4285F4"></path>
+                <path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.34 24 12 24z" fill="#34A853"></path>
+                <path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.16 0 9.97 0 12s.45 3.84 1.24 5.42l4.04-3.15z" fill="#FBBC05"></path>
+                <path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+              </svg>
+              <span>Log in with Google</span>
+            </button>
+
+            <!-- Apple Log-In Button -->
+            <button onclick="openSocialPrompt('Apple')"
+              class="flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-charcoal-border hover:border-charcoal-borderDark hover:bg-[#FAF8F6] text-sm font-medium text-charcoal transition-all cursor-pointer"
+              type="button">
+              <svg class="w-4 h-4 fill-current text-charcoal" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.62-.75 1.04-1.8 0.92-2.84-.9.04-2 .6-2.65 1.36-.58.68-1.09 1.75-.95 2.78 1.01.08 2.06-.55 2.68-1.3z"></path>
+              </svg>
+              <span>Log in with Apple</span>
+            </button>
+          </div>
+
+          <!-- Divider: Or with email -->
+          <div class="relative my-7">
+            <div aria-hidden="true" class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-charcoal-border"></div>
+            </div>
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-white px-4 text-charcoal-muted tracking-widest font-semibold">Or log in with email</span>
+            </div>
+          </div>
+
+          <!-- Email Form -->
+          <form class="space-y-4" id="loginForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <!-- Email Address Field -->
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-1.5" for="email">
+                Email Address <span class="text-brand">*</span>
+              </label>
+              <div class="relative rounded-xl">
+                <input class="w-full rounded-xl border-charcoal-border pr-10 py-3 text-sm font-normal text-charcoal placeholder:text-charcoal-muted/60 focus:border-brand focus:ring-2 focus:ring-brand/20 bg-[#FCFAF9] transition"
+                  id="email" name="email" placeholder="e.g. sarah.jenkins@example.com" required type="email">
+                <!-- Validation Green Check Icon -->
+                <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-emerald-500">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal" for="password">
+                  Password <span class="text-brand">*</span>
+                </label>
+              </div>
+              <div class="relative rounded-xl">
+                <input class="w-full rounded-xl border-charcoal-border pr-10 py-3 text-sm font-normal text-charcoal placeholder:text-charcoal-muted/60 focus:border-brand focus:ring-2 focus:ring-brand/20 bg-[#FCFAF9] transition"
+                  id="password" name="password" placeholder="••••••••••••" required type="password" oninput="handlePasswordInput()">
+                <!-- Show / Hide Password Eye Toggle -->
+                <button aria-label="Toggle password visibility"
+                  class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-charcoal-muted hover:text-charcoal focus:outline-none cursor-default pointer-events-none"
+                  id="togglePassword" type="button" onclick="togglePasswordVisibility()">
+                  <svg class="h-5 w-5 stroke-[1.8]" fill="none" id="eyeIcon" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Utilities: Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between pt-1">
+              <label class="flex items-center gap-2.5 cursor-pointer">
+                <input checked class="w-4 h-4 rounded text-brand border-charcoal-border focus:ring-brand focus:ring-offset-0 focus:ring-1 cursor-pointer" type="checkbox">
+                <span class="text-xs sm:text-sm text-charcoal-muted font-normal select-none">Remember me on this device</span>
+              </label>
+              <a class="text-xs sm:text-sm font-semibold text-brand hover:text-brand-hover hover:underline" href="#">
+                Forgot password?
+              </a>
+            </div>
+
+            <!-- Primary Submission CTA -->
+            <div class="pt-2">
+              <button class="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-brand hover:bg-brand-hover active:scale-[0.99] text-white font-semibold text-base shadow-btn-glow transition-all duration-150 cursor-pointer" id="submitLoginBtn" type="submit">
+                <span id="submitBtnText">Log In to Account</span>
+                <span class="transition-transform duration-200 group-hover:translate-x-1" id="arrowIcon">→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Footer Direct Link -->
+        <div class="pt-6 mt-6 border-t border-charcoal-border/70 text-center">
+          <p class="text-sm text-charcoal-muted">
+            Don't have an account yet?
+            <a class="font-bold text-brand hover:text-brand-hover hover:underline ml-1 inline-flex items-center gap-1" href="Sign_in.php">
+              Create a free account →
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: Rescue Pet Photo, Social Proof & Reassurance (5 cols) -->
+      <section aria-label="Shelter Partners and Social Proof" class="lg:col-span-5 bg-[#FAF7F5] border-t lg:border-t-0 lg:border-l border-charcoal-border p-8 sm:p-12 lg:p-12 flex flex-col justify-between relative overflow-hidden">
+        <div>
+          <!-- Title & Mission Recap -->
+          <div class="space-y-2 mb-6">
+            <h2 class="text-2xl sm:text-3xl font-black text-charcoal leading-tight">
+              Welcome Back to Your <span class="text-brand">Journey Home.</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              Pick up where you left off. Review your saved companions, check submitted application statuses, and connect directly with verified shelter partners.
+            </p>
+          </div>
+
+          <!-- Rescue Pet Photo Section -->
+          <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-sm border border-charcoal-border">
+            <img src="../photos/for log in&sign in/Log_in photo.webp" alt="Rescue pets with owners" class="w-full h-full object-cover">
+
+            <!-- Certification Tag Pill Overlay -->
+            <div class="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/95 backdrop-blur-sm text-emerald-700 border border-emerald-200 shadow-sm">
+              <svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              100% Certified 501(c)(3) Shelters
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Proof Metric Card & Wishlist Reassurance -->
+        <div class="mt-6 space-y-3">
+          <div class="bg-white rounded-2xl p-4 border border-charcoal-border shadow-sm flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-subtle flex items-center justify-center shrink-0 text-brand">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <circle cx="7.5" cy="7" r="2.2"></circle>
+                <circle cx="16.5" cy="7" r="2.2"></circle>
+                <circle cx="4.5" cy="12.5" r="2"></circle>
+                <circle cx="19.5" cy="12.5" r="2"></circle>
+                <path d="M12 11.5c-3.2 0-5.5 2.1-5.5 4.8 0 2.2 1.8 3.7 3.5 3.7 1.3 0 1.5-.7 2-.7.5 0 .7.7 2 .7 1.7 0 3.5-1.5 3.5-3.7 0-2.7-2.3-4.8-5.5-4.8z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs sm:text-sm font-medium text-charcoal">
+                Over <strong class="font-bold text-brand">14,200+</strong> pets matched with loving families nationwide.
+              </p>
+              <p class="text-[11px] text-charcoal-muted mt-0.5">Secure, verified adoption process</p>
+            </div>
+          </div>
+
+          <div class="bg-brand-subtle/50 rounded-xl px-4 py-2.5 border border-brand-tint flex items-center justify-between text-xs text-brand font-medium">
+            <span class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+              4 companion animals on your wishlist are waiting
+            </span>
+            <span class="underline font-semibold cursor-pointer">Preview</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- MAIN FOOTER -->
+  <footer class="w-full bg-[#1F1F1F] text-white border-t border-neutral-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-neutral-800">
+        <div class="lg:col-span-2 space-y-4">
+          <a href="#" class="inline-block">
+            <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-9 w-auto object-contain">
+          </a>
+          <p class="text-sm text-neutral-400 max-w-sm leading-relaxed">
+            Helping rescue pets find safe, loving homes and lifelong companionship. Partnered with certified no-kill shelters nationwide.
+          </p>
+          <div aria-label="Social links" class="flex items-center gap-2 pt-2">
+            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">f</a>
+            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">t</a>
+            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">in</a>
+            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">li</a>
+            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">yt</a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Browse</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li><a class="hover:text-brand transition-colors" href="#">Browse Pets</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">Adoption Process</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">Success Stories</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">About Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Resources</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li><a class="hover:text-brand transition-colors" href="#">FAQ</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">Pet Care Tips</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">Volunteer</a></li>
+            <li><a class="hover:text-brand transition-colors" href="#">Support Center</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Contact</h3>
+          <ul class="space-y-2 text-sm text-neutral-400">
+            <li><a class="hover:text-brand transition-colors" href="mailto:helloadoptly@gmail.com">helloadoptly@gmail.com</a></li>
+            <li class="text-neutral-300 font-medium">+1 (234) 567-890</li>
+            <li>New York, USA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-400 gap-4">
+        <p>© 2026 Adoptly. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a class="hover:text-brand transition-colors" href="#">Privacy Policy</a>
+          <span>|</span>
+          <a class="hover:text-brand transition-colors" href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 1. Social Login Input Prompt Popup -->
+  <div id="socialPromptPopup" class="popup-overlay">
+    <div class="popup-card">
+      <h3 id="socialPromptTitle" style="font-size: 20px; font-weight: 800; color: #1c1917; margin: 0 0 8px 0;">Sign in with Google</h3>
+      <p id="socialPromptMessage" style="font-size: 14px; color: #6b7280; margin: 0 0 16px 0;">Please enter your Google account to continue:</p>
+      <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <input type="email" name="email" id="socialEmailInput" class="prompt-input" placeholder="e.g. user@gmail.com" required>
+        <div style="display: flex; justify-content: flex-end; gap: 12px;">
+          <button type="button" class="popup-cancel-btn" onclick="closeSocialPrompt()">Cancel</button>
+          <button type="submit" class="popup-submit-btn">OK</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Status Pop-up Notification Modal -->
+  <div id="customPopup" class="popup-overlay">
+    <div class="popup-card" style="text-align: center !important;">
+      <div id="popupIcon" style="font-size: 42px; margin-bottom: 12px;"></div>
+      <h3 id="popupTitle" style="font-size: 18px; font-weight: 700; color: #1c1917; margin: 0 0 8px 0;"></h3>
+      <p id="popupMessage" style="font-size: 13px; color: #6b7280; margin: 0 0 20px 0;"></p>
+      <button onclick="closePopup()" class="popup-close-btn" type="button">OK</button>
+    </div>
+  </div>
+
+  <!-- JavaScript Handlers -->
+  <script>
+    function handlePasswordInput() {
+      const passwordInput = document.getElementById('password');
+      const toggleBtn = document.getElementById('togglePassword');
+
+      if (passwordInput.value.length > 0) {
+        toggleBtn.classList.remove('cursor-default', 'pointer-events-none');
+        toggleBtn.classList.add('cursor-pointer');
+      } else {
+        toggleBtn.classList.remove('cursor-pointer');
+        toggleBtn.classList.add('cursor-default', 'pointer-events-none');
+        passwordInput.type = 'password';
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      const eyeIcon = document.getElementById('eyeIcon');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858-5.908A8.982 8.982 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21M3 3l18 18" />
+        `;
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        `;
+      }
+    }
+
+    function openSocialPrompt(provider) {
+      document.getElementById('socialPromptTitle').innerText = 'Log in with ' + provider;
+      document.getElementById('socialPromptMessage').innerText = 'Please enter your ' + provider + ' account email to continue:';
+      document.getElementById('socialEmailInput').value = ''; 
+      document.getElementById('socialPromptPopup').style.display = 'flex';
+    }
+
+    function closeSocialPrompt() {
+      document.getElementById('socialPromptPopup').style.display = 'none';
+    }
+
+    function showPopup(type, title, message) {
+      const popup = document.getElementById('customPopup');
+      const icon = document.getElementById('popupIcon');
+
+      document.getElementById('popupTitle').innerText = title;
+      document.getElementById('popupMessage').innerText = message;
+
+      if (type === 'success') {
+        icon.innerHTML = '✔️';
+      } else {
+        icon.innerHTML = '⚠️';
+      }
+
+      popup.style.display = 'flex';
+    }
+
+    function closePopup() {
+      document.getElementById('customPopup').style.display = 'none';
+    }
+
+    <?php if (!empty($popupType)): ?>
+      document.addEventListener('DOMContentLoaded', function() {
+        showPopup('<?php echo $popupType; ?>', '<?php echo addslashes($popupTitle); ?>', '<?php echo addslashes($popupMessage); ?>');
+      });
+    <?php endif; ?>
+  </script>
+</body>
+</html>

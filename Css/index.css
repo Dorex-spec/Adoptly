@@ -1,0 +1,448 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* --- CLEAN GLOBAL RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    min-height: 100%;
+    background-color: white; 
+    overflow-x: hidden;
+}
+
+/* =========================================
+   HEADER / NAVBAR 
+========================================= */
+
+.navbar-bg {
+    width: 100%;
+    height: 80px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 9999; 
+    background-color: white; 
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 100%; 
+    height: 100%;
+    display: flex;
+    align-items: center; 
+    padding: 0 40px; 
+}
+
+/* --- Logo Group --- */
+.logo-group {
+    height: 35px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    text-decoration: none;
+}
+
+.logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; 
+    color: #E05A4F; 
+    font-size: 35px; 
+    line-height: 35px;
+    letter-spacing: 0;
+}
+
+.logo-img {
+    height: 35px; 
+    width: auto;
+    display: block;
+}
+
+/* --- Navigation Links --- */
+.nav-buttons {
+    /* CHANGED: Updated to your new 80px spacing preference */
+    margin-left: 180px; 
+}
+
+.nav-buttons ul {
+    display: flex;
+    flex-direction: row;
+    gap: 35px; 
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+    align-items: center; 
+}
+
+.nav-buttons a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; 
+    /* CHANGED: Updated to your new 20px size preference */
+    font-size: 20px; 
+    color: #000000; 
+    text-decoration: none; 
+    text-align: center; 
+    transition: opacity 0.2s ease; 
+}
+
+.nav-buttons a:hover {
+    opacity: 0.6;
+}
+
+/* =========================================
+   NEW: ACCOUNT ACTION GROUP
+========================================= */
+
+.account-action {
+    display: flex;
+    align-items: center; /* Ensures the heart and text center align vertically with the rest of the nav */
+    gap: 25px; /* Adds 25px of spacing between the items inside this group */
+    margin-left: 190px; /* 80px spacing from the main nav buttons group */
+}
+
+/* Heart Icon styling */
+.heart-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* The simple text button */
+.login-text-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px; /* 20px size */
+    color: #E05A4F; /* Requested color */
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.login-text-btn:hover {
+    opacity: 0.7;
+}
+
+/* The Sign In box button */
+.signin-box-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #FFFFFF; /* White text */
+    background-color: #E53835; /* Requested red box color */
+    
+    /* Using padding (top/bottom 16px, left/right 35px) to achieve a button shape */
+    padding: 10px 35px; 
+    border-radius: 20px; /* Corner radius of 20 */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.signin-box-btn:hover {
+    background-color: #c9302e; /* Slightly darker red on hover */
+}
+
+/*Hero Section*/
+
+    /* ==========================================================================
+    Hero Section
+    ========================================================================== */
+    .hero-section {
+    width: 100%;
+    background-color: #f9fafb;
+    }
+
+    .hero-background {
+    background-color: #BE362E;
+    color: white;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    position: relative;
+    overflow: visible;
+    }
+
+    .hero-content {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+    }
+
+    .hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem; 
+    padding-top: 25px; 
+    line-height: 1.3;
+    margin: 0;
+    }
+
+    .hero-title-highlight {
+    font-weight: 700;
+    color: white;
+    }
+
+    .hero-subtitle {
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: #fee2e2;
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    line-height: 1.5;
+    }
+
+    .desktop-break {
+    display: none;
+    }
+
+    /* Image Container Frame */
+    .hero-image-container {
+    margin-top: 2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: calc(48rem + 20px);
+    width: 100%;
+    height: calc(28rem + 10px);
+    border-radius: 1rem;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    }
+
+    /* Search Widget */
+    .search-widget {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 10;
+    max-width: calc(100% - 50px);
+    width: 90%;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    text-align: left;
+    border: 1px solid #f3f4f6;
+    }
+
+    .search-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: center;
+    }
+
+    .form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    }
+
+    .input-wrapper {
+    position: relative;
+    }
+
+    .form-input {
+    width: 100%;
+    font-size: 0.75rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    color: #374151;
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    font-family: inherit;
+    }
+
+    .form-input::placeholder {
+    color: #9ca3af;
+    }
+
+    .form-input:focus {
+    box-shadow: 0 0 0 1px #BE362E;
+    border-color: #BE362E;
+    }
+
+    .submit-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-top: 0.5rem;
+    }
+
+    .submit-btn {
+    width: 100%;
+    height: 2.5rem;
+    background-color: #BE362E;
+    color: white;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    }
+
+    .submit-btn:hover {
+    background-color: #a82e27;
+    }
+
+    .submit-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    }
+
+    /* ==========================================================================
+    Thousands of Pets Found Loving Homes Section
+    ========================================================================== */
+    .pets-homes-section {
+    width: 100%;
+    background-color: #ffffff;
+    padding-top: 25px;
+    padding-bottom: 4rem;
+    min-height: 22rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    }
+
+    .pets-homes-content {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+    width: 100%;
+    }
+
+    .pets-homes-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 0;
+    color: #111827;
+    }
+
+    /* Subtitle (Updated to 80% of title size) */
+    .pets-homes-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem; /* 80% of 1.5rem */
+    color: #000000;
+    margin-top: 1rem;
+    line-height: 1.5;
+    }
+
+    /* ==========================================================================
+    4 Icon Containers Below Subtitle
+    ========================================================================== */
+    .cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* 20px spacing between each container */
+    margin-top: 20px; /* 20px spacing from the subtitle */
+    width: 100%;
+    flex-wrap: wrap; /* Allows stacking cleanly on smaller screens */
+    }
+
+    .card-item {
+    flex: 1;
+    min-width: 180px;
+    max-width: 250px;
+    height: 160px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally centers the icon */
+    justify-content: flex-start; /* Upper aligned */
+    padding-top: 10px; /* 10px upper spacing for icon */
+    }
+
+    .card-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    /* Applies exact #E05A4F color to the black icons */
+    filter: invert(47%) sepia(43%) saturate(1461%) hue-rotate(319deg) brightness(95%) contrast(92%);
+    }
+
+
+
+    /* ==========================================================================
+    Responsive Breakpoints
+    ========================================================================== */
+    @media (min-width: 640px) {
+    .hero-title { font-size: 1.875rem; } 
+    .hero-subtitle { font-size: 1rem; }
+    .desktop-break { display: inline; }
+    .hero-image-container { height: calc(26rem + 10px); }
+    .search-widget { padding: 1.25rem; width: calc(100% - 50px); }
+    .search-form { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .form-group-large { grid-column: span 4 / span 4; }
+    .form-group-medium { grid-column: span 3 / span 3; }
+    .form-group-small { grid-column: span 1 / span 1; }
+    .form-input { font-size: 0.875rem; }
+    .submit-container { padding-top: 1rem; }
+
+    /* New Section Responsive Scaling */
+    .pets-homes-section { min-height: 25rem; }
+    .pets-homes-title { font-size: 1.875rem; }
+
+    .pets-homes-subtitle { 
+    font-size: 1.5rem; 
+    }
+    }
+
+    @media (min-width: 768px) {
+    .hero-title { font-size: 2.25rem; } 
+    .hero-image-container { height: calc(24rem + 10px); }
+
+    /* New Section Responsive Scaling */
+    .pets-homes-section { min-height: 28rem; }
+    .pets-homes-title { font-size: 2.25rem; }
+
+    .pets-homes-subtitle { 
+    font-size: 1.8rem; 
+    }
+    }
+
+    @media (min-width: 1024px) {
+    .hero-title { font-size: 2.5rem; } 
+    .hero-subtitle { font-size: 1.125rem; }
+
+    /* New Section Responsive Scaling */
+    .pets-homes-section { min-height: 30rem; }
+    .pets-homes-title { font-size: 2.5rem; }
+
+    .pets-homes-subtitle { 
+    font-size: 2rem; 
+    }
+    }

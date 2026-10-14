@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pet Shop</title>
+    <!-- Links to your external CSS file in the Css folder -->
+    <link rel="stylesheet" href="../Css/index.css">
+</head>
+<body>
+    <header class="navbar-bg">
+        <div class="navbar-container">
+            
+            <!-- Logo Group -->
+            <div class="logo-group">
+                <span class="logo-text">AD</span>
+                <img src="../photos/pawlogo.png" alt="Paw Logo" class="logo-img">
+                <span class="logo-text">TLY</span>
+            </div>
+
+            <!-- Navigation Buttons Group -->
+            <nav class="nav-buttons">
+                <ul>
+                    <li><a href="#">Browse pets</a></li>
+                    <li><a href="#">adoption process</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Shelters</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+
+            <!-- NEW: Account Action Group -->
+            <div class="account-action">
+                <!-- Make sure "Heart icon.png" is in your photos folder -->
+                <img src="../photos/Heart Icon.svg" alt="Favorites" class="heart-icon">
+                
+                <!-- Placeholder text for the #E05A4F button -->
+                <a href="#" class="login-text-btn">Log in</a>
+                
+                <!-- The Sign In box button -->
+                <a href="#" class="signin-box-btn">Sign in</a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- BEGIN: HeroSection -->
+    <section class="hero-section">
+        <!-- Full Width Background Wrapper -->
+        <div class="hero-background">
+        <div class="hero-content">
+            <!-- Main Hero Headings -->
+            <h1 class="hero-title">
+            The first time you see them, <span class="hero-title-highlight">you'll just know.</span>
+            </h1>
+            <p class="hero-subtitle">
+            You don't find the right animal. You recognize them. Browse<br class="desktop-break">
+            14,200+ rescue pets — free, no commitment, just a search.
+            </p>
+
+            <!-- Hero Pet Image Container -->
+            <div class="hero-image-container">
+            <!-- Hero Image -->
+            <img src="../photos/New_Hero_Bg.png" alt="Group of rescue pets in a box" class="hero-image">
+            
+            <!-- Search Filter Widget (Nested inside image container) -->
+            <div class="search-widget">
+                <form class="search-form">
+                <!-- Filter: Type of pet -->
+                <div class="form-group-large">
+                    <label class="form-label">Type of pet</label>
+                    <div class="input-wrapper">
+                    <select class="form-input">
+                        <option>All Species</option>
+                        <option>Dogs</option>
+                        <option>Cats</option>
+                        <option>Birds</option>
+                        <option>Rabbits</option>
+                    </select>
+                    </div>
+                </div>
+
+                <!-- Filter: Breed -->
+                <div class="form-group-large">
+                    <label class="form-label">Breed</label>
+                    <div class="input-wrapper">
+                    <select class="form-input">
+                        <option>Any Breed</option>
+                        <option>Labrador</option>
+                        <option>Golden Retriever</option>
+                        <option>Domestic Shorthair</option>
+                    </select>
+                    </div>
+                </div>
+
+                <!-- Filter: Location -->
+                <div class="form-group-medium">
+                    <label class="form-label">Location</label>
+                    <input class="form-input" placeholder="Enter City, State or Zip" type="text">
+                </div>
+
+                <!-- Search Submit Button -->
+                <div class="form-group-small submit-container">
+                    <button aria-label="Search" class="submit-btn" type="button">
+                    <svg class="submit-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <path d="m21 21-4.35-4.35" stroke-linecap="round"></path>
+                    </svg>
+                    </button>
+                </div>
+                </form>
+            </div>
+            <!-- END: Search Filter Widget -->
+
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- END: HeroSection -->
+
+<!-- BEGIN: Thousands of Pets Found Loving Homes Section -->
+    <section class="pets-homes-section">
+    <div class="pets-homes-content">
+        <h2 class="pets-homes-title">
+        Thousands of Pets have Found Loving homes
+        </h2>
+        <p class="pets-homes-subtitle">
+        We partnered with shelters and organizations to help animals find safe and caring homes faster.
+        </p>
+
+        <!-- 4 Icon Containers -->
+        <div class="cards-container">
+        <div class="card-item">
+            <img src="../photos/pawlogo.png" alt="Paw Icon" class="card-icon">
+        </div>
+        <div class="card-item">
+            <img src="../photos/House Icon.svg" alt="House Icon" class="card-icon">
+        </div>
+        <div class="card-item">
+            <img src="../photos/Heart Icon.svg" alt="Heart Icon" class="card-icon">
+        </div>
+        <div class="card-item">
+            <img src="../photos/headset Icon.svg" alt="Headset Icon" class="card-icon">
+        </div>
+        </div>
+    </div>
+    </section>
+<!-- END: Thousands of Pets Found Loving Homes Section -->
+</body>
+</html>*\

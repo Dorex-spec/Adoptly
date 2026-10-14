@@ -1,0 +1,41 @@
+/* Typography */
+body {
+  font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
+  background-color: #F8F6F5;
+  color: #262626;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Wireframe photo placeholders (diagonal crossline pattern) */
+.wireframe-box {
+  background-color: #F3EFEF;
+  position: relative;
+  overflow: hidden;
+}
+.wireframe-box::before,
+.wireframe-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.wireframe-box::before {
+  background: linear-gradient(to top right, transparent calc(50% - 1px), #DCD3D0 calc(50% - 1px), #DCD3D0 calc(50% + 1px), transparent calc(50% + 1px));
+}
+.wireframe-box::after {
+  background: linear-gradient(to bottom right, transparent calc(50% - 1px), #DCD3D0 calc(50% - 1px), #DCD3D0 calc(50% + 1px), transparent calc(50% + 1px));
+}
+
+/* Itago ang X lines kapag may picture na */
+.wireframe-box.has-image::before,
+.wireframe-box.has-image::after {
+  display: none;
+}
+
+.wireframe-box .pet-img {
+  z-index: 1;
+}
+

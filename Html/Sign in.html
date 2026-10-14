@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Adoptly - Sign In</title>
+    <!-- Tailwind CSS v3 with Forms & Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <!-- Tailwind Configuration -->
+    <script data-purpose="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            coral: '#E05A4F',
+                            coralHover: '#cc4b41',
+                            dark: '#1C1917',
+                            gray: '#6B7280',
+                            lightBg: '#FBF8F7',
+                            cardBg: '#FFF5F2',
+                            border: '#EBE5E2',
+                            inputBg: '#FAF8F7'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <!-- Typography and Custom Layout Styles -->
+    <style data-purpose="typography">
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #1F2937;
+            background-color: #F8F5F4;
+        }
+
+        :root {
+            --coral: #E05A4F;
+        }
+
+        /* Favorites Heart Button CSS */
+        .fav {
+            width: 36px;
+            height: 36px;
+            border: 0;
+            border-radius: 50%;
+            background: #FFE1DD;
+            color: var(--coral);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .fav:hover {
+            background: var(--coral);
+            color: #fff;
+            transform: scale(1.08);
+        }
+
+        /* Centered Full-Screen Overlay with Blur */
+        .popup-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background-color: rgba(0, 0, 0, 0.45) !important;
+            backdrop-filter: blur(8px) !important;
+            /* Blurs the background site */
+            -webkit-backdrop-filter: blur(8px) !important;
+            display: none;
+            /* Controlled by JavaScript */
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 99999 !important;
+            /* Keeps it above the header and footer */
+            padding: 20px !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Styled Modal Card */
+        .popup-card {
+            background: #ffffff !important;
+            border-radius: 20px !important;
+            padding: 28px !important;
+            max-width: 400px !important;
+            width: 100% !important;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid #f0e6e1 !important;
+            text-align: left !important;
+            animation: popupFadeIn 0.2s ease-out;
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .prompt-input {
+            width: 100% !important;
+            padding: 12px 14px !important;
+            border: 1px solid #ebe5e2 !important;
+            border-radius: 10px !important;
+            font-size: 14px !important;
+            outline: none !important;
+            background: #faf8f7 !important;
+            margin-top: 12px !important;
+            margin-bottom: 20px !important;
+            box-sizing: border-box !important;
+        }
+
+        .prompt-input:focus {
+            border-color: #e05a4f !important;
+            background: #ffffff !important;
+            box-shadow: 0 0 0 3px rgba(224, 90, 79, 0.15) !important;
+        }
+
+        .popup-cancel-btn {
+            background: #f3f4f6 !important;
+            color: #4b5563 !important;
+            border: none !important;
+            padding: 10px 18px !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+        }
+
+        .popup-submit-btn {
+            background: #e05a4f !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 10px 18px !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+        }
+
+        .popup-close-btn {
+            background: #e05a4f !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 10px 24px !important;
+            border-radius: 10px !important;
+            cursor: pointer !important;
+            font-weight: 600 !important;
+            width: 100% !important;
+            font-size: 14px !important;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between">
+    <!-- MAIN HEADER SECTION -->
+    <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+
+            <!-- Brand Logo (Replaced AD PTLY text with Homepage Logo) -->
+            <a class="flex items-center" href="#">
+                <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="#browse">Browse pets</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="#process">Adoption Process</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="#donate">Donate</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="#about">About</a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Homepage Coral Round Heart Button -->
+                <button aria-label="Favorites" class="fav flex items-center justify-center">
+                    ❤️
+                </button>
+
+                <!-- Sign In Button -->
+                <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition"
+                    href="#signup">Sign in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- BEGIN: MainContent -->
+    <main class="flex-grow py-8 md:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+        <div
+            class="w-full max-w-[1180px] bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
+            <!-- BEGIN: LeftBrandColumn -->
+            <section
+                class="w-full lg:w-[46%] bg-[#FCF8F7] p-8 sm:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#F0E6E1]"
+                data-purpose="brand-reassurance">
+                <div>
+                    <!-- Pill Tag -->
+                    <div
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#EADFD9] text-[11px] font-bold tracking-wider text-brand-coral uppercase mb-6 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-coral"></span>
+                        WELCOME BACK • ADOPTLY COMMUNITY
+                    </div>
+                    <!-- Main Left Heading -->
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight leading-[1.2] mb-4">
+                        Welcome Back to Your <span class="text-brand-coral">Journey Home.</span>
+                    </h1>
+                    <!-- Description -->
+                    <p class="text-gray-600 text-sm sm:text-[14.5px] leading-relaxed mb-8">
+                        Pick up where you left off. Review your saved companions, check submitted application statuses,
+                        and connect directly with verified shelter partners.
+                    </p>
+
+                    <!-- Image Container -->
+                    <div
+                        class="rounded-2xl h-56 sm:h-64 w-full relative flex flex-col items-center justify-end p-4 overflow-hidden bg-[#F5EFEB]">
+                        <!-- Background Image -->
+                        <img src="../photos/for log in&sign in/new_happy_dog.webp"
+                            alt="Happy rescue dog wearing an Adopt bandana"
+                            class="absolute inset-0 w-full h-full object-cover object-bottom z-0" />
+
+                        <!-- Trust Badge Overlaid at Bottom of Image -->
+                        <div
+                            class="relative z-10 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm border border-[#34D399]/40 text-[#059669] text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm">
+                            <svg class="w-3.5 h-3.5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span>100% Certified 501(c)(3) Shelters</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Testimonial / Statistic Card -->
+                    <div
+                        class="mt-8 bg-white border border-[#ECE2DC] rounded-xl p-4 flex items-center gap-3.5 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#FFF0ED] flex items-center justify-center text-brand-coral shrink-0 text-sm">
+                            🐾
+                        </div>
+                        <div>
+                            <p class="text-[13px] text-gray-800 font-medium leading-snug">
+                                Over <strong>14,200+</strong> pets matched with loving families nationwide.
+                            </p>
+                            <p class="text-[11px] text-gray-400 mt-0.5">Secure, verified adoption process</p>
+                        </div>
+                    </div>
+            </section>
+            <!-- END: LeftBrandColumn -->
+            <!-- BEGIN: RightFormColumn -->
+            <section class="w-full lg:w-[54%] p-8 sm:p-12 bg-white flex flex-col justify-center"
+                data-purpose="sign-in-form">
+                <div class="max-w-md w-full mx-auto">
+                    <!-- Header -->
+                    <div class="mb-8">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Sign In to Adoptly
+                        </h2>
+                        <p class="text-sm text-gray-500 mt-2">Enter your credentials to access your saved animals,
+                            ongoing applications, and shelter chats.</p>
+                    </div>
+                    <!-- Social Login Buttons -->
+                    <div class="flex flex-row gap-3 mb-6 w-full">
+                        <!-- Google Login Button -->
+                        <button
+                            class="flex-1 flex items-center justify-center gap-2.5 py-2.5 px-3 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-[12px] sm:text-[13px] font-semibold text-gray-700 transition whitespace-nowrap"
+                            type="button" onclick="simulateLogin('Google')">
+                            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                                <path
+                                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                                    fill="#4285F4"></path>
+                                <path
+                                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.35 24 12 24z"
+                                    fill="#34A853"></path>
+                                <path
+                                    d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+                                    fill="#FBBC05"></path>
+                                <path
+                                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                                    fill="#EA4335"></path>
+                            </svg>
+                            <span>Sign in with Google</span>
+                        </button>
+
+                        <!-- Apple Login Button -->
+                        <button
+                            class="flex-1 flex items-center justify-center gap-2.5 py-2.5 px-3 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-[12px] sm:text-[13px] font-semibold text-gray-700 transition whitespace-nowrap"
+                            type="button" onclick="simulateLogin('Apple')">
+                            <svg class="w-4 h-4 shrink-0 fill-current text-gray-900" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-1.99.6-2.64 1.35-.57.65-1.06 1.72-.93 2.74 1 .08 2.03-.49 2.65-1.24z">
+                                </path>
+                            </svg>
+                            <span>Sign in with Apple</span>
+                        </button>
+                    </div>
+                    <!-- Divider -->
+                    <div class="relative flex items-center justify-center my-6">
+                        <div class="border-t border-gray-200 w-full"></div>
+                        <span
+                            class="bg-white px-3 text-[11px] font-semibold uppercase tracking-wider text-gray-400 absolute">OR
+                            LOG IN WITH EMAIL</span>
+                    </div>
+                    <!-- Form Element (Updated with onsubmit) -->
+                    <form action="#" class="space-y-4" method="POST" onsubmit="handleFormLogin(event)">
+                        <!-- Email Field -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5"
+                                for="email">
+                                Email Address <span class="text-brand-coral">*</span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    class="w-full bg-[#FAF8F7] border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-coral/20 focus:border-brand-coral transition"
+                                    id="email" name="email" placeholder="e.g. sarah.jenkins@example.com" required=""
+                                    type="email">
+                                <div
+                                    class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-emerald-500">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Password Field -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5"
+                                for="password">
+                                Password <span class="text-brand-coral">*</span>
+                            </label>
+                            <div class="relative">
+                                <input
+                                    class="w-full bg-[#FAF8F7] border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-coral/20 focus:border-brand-coral transition"
+                                    id="password" name="password" placeholder="••••••••" required="" type="password">
+                                <button aria-label="Toggle password visibility"
+                                    class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 transition"
+                                    type="button">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="2"></path>
+                                        <path
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Remember Me & Forgot Password Row -->
+                        <div class="flex items-center justify-between pt-1">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="w-4 h-4 rounded text-brand-coral focus:ring-brand-coral border-gray-300"
+                                    type="checkbox">
+                                <span class="text-xs font-medium text-gray-600">Remember me on this device</span>
+                            </label>
+                            <a class="text-xs font-semibold text-brand-coral hover:underline" href="#">Forgot
+                                password?</a>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="pt-2">
+                            <button
+                                class="w-full bg-brand-coral hover:bg-brand-coralHover text-white font-semibold py-3 px-4 rounded-xl shadow-md shadow-brand-coral/25 transition duration-150 flex items-center justify-center gap-2 text-sm"
+                                type="submit">
+                                <span>Sign In to Account</span>
+                                <span class="text-base leading-none">→</span>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Sign Up Switch Prompt -->
+                    <div class="text-center mt-6 pt-6 border-t border-gray-100">
+                        <p class="text-xs sm:text-sm text-gray-500">
+                            Don't have an account yet?
+                            <a class="font-semibold text-brand-coral hover:underline ml-1" href="#">Create a free
+                                account →</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- END: RightFormColumn -->
+        </div>
+    </main>
+    <!-- END: MainContent -->
+
+    <!-- BEGIN: GlobalFooter -->
+    <footer class="bg-[#121212] text-gray-400 text-sm mt-12 border-t border-neutral-800">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 pt-14 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+                <!-- Left Brand Description -->
+                <div class="lg:col-span-2 space-y-4">
+
+                    <!-- REPLACED TEXT LOGO WITH IMAGE LOGO -->
+                    <a href="#" class="inline-block">
+                        <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-9 w-auto object-contain">
+                    </a>
+
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+                        Helping rescue pets find safe, loving homes and lifelong companionship. Partnered with certified
+                        no-kill shelters nationwide.
+                    </p>
+                    <!-- Social Icons -->
+                    <div class="flex items-center gap-2.5 pt-2">
+                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold"
+                            href="#">f</a>
+                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold"
+                            href="#">t</a>
+                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold"
+                            href="#">in</a>
+                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold"
+                            href="#">li</a>
+                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold"
+                            href="#">yt</a>
+                    </div>
+                </div>
+                <!-- Column 1: Browse -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Browse</h3>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a class="hover:text-white transition" href="#">Browse Pets</a></li>
+                        <li><a class="hover:text-white transition" href="#">Adoption Process</a></li>
+                        <li><a class="hover:text-white transition" href="#">Success Stories</a></li>
+                        <li><a class="hover:text-white transition" href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2: Resources -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Resources</h3>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a class="hover:text-white transition" href="#">FAQ</a></li>
+                        <li><a class="hover:text-white transition" href="#">Pet Care Tips</a></li>
+                        <li><a class="hover:text-white transition" href="#">Volunteer</a></li>
+                        <li><a class="hover:text-white transition" href="#">Support Center</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Contact -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Contact</h3>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li class="hover:text-white transition">helloadoptly@gmail.com</li>
+                        <li class="hover:text-white transition">+1 (234) 567-890</li>
+                        <li class="hover:text-white transition">New York, USA</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Copyright Sub-bar -->
+            <div
+                class="mt-12 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>© 2026 Adoptly. All rights reserved.</p>
+                <div class="flex items-center gap-4 mt-3 sm:mt-0">
+                    <a class="hover:text-gray-300 transition" href="#">Privacy Policy</a>
+                    <span>|</span>
+                    <a class="hover:text-gray-300 transition" href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 1. Input Prompt Modal (Centered with Blur) -->
+    <div id="customPromptOverlay" class="popup-overlay">
+        <div class="popup-card">
+            <h3 id="promptTitle" style="font-size: 18px; font-weight: 700; color: #1c1917; margin: 0 0 6px 0;"></h3>
+            <p id="promptMessage" style="font-size: 13px; color: #6b7280; margin: 0;"></p>
+
+            <input type="email" id="promptInput" class="prompt-input" placeholder="e.g. user@gmail.com"
+                onkeydown="handleEnterKey(event)" />
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="closePrompt()" class="popup-cancel-btn" type="button">Cancel</button>
+                <button onclick="submitPrompt()" class="popup-submit-btn" type="button">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Status Alert Modal (Success / Error) -->
+    <div id="customPopup" class="popup-overlay">
+        <div class="popup-card" style="text-align: center !important;">
+            <div id="popupIcon" style="font-size: 42px; margin-bottom: 12px;"></div>
+            <h3 id="popupTitle" style="font-size: 18px; font-weight: 700; color: #1c1917; margin: 0 0 8px 0;"></h3>
+            <p id="popupMessage" style="font-size: 13px; color: #6b7280; margin: 0 0 20px 0;"></p>
+            <button onclick="closePopup()" class="popup-close-btn" type="button">OK</button>
+        </div>
+    </div>
+
+    <!-- END: GlobalFooter -->
+    <div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true"
+        style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>
+
+
+    <script>
+        let currentProvider = '';
+
+        // 1. Opens the custom prompt instead of the browser prompt
+        function simulateLogin(provider) {
+            currentProvider = provider;
+
+            // Update texts based on Google or Apple
+            document.getElementById('promptTitle').innerText = `Sign in with ${provider}`;
+            document.getElementById('promptMessage').innerText = `Please enter your ${provider} account to continue:`;
+
+            // Clear previous input and show the modal
+            document.getElementById('promptInput').value = '';
+            document.getElementById('customPromptOverlay').style.display = 'flex';
+
+            // Focus the input automatically
+            setTimeout(() => document.getElementById('promptInput').focus(), 100);
+        }
+
+        // 2. Closes the input prompt if they click Cancel
+        function closePrompt() {
+            document.getElementById('customPromptOverlay').style.display = 'none';
+        }
+
+        // 3. Runs when the user clicks "OK" in our custom prompt
+        function submitPrompt() {
+            // Get the typed email and hide the prompt box
+            let email = document.getElementById('promptInput').value.trim().toLowerCase();
+            closePrompt();
+
+            if (!email) return; // Do nothing if left blank
+
+            // Domain Validation
+            if (currentProvider === 'Google' && !email.includes('@gmail.com')) {
+                showPopup('error', 'User Not Found', 'Invalid account. You must use an @gmail.com address.');
+                return;
+            }
+
+            if (currentProvider === 'Apple' && !email.includes('@icloud.com') && !email.includes('@apple.com')) {
+                showPopup('error', 'User Not Found', 'Invalid account. You must use a valid Apple ID (@icloud.com).');
+                return;
+            }
+
+            // Connect to Session Storage
+            let activeSession = JSON.parse(sessionStorage.getItem('sessionUsers')) || [];
+
+            // Check if the user is already logged in
+            if (activeSession.includes(email)) {
+                showPopup('error', 'Login Error', 'This account has already been logged in.');
+            } else {
+                activeSession.push(email);
+                sessionStorage.setItem('sessionUsers', JSON.stringify(activeSession));
+
+                showPopup('success', 'Login Successful', '✔️ Your account is now logged in for this session.');
+            }
+        }
+
+        // Controls the appearance of the Success/Error pop-up
+        function showPopup(type, title, message) {
+            const popup = document.getElementById('customPopup');
+            const icon = document.getElementById('popupIcon');
+
+            document.getElementById('popupTitle').innerText = title;
+            document.getElementById('popupMessage').innerText = message;
+
+            if (type === 'success') {
+                icon.innerHTML = '✔️';
+                icon.className = 'popup-icon icon-success';
+            } else {
+                icon.innerHTML = '⚠️';
+                icon.className = 'popup-icon icon-error';
+            }
+
+            popup.style.display = 'flex';
+        }
+
+        // Closes the Success/Error pop-up
+        function closePopup() {
+            document.getElementById('customPopup').style.display = 'none';
+        }
+
+        function handleFormLogin(event) {
+            event.preventDefault(); // Prevents form submission / page reload
+
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim().toLowerCase();
+
+            if (!email) return;
+
+            // 1. Domain Check: Verify if the email contains @gmail.com
+            if (!email.includes('@gmail.com')) {
+                showPopup('error', 'User Not Found', 'Invalid account. You must use an @gmail.com address.');
+                return;
+            }
+
+            // 2. Retrieve session storage
+            let activeSession = JSON.parse(sessionStorage.getItem('sessionUsers')) || [];
+
+            // 3. Duplicate session check
+            if (activeSession.includes(email)) {
+                showPopup('error', 'Login Error', 'This account has already been logged in.');
+            } else {
+                activeSession.push(email);
+                sessionStorage.setItem('sessionUsers', JSON.stringify(activeSession));
+
+                showPopup('success', 'Login Successful', '✔️️ Your account is now logged in for this session.');
+            }
+        }
+    </script>
+</body>
+
+</html>
