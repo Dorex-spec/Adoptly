@@ -1,150 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Pet Shop</title>
-    <!-- Links to your external CSS file in the Css folder -->
-    <link rel="stylesheet" href="../Css/index.css">
-</head>
-<body>
-    <header class="navbar-bg">
-        <div class="navbar-container">
-            
-            <!-- Logo Group -->
-            <div class="logo-group">
-                <span class="logo-text">AD</span>
-                <img src="../photos/pawlogo.png" alt="Paw Logo" class="logo-img">
-                <span class="logo-text">TLY</span>
-            </div>
 
-            <!-- Navigation Buttons Group -->
-            <nav class="nav-buttons">
-                <ul>
-                    <li><a href="#">Browse pets</a></li>
-                    <li><a href="#">adoption process</a></li>
-                    <li><a href="#">Donate</a></li>
-                    <li><a href="#">Shelters</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
+<!-- ========================================== -->
+<!-- HEAD SECTION (Scripts, Styles, Meta)       -->
+<!-- ========================================== -->
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Adoptly - Pet Adoption Platform</title>
+
+    <!-- Tailwind CSS CDN with Forms and Container Queries Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="../Css/index.css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#E05A4F',
+                            hover: '#C8483E',
+                            light: '#FDF2F0',
+                            accent: '#E66763',
+                            dark: '#A73B2C'
+                        },
+                        hero: '#B84433',
+                        slateDark: '#1F1F1F',
+                        slateSub: '#71717A',
+                        softBg: '#FBF9F8'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Core Styles -->
+    <style data-purpose="base-styling">
+        :root {
+            --coral: #E05A4F;
+        }
+
+        body {
+            background-color: #FBF9F8;
+            color: #2D2D2D;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hero-bg {
+            background-color: #BE362E;
+        }
+
+        /* Heart button (same as Adoption Process) */
+        .fav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 0;
+            border-radius: 50%;
+            background: #FFE1DD;
+            color: var(--coral);
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .fav:hover {
+            background: var(--coral);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========================================== -->
+    <!-- MAIN HEADER SECTION                        -->
+    <!-- ========================================== -->
+    <!-- BEGIN: MainHeader -->
+    <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a class="flex items-center" href="#">
+                <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+            </a>
+
+            <!-- Center Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="../php/Browse_page.php">Browse pets</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="../php/Adoption_process.php">Adoption Process</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="../php/Donation.php">Donate</a>
+                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
+                    href="../php/About.php">About</a>
             </nav>
 
-            <!-- NEW: Account Action Group -->
-            <div class="account-action">
-                <!-- Make sure "Heart icon.png" is in your photos folder -->
-                <img src="../photos/Heart Icon.svg" alt="Favorites" class="heart-icon">
-                
-                <!-- Placeholder text for the #E05A4F button -->
-                <a href="#" class="login-text-btn">Log in</a>
-                
-                <!-- The Sign In box button -->
-                <a href="#" class="signin-box-btn">Sign in</a>
-            </div>
+            <!-- Right Header Actions -->
+            <div class="flex items-center gap-4">
 
+                <button class="fav" type="button" aria-label="View Saved Pets">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20"
+                        height="20">
+                        <path
+                            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                    </svg>
+                </button>
+
+                <!-- Login Link -->
+                <a class="text-sm font-semibold text-gray-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block"
+                    href="../php/Log_in.php">Login</a>
+
+                <!-- Sign in / Sign up Coral Pill Button -->
+                <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition"
+                    href="../php/Sign_in.php">Sign in</a>
+            </div>
         </div>
     </header>
+    <!-- END: MainHeader -->
 
+    <!-- ========================================== -->
+    <!-- HERO SECTION                               -->
+    <!-- ========================================== -->
     <!-- BEGIN: HeroSection -->
-    <section class="hero-section">
-        <!-- Full Width Background Wrapper -->
-        <div class="hero-background">
-        <div class="hero-content">
+    <section class="hero-bg text-white pt-16 pb-28 relative">
+        <div class="max-w-6xl mx-auto px-4 text-center">
             <!-- Main Hero Headings -->
-            <h1 class="hero-title">
-            The first time you see them, <span class="hero-title-highlight">you'll just know.</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+                The first time you see them, <span class="font-extrabold text-white">you'll just know.</span>
             </h1>
-            <p class="hero-subtitle">
-            You don't find the right animal. You recognize them. Browse<br class="desktop-break">
-            14,200+ rescue pets — free, no commitment, just a search.
+            <p class="mt-4 text-sm sm:text-base text-red-100 max-w-2xl mx-auto font-normal">
+                You don't find the right animal. You recognize them. Browse<br class="hidden sm:inline">
+                14,200+ rescue pets — free, no commitment, just a search.
             </p>
 
-            <!-- Hero Pet Image Container -->
-            <div class="hero-image-container">
-            <!-- Hero Image -->
-            <img src="../photos/New_Hero_Bg.png" alt="Group of rescue pets in a box" class="hero-image">
-            
-            <!-- Search Filter Widget (Nested inside image container) -->
-            <div class="search-widget">
-                <form class="search-form">
-                <!-- Filter: Type of pet -->
-                <div class="form-group-large">
-                    <label class="form-label">Type of pet</label>
-                    <div class="input-wrapper">
-                    <select class="form-input">
-                        <option>All Species</option>
-                        <option>Dogs</option>
-                        <option>Cats</option>
-                        <option>Birds</option>
-                        <option>Rabbits</option>
-                    </select>
+            <!-- Hero Pet Image -->
+            <img src="../photos/New_Hero_Bg.png" alt="Group of pets looking out of a cardboard box"
+                class="mt-8 mx-auto max-w-3xl w-full h-72 sm:h-80 md:h-[420px] object-cover rounded-2xl">
+
+            <!-- Search Filter Widget -->
+            <div
+                class="mt-[-40px] relative z-10 max-w-3xl mx-auto bg-white rounded-2xl p-4 sm:p-5 shadow-2xl text-left border border-gray-100">
+                <form class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                    <!-- Filter: Type of pet -->
+                    <div class="sm:col-span-4">
+                        <label class="block text-xs font-bold text-gray-900 mb-1">Type of pet</label>
+                        <div class="relative">
+                            <select
+                                class="w-full text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand">
+                                <option>All Species</option>
+                                <option>Dogs</option>
+                                <option>Cats</option>
+                                <option>Birds</option>
+                                <option>Rabbits</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Filter: Breed -->
-                <div class="form-group-large">
-                    <label class="form-label">Breed</label>
-                    <div class="input-wrapper">
-                    <select class="form-input">
-                        <option>Any Breed</option>
-                        <option>Labrador</option>
-                        <option>Golden Retriever</option>
-                        <option>Domestic Shorthair</option>
-                    </select>
+                    <!-- Filter: Breed -->
+                    <div class="sm:col-span-4">
+                        <label class="block text-xs font-bold text-gray-900 mb-1">Breed</label>
+                        <div class="relative">
+                            <select
+                                class="w-full text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-brand">
+                                <option>Any Breed</option>
+                                <option>Labrador</option>
+                                <option>Golden Retriever</option>
+                                <option>Domestic Shorthair</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Filter: Location -->
-                <div class="form-group-medium">
-                    <label class="form-label">Location</label>
-                    <input class="form-input" placeholder="Enter City, State or Zip" type="text">
-                </div>
+                    <!-- Filter: Location -->
+                    <div class="sm:col-span-3">
+                        <label class="block text-xs font-bold text-gray-900 mb-1">Location</label>
+                        <input
+                            class="w-full text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg py-2.5 px-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-brand"
+                            placeholder="Enter City, State or Zip" type="text">
+                    </div>
 
-                <!-- Search Submit Button -->
-                <div class="form-group-small submit-container">
-                    <button aria-label="Search" class="submit-btn" type="button">
-                    <svg class="submit-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="7"></circle>
-                        <path d="m21 21-4.35-4.35" stroke-linecap="round"></path>
-                    </svg>
-                    </button>
-                </div>
+                    <!-- Search Submit Button -->
+                    <div class="sm:col-span-1 flex items-end justify-center pt-2 sm:pt-4">
+                        <button aria-label="Search"
+                            class="w-full h-10 bg-brand hover:bg-brand-hover text-white rounded-lg flex items-center justify-center transition-colors"
+                            type="button">
+                            <svg class="w-5 h-5 stroke-current stroke-[2.5] fill-none" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="m21 21-4.35-4.35" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </form>
             </div>
-            <!-- END: Search Filter Widget -->
-
-            </div>
-        </div>
         </div>
     </section>
     <!-- END: HeroSection -->
 
-<!-- BEGIN: Thousands of Pets Found Loving Homes Section -->
-    <section class="pets-homes-section">
-    <div class="pets-homes-content">
-        <h2 class="pets-homes-title">
-        Thousands of Pets have Found Loving homes
-        </h2>
-        <p class="pets-homes-subtitle">
-        We partnered with shelters and organizations to help animals find safe and caring homes faster.
-        </p>
+    <!-- ========================================== -->
+    <!-- IMPACT STATS SECTION                       -->
+    <!-- ========================================== -->
+    <!-- BEGIN: ImpactStatsSection -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                Thousands of Pets Have Found Loving Homes
+            </h2>
+            <p class="mt-2 text-sm text-gray-500 max-w-xl mx-auto">
+                We partner with shelters and rescue organizations to help animals find safe and caring homes faster.
+            </p>
 
-        <!-- 4 Icon Containers -->
-        <div class="cards-container">
-        <div class="card-item">
-            <img src="../photos/pawlogo.png" alt="Paw Icon" class="card-icon">
+            <!-- Key Figures Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
+                <!-- Stat Item 1 -->
+                <div class="flex flex-col items-center">
+                    <div class="text-brand mb-2">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 10.5c1.38 0 2.5-1.12 2.5-2.5S13.38 5.5 12 5.5s-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm-5 1c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm10 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-8.8 5.6c-.66.8-1.2 2.05-.2 3.1 1 1.05 2.65.65 3.8.3 1.15.35 2.8.75 3.8-.3 1-1.05.46-2.3-.2-3.1-.98-1.19-2.57-2.6-3.6-2.6s-2.62 1.41-3.6 2.6z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-3xl sm:text-4xl font-black text-brand">10K+</span>
+                    <span class="text-sm font-semibold text-gray-700 mt-1">Pets Adopted</span>
+                </div>
+
+                <!-- Stat Item 2 -->
+                <div class="flex flex-col items-center">
+                    <div class="text-brand mb-2">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-3xl sm:text-4xl font-black text-brand">850+</span>
+                    <span class="text-sm font-semibold text-gray-700 mt-1">Shelters Partnerd</span>
+                </div>
+
+                <!-- Stat Item 3 -->
+                <div class="flex flex-col items-center">
+                    <div class="text-brand mb-2">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-3xl sm:text-4xl font-black text-brand">96%</span>
+                    <span class="text-sm font-semibold text-gray-700 mt-1">Success Rate</span>
+                </div>
+
+                <!-- Stat Item 4 -->
+                <div class="flex flex-col items-center">
+                    <div class="text-brand mb-2">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z">
+                            </path>
+                        </svg>
+                    </div>
+                    <span class="text-3xl sm:text-4xl font-black text-brand">24/7</span>
+                    <span class="text-sm font-semibold text-gray-700 mt-1">Adoption Support</span>
+                </div>
+            </div>
         </div>
-        <div class="card-item">
-            <img src="../photos/House Icon.svg" alt="House Icon" class="card-icon">
-        </div>
-        <div class="card-item">
-            <img src="../photos/Heart Icon.svg" alt="Heart Icon" class="card-icon">
-        </div>
-        <div class="card-item">
-            <img src="../photos/headset Icon.svg" alt="Headset Icon" class="card-icon">
-        </div>
-        </div>
-    </div>
     </section>
-<!-- END: Thousands of Pets Found Loving Homes Section -->
+    <!-- END: ImpactStatsSection -->
+
+    <!-- ========================================== -->
+    <!-- BROWSE PET TYPE CATEGORIES SECTION         -->
+    <!-- ========================================== -->
+    <!-- BEGIN: BrowsePetType -->
+    <section class="py-14 bg-softBg" id="browse">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-8">
+                Browse by Pet Type
+            </h2>
+            <!-- Species Navigation Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-5 max-w-4xl mx-auto"
+                id="pet-categories">
+
+                <!-- Category Card: Dogs -->
+                <div data-filter="dog"
+                    class="pet-category-btn bg-white border-gray-200 text-brand hover:shadow-md rounded-xl border p-6 flex flex-col items-center justify-center cursor-pointer transition-all">
+                    <svg class="w-10 h-10 stroke-current fill-none stroke-2 mb-3" viewBox="0 0 24 24">
+                        <path
+                            d="M4 19a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2M6 14a4 4 0 0 1 8-1 4 4 0 0 1 4 1M7 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="font-bold text-sm">Dogs</span>
+                </div>
+
+                <!-- Category Card: Cats -->
+                <div data-filter="cat"
+                    class="pet-category-btn bg-white border-gray-200 text-brand hover:shadow-md rounded-xl border p-6 flex flex-col items-center justify-center cursor-pointer transition-all">
+                    <svg class="w-10 h-10 stroke-current fill-none stroke-2 mb-3" viewBox="0 0 24 24">
+                        <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-7-7l2-4 3 2m9-2l2 4-3 2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="font-bold text-sm">Cats</span>
+                </div>
+
+                <!-- Category Card: Birds -->
+                <div data-filter="bird"
+                    class="pet-category-btn bg-white border-gray-200 text-brand hover:shadow-md rounded-xl border p-6 flex flex-col items-center justify-center cursor-pointer transition-all">
+                    <svg class="w-10 h-10 stroke-current fill-none stroke-2 mb-3" viewBox="0 0 24 24">
+                        <path d="M16 8a4 4 0 0 0-8 0c0 4 4 8 4 8s4-4 4-8zm-6 0h.01" stroke-linecap="round"
+                            stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    <span class="font-bold text-sm">Birds</span>
+                </div>
+
+                <!-- Category Card: Rabbits -->
+                <div data-filter="rabbit"
+                    class="pet-category-btn bg-white border-gray-200 text-brand hover:shadow-md rounded-xl border p-6 flex flex-col items-center justify-center cursor-pointer transition-all">
+                    <svg class="w-10 h-10 stroke-current fill-none stroke-2 mb-3" viewBox="0 0 24 24">
+                        <path d="M9 3v8a3 3 0 0 0 6 0V3M8 17a4 4 0 1 0 8 0" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="font-bold text-sm">Rabbits</span>
+                </div>
+
+                <!-- Category Card: Other Animals (Active Style Default - Acts as 'Show All') -->
+                <div data-filter="all"
+                    class="pet-category-btn bg-brand border-brand text-white shadow-md hover:bg-brand-hover rounded-xl border p-6 flex flex-col items-center justify-center cursor-pointer transition-all">
+                    <svg class="w-10 h-10 fill-current mb-3" viewBox="0 0 24 24">
+                        <path
+                            d="M12 10.5c1.38 0 2.5-1.12 2.5-2.5S13.38 5.5 12 5.5s-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm-5 1c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm10 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-8.8 5.6c-.66.8-1.2 2.05-.2 3.1 1 1.05 2.65.65 3.8.3 1.15.35 2.8.75 3.8-.3 1-1.05.46-2.3-.2-3.1-.98-1.19-2.57-2.6-3.6-2.6s-2.62 1.41-3.6 2.6z">
+                        </path>
+                    </svg>
+                    <span class="font-bold text-sm">Other animals</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: BrowsePetType -->
+
+    <!-- ========================================== -->
+    <!-- ADOPTABLE PETS GRID SECTION                -->
+    <!-- ========================================== -->
+    <!-- BEGIN: AdoptablePetsGrid -->
+    <section class="py-16 bg-softBg">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-10">
+                Meet Adoptable Pets Near You
+            </h2>
+
+            <!-- 12 Pet Cards (3 Rows x 4 Columns) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Card 1: Bella (Black Cat) -->
+                <article data-species="cat"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/bella.jpg" alt="Bella - Black Cat"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Bella</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Austin, TX</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Domestic
+                                    Short Hair (Black)
+                                </p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♀
+                                        Female</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Polly (Cat) -->
+                <article data-species="cat"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/POLLY.jpg" alt="Polly - Tabby Cat"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Polly</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Sedalia, MO
+                                </p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Tabby Cat</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♀
+                                        Female</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Marley (Australian Shepherd Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/MARLEY.jpg" alt="Marley - Australian Shepherd Dog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Marley</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Green Ridge,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Australian
+                                    Shepherd</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Beau (French Bulldog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/extra phto/4.jpg" alt="Beau - French Bulldog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Beau</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Green Ridge,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> French
+                                    Bulldog</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Puppy</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Casper (Samoyed Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/CASPER.jpg" alt="Casper - Samoyed Dog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Casper</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Warrensburg,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Samoyed /
+                                    Husky Mix</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Young</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 6: Maleficent (Husky Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/MALEFICENT.jpg" alt="Maleficent - Siberian Husky Dog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Maleficent</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Warrensburg,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Siberian
+                                    Husky</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♀
+                                        Female</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 7: Bailey (White Longhair Cat) -->
+                <article data-species="cat"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/BAILEY.jpg" alt="Bailey - White Longhair Cat"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Bailey</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Warrensburg,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Domestic Long
+                                    Hair (White)
+                                </p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♀
+                                        Female</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 8: Ali (Pug Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/extra phto/8.jpg" alt="Ali - Pug Dog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Ali</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Grandview, MO
+                                </p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Pug</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 9: Lemon (Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/LEMON.jpg" alt="Lemon - Mixed Breed Puppy"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Lemon</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Grandview, MO
+                                </p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Mixed Breed
+                                </p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Puppy</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 10: Danny (Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/DANNY.jpg" alt="Danny - American Bulldog Dog"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Danny</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Lee's Summit,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> American
+                                    Bulldog / Pit Bull
+                                </p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Young</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 11: Mary Kate (Dog) -->
+                <article data-species="dog"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/BROWSE PAGE/MARY KATE.jpg" alt="Mary Kate - Mixed Breed Puppy"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Mary Kate</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Warrensburg,
+                                    MO</p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Mixed Breed
+                                </p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Puppy</span> <span>♀
+                                        Female</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 12: Hunter (Cat) -->
+                <article data-species="cat"
+                    class="adoptable-pet-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col">
+                    <div class="relative h-48 bg-white flex items-end p-3 border-b border-gray-100">
+                        <img src="../photos/extra phto/3.jpg" alt="Hunter - Maine Coon Cat"
+                            class="w-full h-full absolute inset-0 object-cover">
+                        <button aria-label="Favorite"
+                            class="absolute top-3 right-3 w-7 h-7 bg-white rounded-full flex items-center justify-center text-brand shadow-sm">
+                            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between text-xs text-gray-600 space-y-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Hunter</h3>
+                            <div class="space-y-1.5 text-xs">
+                                <p class="flex items-center gap-1.5"><span class="text-red-500">📍</span> Sedalia, MO
+                                </p>
+                                <p class="flex items-center gap-1.5"><span class="text-gray-500">🐾</span> Maine Coon /
+                                    Domestic Long
+                                    Hair</p>
+                                <p class="flex items-center gap-2 text-[11px] text-gray-500 font-medium"><span>🎂
+                                        Adult</span> <span>♂
+                                        Male</span></p>
+                            </div>
+                        </div>
+                        <div class="pt-3 flex items-center gap-2">
+                            <button
+                                class="flex-1 py-2 bg-brand text-white font-semibold rounded-lg text-xs hover:bg-brand-hover transition">Adopt
+                                Me</button>
+                            <button
+                                class="px-2.5 py-2 border border-brand text-brand font-semibold rounded-lg text-xs hover:bg-brand-light transition">More
+                                About Me</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- More Pets Link -->
+            <div class="text-center mt-12">
+                <a class="inline-flex items-center text-sm font-bold text-gray-800 hover:text-brand transition"
+                    href="../php/Browse_page.php">
+                    More pets
+                    <svg class="w-4 h-4 ml-1 text-brand stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- END: AdoptablePetsGrid -->
+
+    <!-- ========================================== -->
+    <!-- WHY FAMILIES TRUST (ABOUT) SECTION         -->
+    <!-- ========================================== -->
+    <!-- BEGIN: WhyFamiliesTrust -->
+    <section class="py-16 bg-softBg" id="about">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-14">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                    Why Families Trust Adoptly
+                </h2>
+                <p class="mt-2 text-sm text-gray-500">
+                    We make pet adoption simple, safe, and more personal for both pets and families.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+
+                <!-- Feature Image -->
+                <div
+                    class="relative mx-auto w-full max-w-md h-80 sm:h-96 rounded-3xl bg-white border border-gray-200 shadow-sm overflow-hidden">
+                    <img src="../photos/cat dog.jpg" alt="A cat and dog sitting together on a bed"
+                        class="w-full h-full object-cover">
+                </div>
+
+                <!-- 4 Value Proposition Cards -->
+                <div class="space-y-4">
+                    <!-- Item 1: Verified Shelters -->
+                    <div
+                        class="group bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4 hover:bg-[#E53935] transition-colors duration-300 cursor-pointer">
+                        <div
+                            class="relative p-2.5 rounded-xl bg-gray-50 text-gray-800 shrink-0 group-hover:bg-transparent group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                            </svg>
+                            <!-- Green dot with hover check -->
+                            <div
+                                class="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full border-2 border-white group-hover:border-[#E53935] transition-colors duration-300">
+                                <svg class="w-2.5 h-2.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-sm group-hover:text-white transition-colors duration-300">
+                                Verified
+                                Shelters</h3>
+                            <p class="text-xs text-gray-500 mt-1 group-hover:text-white transition-colors duration-300">
+                                Every pet
+                                comes from trusted shelters and rescue organizations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Simple Adoption Process -->
+                    <div
+                        class="group bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4 hover:bg-[#E53935] transition-colors duration-300 cursor-pointer">
+                        <div
+                            class="relative p-2.5 rounded-xl bg-gray-50 text-gray-800 shrink-0 group-hover:bg-transparent group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24">
+                                <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                            <!-- Green dot with hover check -->
+                            <div
+                                class="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full border-2 border-white group-hover:border-[#E53935] transition-colors duration-300">
+                                <svg class="w-2.5 h-2.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-sm group-hover:text-white transition-colors duration-300">
+                                Simple
+                                Adoption Process</h3>
+                            <p class="text-xs text-gray-500 mt-1 group-hover:text-white transition-colors duration-300">
+                                We make
+                                finding and adopting a pet easy and stress-free.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Personalized Matching -->
+                    <div
+                        class="group bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4 hover:bg-[#E53935] transition-colors duration-300 cursor-pointer">
+                        <div
+                            class="relative p-2.5 rounded-xl bg-gray-50 text-gray-800 shrink-0 group-hover:bg-transparent group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
+                                </path>
+                            </svg>
+                            <!-- Green dot with hover check -->
+                            <div
+                                class="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full border-2 border-white group-hover:border-[#E53935] transition-colors duration-300">
+                                <svg class="w-2.5 h-2.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-sm group-hover:text-white transition-colors duration-300">
+                                Personalized Matching</h3>
+                            <p class="text-xs text-gray-500 mt-1 group-hover:text-white transition-colors duration-300">
+                                Find pets that
+                                match your lifestyle and personality.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Ongoing Support -->
+                    <div
+                        class="group bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4 hover:bg-[#E53935] transition-colors duration-300 cursor-pointer">
+                        <div
+                            class="relative p-2.5 rounded-xl bg-gray-50 text-gray-800 shrink-0 group-hover:bg-transparent group-hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z">
+                                </path>
+                            </svg>
+                            <!-- Green dot with hover check -->
+                            <div
+                                class="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 bg-green-500 rounded-full border-2 border-white group-hover:border-[#E53935] transition-colors duration-300">
+                                <svg class="w-2.5 h-2.5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3
+                                class="font-bold text-gray-900 text-sm group-hover:text-white transition-colors duration-300">
+                                Ongoing
+                                Support</h3>
+                            <p class="text-xs text-gray-500 mt-1 group-hover:text-white transition-colors duration-300">
+                                Our team helps
+                                guide you through every step of adoption.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: WhyFamiliesTrust -->
+
+    <!-- ========================================== -->
+    <!-- TESTIMONIAL SECTION                        -->
+    <!-- ========================================== -->
+    <!-- BEGIN: HappyTailsTestimonial -->
+    <section class="py-16 bg-softBg">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+                    Happy Tails, Happy Homes
+                </h2>
+                <p class="mt-2 text-sm text-gray-500">
+                    Every adoption creates a story filled with love, trust, and companionship.
+                </p>
+            </div>
+
+            <!-- Testimonial Feature Card -->
+            <div
+                class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 grid grid-cols-1 md:grid-cols-2">
+                <!-- Sarah & Charlie Photo -->
+                <div
+                    class="w-full h-72 md:h-auto min-h-[320px] bg-white border-r border-gray-100 overflow-hidden relative">
+                    <img src="../photos/Sarah&corgi.webp" alt="Sarah and her Corgi, Charlie"
+                        class="w-full h-full object-cover absolute inset-0">
+                </div>
+
+                <!-- Content Area -->
+                <div class="p-8 sm:p-10 flex flex-col justify-between relative">
+                    <!-- Paw Accent Icon -->
+                    <div class="absolute top-6 right-6 text-red-100">
+                        <svg class="w-10 h-10 fill-current opacity-60" viewBox="0 0 24 24">
+                            <path
+                                d="M12 10.5c1.38 0 2.5-1.12 2.5-2.5S13.38 5.5 12 5.5s-2.5 1.12-2.5 2.5 1.12 2.5 2.5 2.5zm-5 1c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm10 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-8.8 5.6c-.66.8-1.2 2.05-.2 3.1 1 1.05 2.65.65 3.8.3 1.15.35 2.8.75 3.8-.3 1-1.05.46-2.3-.2-3.1-.98-1.19-2.57-2.6-3.6-2.6s-2.62 1.41-3.6 2.6z">
+                            </path>
+                        </svg>
+                    </div>
+
+                    <!-- Quote Icon -->
+                    <div class="text-brand text-4xl font-serif leading-none mb-3">
+                        “
+                    </div>
+
+                    <!-- Quote Text -->
+                    <blockquote class="text-gray-800 text-sm sm:text-base font-medium leading-relaxed">
+                        "Charlie didn't just join my home; he completed it. The moment I saw his profile on Adoptly, I
+                        knew he was
+                        the one. The process was so human and supportive."
+                    </blockquote>
+
+                    <!-- Author Info & Action -->
+                    <div class="mt-8">
+                        <h4 class="font-bold text-gray-900 text-sm">Sarah &amp; Charlie</h4>
+                        <p class="text-xs text-gray-400 mb-5">Adopted 6 months ago</p>
+                        <a class="inline-flex items-center px-5 py-2 border border-brand text-brand rounded-full text-xs font-bold hover:bg-brand-light transition"
+                            href="#stories">
+                            Read More Stories
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: HappyTailsTestimonial -->
+
+    <!-- ========================================== -->
+    <!-- CALL TO ACTION BANNER SECTION              -->
+    <!-- ========================================== -->
+    <!-- BEGIN: CallToActionBanner -->
+    <section class="py-20 relative bg-stone-700 text-white overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="../photos/livingroomwithfamily&pets.avif" alt="Family with adopted pets in living room"
+                class="w-full h-full object-cover">
+        </div>
+
+        <!-- Subtle overlay -->
+        <div class="absolute inset-0 bg-stone-800/60"></div>
+
+        <!-- CTA Content Box -->
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                Start your adoption journey today
+            </h2>
+            <p class="mt-3 text-sm sm:text-base text-gray-200 max-w-xl mx-auto">
+                Join thousands of families who have found their perfect companions through Adoptly. Your new best friend
+                is just
+                a click away.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a class="w-full sm:w-auto px-7 py-3 rounded-full text-xs font-bold bg-brand text-white hover:bg-brand-hover shadow-lg transition"
+                    href="../php/Browse_page.php">
+                    Start Adopting
+                </a>
+                <a class="w-full sm:w-auto px-7 py-3 rounded-full text-xs font-bold bg-white text-gray-800 hover:bg-gray-100 shadow-lg transition"
+                    href="../php/Adoption_process.php">
+                    Learn the process
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- END: CallToActionBanner -->
+
+    <!-- ========================================== -->
+    <!-- FOOTER SECTION                               -->
+    <!-- ========================================== -->
+    <!-- BEGIN: MainFooter -->
+    <footer class="bg-[#181818] text-gray-300 pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Top Columns Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
+
+                <!-- Brand Summary Column -->
+                <div class="md:col-span-4 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-10 w-auto">
+                    </div>
+                    <p class="text-xs text-gray-400 max-w-xs leading-relaxed">
+                        Helping rescue pets find safe, loving homes and lifelong companionship.
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex items-center space-x-3 pt-2">
+                        <a aria-label="Facebook"
+                            class="w-7 h-7 bg-gray-800 hover:bg-brand rounded flex items-center justify-center text-white text-xs font-bold transition"
+                            href="#">f</a>
+                        <a aria-label="Twitter"
+                            class="w-7 h-7 bg-gray-800 hover:bg-brand rounded flex items-center justify-center text-white text-xs font-bold transition"
+                            href="#">t</a>
+                        <a aria-label="Instagram"
+                            class="w-7 h-7 bg-gray-800 hover:bg-brand rounded flex items-center justify-center text-white text-xs font-bold transition"
+                            href="#">in</a>
+                        <a aria-label="LinkedIn"
+                            class="w-7 h-7 bg-gray-800 hover:bg-brand rounded flex items-center justify-center text-white text-xs font-bold transition"
+                            href="#">li</a>
+                        <a aria-label="YouTube"
+                            class="w-7 h-7 bg-gray-800 hover:bg-brand rounded flex items-center justify-center text-white text-xs font-bold transition"
+                            href="#">yt</a>
+                    </div>
+                </div>
+
+                <!-- Spacer -->
+                <div class="hidden md:block md:col-span-1"></div>
+
+                <!-- Browse Links Column -->
+                <div class="md:col-span-2 space-y-3">
+                    <h4 class="text-sm font-bold text-white tracking-wide">Browse</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a class="hover:text-white transition" href="../php/Browse_page.php">Browse Pets</a></li>
+                        <li><a class="hover:text-white transition" href="../php/Adoption_process.php">Adoption Process</a></li>
+                        <li><a class="hover:text-white transition" href="../php/Success_stories.php">Success Stories</a></li>
+                        <li><a class="hover:text-white transition" href="../php/About_us.php">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources Links Column -->
+                <div class="md:col-span-2 space-y-3">
+                    <h4 class="text-sm font-bold text-white tracking-wide">Resources</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a class="hover:text-white transition" href="#faq">FAQ</a></li>
+                        <li><a class="hover:text-white transition" href="#tips">Pet Care Tips</a></li>
+                        <li><a class="hover:text-white transition" href="#volunteer">Volunteer</a></li>
+                        <li><a class="hover:text-white transition" href="#support">Support Center</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info Column -->
+                <div class="md:col-span-3 space-y-3">
+                    <h4 class="text-sm font-bold text-white tracking-wide">Contact</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li>helloadoptly@gmail.com</li>
+                        <li>+1 (234) 567-890</li>
+                        <li>New York, USA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Row -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p>© 2026 Adoptly. All rights reserved.</p>
+                <div class="flex items-center space-x-4 mt-3 sm:mt-0">
+                    <a class="hover:text-gray-400 transition" href="#privacy">Privacy Policy</a>
+                    <span>|</span>
+                    <a class="hover:text-gray-400 transition" href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END: MainFooter -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryBtns = document.querySelectorAll('.pet-category-btn');
+            const petCards = document.querySelectorAll('.adoptable-pet-card');
+
+            // Tailwind classes for active and inactive states
+            const activeClasses = ['bg-brand', 'border-brand', 'text-white', 'shadow-md', 'hover:bg-brand-hover'];
+            const inactiveClasses = ['bg-white', 'border-gray-200', 'text-brand', 'hover:shadow-md'];
+
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+
+                    // 1. Reset all category buttons to inactive state
+                    categoryBtns.forEach(c => {
+                        c.classList.remove(...activeClasses);
+                        c.classList.add(...inactiveClasses);
+                    });
+
+                    // 2. Set the clicked button to active state
+                    btn.classList.remove(...inactiveClasses);
+                    btn.classList.add(...activeClasses);
+
+                    // 3. Filter the pet cards
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    petCards.forEach(card => {
+                        const species = card.getAttribute('data-species');
+
+                        if (filterValue === 'all' || filterValue === species) {
+                            // Show card: remove hidden, restore flex layout
+                            card.classList.remove('hidden');
+                            card.classList.add('flex');
+                        } else {
+                            // Hide card: remove flex to allow hidden to work properly
+                            card.classList.remove('flex');
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
-</html>*\
+
+</html>
