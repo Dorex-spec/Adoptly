@@ -1,26 +1,28 @@
-dash: Deploy to InfinityFree
+name: Deploy to InfinityFree
 
 on:
   push:
     branches:
-      
-      - main
+      - main # Change this to 'master' if your default branch is named master
 
 jobs:
   web-deploy:
-    name: Deploy via FTP
-      runs-on: ubuntu-latest
-      steps:
-      
-    - name: Checkout Code
+    name: 🎉 Deploy via FTP
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
       uses: actions/checkout@v4
 
-
-      
-    - name: Sync files to InfinityFree
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: htdocs/
+        # InfinityFree requires files to be inside the htdocs folder
+        server-dir: /htdocs/ 
+        # Prevents the action from deleting InfinityFree's default system files
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
