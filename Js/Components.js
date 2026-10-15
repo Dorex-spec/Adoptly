@@ -8,7 +8,7 @@ const navbarHTML = `
         <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Browse_page.php">Browse pets</a>
         <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Adoption_process.php">Adoption Process</a>
         <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Donation.php">Donate</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="About.php">About</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="About_us.php">About</a>
       </nav>
       <div class="flex items-center gap-4">
         <button class="fav" type="button" aria-label="View Saved Pets">
@@ -46,10 +46,10 @@ const footerHTML = `
         <div class="md:col-span-2 space-y-3">
           <h4 class="text-sm font-bold text-white tracking-wide">Browse</h4>
           <ul class="space-y-2 text-xs text-gray-400">
-            <li><a class="hover:text-white transition" href="#browse">Browse Pets</a></li>
-            <li><a class="hover:text-white transition" href="#process">Adoption Process</a></li>
-            <li><a class="hover:text-white transition" href="#stories">Success Stories</a></li>
-            <li><a class="hover:text-white transition" href="#about">About Us</a></li>
+            <li><a class="hover:text-white transition" href="Browse_page.php">Browse Pets</a></li>
+            <li><a class="hover:text-white transition" href="Adoption_process.php">Adoption Process</a></li>
+            <li><a class="hover:text-white transition" href="Success_stories.php">Success Stories</a></li>
+            <li><a class="hover:text-white transition" href="About_us.php">About Us</a></li>
           </ul>
         </div>
         <div class="md:col-span-2 space-y-3">

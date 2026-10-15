@@ -130,14 +130,14 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
         <!-- Breadcrumbs -->
         <nav class="flex items-center gap-2 text-xs font-semibold text-neutral-400 mb-6 uppercase tracking-wider">
-          <a class="hover:text-neutral-700 transition" href="../php/index.php">HOME</a>
+          <a class="hover:text-neutral-700 transition" href="index.php">HOME</a>
           <span class="text-neutral-300">/</span>
           <span class="text-[#E05A4F]">ABOUT US</span>
         </nav>
         <!-- Framed Hero Card -->
         <div
           class="bg-white/60 bg-blend-overlay bg-cover bg-center rounded-3xl border border-neutral-200 shadow-sm p-8 sm:p-14 text-center relative overflow-hidden"
-          style="background-image: url('../photos/About%20us/Hero_card_pic.jpg');">
+          style="background-image: url('photos/About%20us/Hero_card_pic.jpg');">
           <!-- Badges Row -->
           <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
             <div
@@ -505,7 +505,7 @@
               <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <!-- Primary CTA -> Browse Pet Page -->
                 <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#E05A4F] text-white font-semibold text-sm hover:bg-[#c94b41] active:scale-95 transition shadow-sm flex items-center justify-center gap-2"
-                  href="../php/Browse_page.php">
+                  href="Browse_page.php">
                   <span class="">Start Adopting</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -514,7 +514,7 @@
                 </a>
                 <!-- Secondary CTA -> Adoption Process Page -->
                 <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl border-2 border-neutral-300 bg-white/95 text-neutral-900 font-semibold text-sm hover:bg-white hover:border-neutral-400 active:scale-95 transition shadow-sm flex items-center justify-center gap-2"
-                  href="../php/Adoption_process.php">
+                  href="Adoption_process.php">
                   <span class="">Learn the process</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>

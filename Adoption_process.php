@@ -1,9 +1,9 @@
 <?php
 $navLinks = [
-  ['Browse Pets', '../php/Browse_page.php'],
-  ['Adoption Process', '../php/Adoption_process.php'],
-  ['Donate', '../php/Donation.php'],
-  ['About', '../php/About_us.php'],
+  ['Browse Pets', 'Browse_page.php'],
+  ['Adoption Process', 'Adoption_process.php'],
+  ['Donate', 'Donation.php'],
+  ['About', 'About_us.php'],
 ];
 $activePage = 'Adoption Process';
 
@@ -54,8 +54,8 @@ $faqs = [
 ];
 
 $ctas = [
-  ['01', 'Start Application', 'Complete our digital questionnaire to connect with verified shelters and foster homes.', '../php/Adoption_process.php', 'btn-fill'],
-  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', '../php/Browse_page.php', 'btn-outline'],
+  ['01', 'Start Application', 'Complete our digital questionnaire to connect with verified shelters and foster homes.', 'Adoption_process_form.php', 'btn-fill'],
+  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', 'Browse_page.php', 'btn-outline'],
   ['03', 'Contact Support Team', 'Have specific questions about requirements, veterinary care or special adoptions?', 'mailto:support@adoptly.org', 'btn-dark'],
 ];
 
@@ -73,14 +73,14 @@ $footerCols = [
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../Css/style.css">
+  <link rel="stylesheet" href="Css/style.css">
 </head>
 <body>
 
 <!-- HEADER -->
 <header class="header">
   <div class="container header-row">
-    <a href="#top" class="logo"><img src="../photos/image-removebg-preview (1).png"></a>
+    <a href="#top" class="logo"><img src="photos/logoNav.png"></a>
 
     <nav class="nav" aria-label="Main">
       <?php foreach ($navLinks as [$label, $href]): ?>

@@ -11,13 +11,13 @@ require __DIR__ . '/data.php';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="../Css/style2.css">
+  <link rel="stylesheet" href="Css/style2.css">
 </head>
 <body>
 
  <header class="header">
   <div class="container header-row">
-    <a href="#top" class="logo"><img src="../photos/image-removebg-preview (1).png"></a>
+    <a href="#top" class="logo"><img src="photos/logoNav.png"></a>
 
       <nav class="main-nav" aria-label="Main">
         <?php foreach ($navLinks as $link): ?>
@@ -27,8 +27,8 @@ require __DIR__ . '/data.php';
 
       <div class="header-actions">
         <button class="fav" type="button" aria-label="View Saved Pets">❤</button>
-        <a class="header-actions__login" href="../php/Log_in.php">Login</a>
-        <a class="btn btn--coral btn--sm" href="../php/Sign_in.php">Sign in</a>
+        <a class="header-actions__login" href="Log_in.php">Login</a>
+        <a class="btn btn--coral btn--sm" href="Sign_in.php">Sign in</a>
       </div>
     </div>
   </header>
@@ -37,7 +37,7 @@ require __DIR__ . '/data.php';
     <section class="hero">
       <div class="container container--medium text-center">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="../php/index.php">Home</a><span>/</span><span class="breadcrumb__current">Donate</span>
+          <a href="index.php">Home</a><span>/</span><span class="breadcrumb__current">Donate</span>
         </nav>
         <h1 class="hero__title">Give Hope, Save Lives: Support Adoptly Rescue Animals</h1>
         <p class="hero__subtitle">Every single contribution directly feeds, shelters, and provides emergency medical treatments to abandoned and recovering pets until they find their forever home.</p>
@@ -210,7 +210,7 @@ require __DIR__ . '/data.php';
   <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <a href="#top" class="logo footer-logo"><img src="../photos/Adoptly logo.png"></a>
+      <a href="#top" class="logo footer-logo"><img src="photos/Adoptly logo.png"></a>
       <p>Adoptly is a non-profit companion animal rescue network dedicated to connecting shelter pets with safe, loving and permanent forever homes through nationwide solidarity.</p>
     </div>
     <?php foreach ($footerCols as $heading => $links): ?>

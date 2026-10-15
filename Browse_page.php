@@ -64,7 +64,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
 
 <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
   <nav class="text-xs text-gray-500 mb-6 flex items-center gap-2">
-    <a class="hover:underline text-gray-600 font-medium" href="../php/index.php">Home</a>
+    <a class="hover:underline text-gray-600 font-medium" href="index.php">Home</a>
     <i class="fa-solid fa-chevron-right text-[10px] text-gray-400"></i>
     <span class="text-brand font-medium">Browse Pets</span>
   </nav>
@@ -247,7 +247,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 1: Bella -->
         <article data-type="Cat" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/BELLA.jpg" alt="Bella" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/BELLA.jpg" alt="Bella" class="w-full h-full object-cover">
             <div class="w-full h-full bg-[#f3f4f6] flex items-center justify-center text-gray-300"><i class="fa-solid fa-paw text-5xl opacity-40"></i></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Bella</h3>
@@ -277,8 +277,8 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
               </div>
             </div>
             <div class="flex items-center gap-2 pt-1">
-			<a href="../php/Pet_details.php" class="flex-1 bg-brand text-white font-medium py-2 px-3 rounded-full hover:bg-brand-hover transition-colors shadow-sm text-center">Adopt Me</a>
-              <a href="../php/Pet_details.php" class="flex items-center justify-center gap-1.5 px-3 py-2 text-brand font-medium hover:bg-brand-light rounded-full transition-colors">
+			<a href="php/Pet_details.php" class="flex-1 bg-brand text-white font-medium py-2 px-3 rounded-full hover:bg-brand-hover transition-colors shadow-sm text-center">Adopt Me</a>
+              <a href="php/Pet_details.php" class="flex items-center justify-center gap-1.5 px-3 py-2 text-brand font-medium hover:bg-brand-light rounded-full transition-colors">
   <i class="fa-solid fa-info-circle text-xs"></i>
   <span>More About Me</span>
 </a>
@@ -289,7 +289,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 2: Polly -->
         <article data-type="Cat" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/POLLY.jpg" alt="Polly" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/POLLY.jpg" alt="Polly" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Polly</h3>
             <button aria-label="Favorite Polly" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-brand hover:bg-white transition-all shadow-sm">
@@ -330,7 +330,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 3: Marley -->
         <article data-type="Dog" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/MARLEY.jpg" alt="Marley" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/MARLEY.jpg" alt="Marley" class="w-full h-full object-cover">
             <div class="w-full h-full bg-[#f3f4f6] flex items-center justify-center text-gray-300"><i class="fa-solid fa-paw text-5xl opacity-40"></i></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Marley</h3>
@@ -414,7 +414,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 5: Maleficent -->
         <article data-type="Dog" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/MALEFICENT.jpg" alt="Maleficent" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/MALEFICENT.jpg" alt="Maleficent" class="w-full h-full object-cover">
             <div class="w-full h-full bg-[#f3f4f6] flex items-center justify-center text-gray-300"><i class="fa-solid fa-paw text-5xl opacity-40"></i></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Maleficent</h3>
@@ -456,7 +456,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 6: Bailey -->
         <article data-type="Cat" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/BAILEY.jpg" alt="Bailey" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/BAILEY.jpg" alt="Bailey" class="w-full h-full object-cover">
             <div class="w-full h-full bg-[#f3f4f6] flex items-center justify-center text-gray-300"><i class="fa-solid fa-paw text-5xl opacity-40"></i></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Bailey</h3>
@@ -582,7 +582,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
         <!-- Card 9: Mary Kate -->
         <article data-type="Dog" class="pet-card bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F3EBE7] flex flex-col">
           <div class="relative h-56 w-full overflow-hidden">
-            <img src="../photos/BROWSE PAGE/MARY KATE.jpg" alt="Mary Kate" class="w-full h-full object-cover">
+            <img src="photos/BROWSE PAGE/MARY KATE.jpg" alt="Mary Kate" class="w-full h-full object-cover">
             <div class="w-full h-full bg-[#f3f4f6] flex items-center justify-center text-gray-300"><i class="fa-solid fa-paw text-5xl opacity-40"></i></div>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <h3 class="absolute bottom-3 left-4 text-xl font-bold text-white tracking-wide">Mary Kate</h3>
@@ -4796,7 +4796,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
 
 <!-- FOOTER -->
 <div id="footer-placeholder"></div>
-<script src="js/Components.js"></script>
+<script src="Js/Components.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

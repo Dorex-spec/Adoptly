@@ -181,19 +181,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
 
             <!-- Brand Logo -->
             <a class="flex items-center" href="#">
-                <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+                <img src="photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
             </a>
 
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
                 <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="../php/Browse_page.php">Browse pets</a>
+                    href="Browse_page.php">Browse pets</a>
                 <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="../php/Adoption_process.php">Adoption Process</a>
+                    href="Adoption_process.php">Adoption Process</a>
                 <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="../php/Donation.php">Donate</a>
+                    href="Donation.php">Donate</a>
                 <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="../php/About_us.php">About</a>
+                    href="About_us.php">About</a>
             </nav>
 
             <!-- Right Actions -->

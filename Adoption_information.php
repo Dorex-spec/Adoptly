@@ -3,7 +3,7 @@ require_once __DIR__ . '/profile_data.php';   // $user, $navLinks, $footerCols
 $fullName = trim($user['first'] . ' ' . $user['last']);
 
 /* ---------- 1. CONFIG ---------- */
-const DATA_DIR  = __DIR__ . '/data';
+const DATA_DIR  = __DIR__ . '/data.php';
 const DATA_FILE = DATA_DIR . '/adoption.json';
 
 const CATEGORIES = [
