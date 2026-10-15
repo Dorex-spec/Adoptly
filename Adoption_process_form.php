@@ -1,699 +1,395 @@
-Adoption Process Form (V1).php
-100%
+
 <?php
-/**
- * Adoptly - Full Adoption Application Portal (PHP)
- * Formatted strictly according to Adoptly Official Brand Guidelines & Palette
- */
 session_start();
 
-// Initialize or persist state
-if (!isset($_SESSION['adoptly_app'])) {
-    $_SESSION['adoptly_app'] = [
-        'step' => 1,
-        'intent' => 'dog',
-        'shelter_location' => 'bulacan-haven',
-        'target_pet' => 'Bella (Domestic Short Hair • ID #9034)',
-        'alternative_adoption' => 'open',
-        'household_count' => '2-3',
-        'household_demographics' => '2 adults (ages 32, 34), 1 child (age 6). Living together in a 2-bedroom home.',
-        'prior_experience' => 'experienced',
-        'financial_payer' => 'primary',
-        'reason_for_adopting' => 'We are seeking a lifelong companion to join our family and share our daily routine.',
-        'full_name' => 'Juan Dela Cruz',
-        'email' => 'juandelacruz@example.com',
-        'home_address' => 'Unit 402, Acacia Terraces, Barangay San Antonio, Pasig City, Metro Manila 1605',
-        'contact_number' => '917 555 2468',
-        'dob' => '15 / 08 / 1994',
-        'income_range' => '20k-50k',
-        'facebook_link' => 'https://facebook.com/juan.delacruz.ph',
-        'contact_pref' => 'call',
-        'gov_id_filename' => 'valid_gov_id_dela_cruz.pdf',
-        'residence_type' => 'Single Family House (with yard)',
-        'residence_ownership' => 'Owned (Sole Owner / Family)',
-        'agreement_status' => 'Yes, everyone in the home is enthusiastic and fully supportive',
-        'household_notes' => 'No known allergies. Kids understand gentle pet handling.',
-        'outdoor_space' => 'fenced_yard',
-        'primary_stay' => 'inside_main',
-        'move_plans' => 'none',
-        'move_commitment' => '100_percent',
-        'clinic_name' => 'St. Francis Animal Care Clinic',
-        'clinic_location' => '108 West Avenue, Suite 4, Central District',
-        'clinic_emergency' => 'Yes, 24/7 emergency facility',
-        'breeding_history' => 'No, never and never will',
-        'vax_status' => 'Yes, fully up to date',
-        'parasite_status' => 'No, routinely tested negative & on preventative care',
-        'altered_status' => 'all',
-        'spay_neuter_agreement' => 'fully_agree',
-        'slot1_date' => 'Thu, Oct 24, 2026',
-        'slot1_time' => '10:00 AM – 11:00 AM (Morning)',
-        'slot2_date' => 'Fri, Oct 25, 2026',
-        'slot2_time' => '03:00 PM – 04:00 PM (Afternoon)',
-        'platform' => 'Google Meet',
-    ];
+$sections = [
+  [
+    'title' => 'Adoption Information', 'code' => '#ADP-SPEC',
+    'description' => 'Tell us which type of companion you’re hoping to welcome home.',
+    'fields' => [
+      ['intent', 'Which of the following best describes why you’re filling out the form?', 'cards', [
+        ['dog', 'I’m applying to adopt a dog from the shelter', 'Companion dogs, puppies, and senior canines'],
+        ['cat', 'I’m applying to adopt a cat from the shelter', 'Indoor companions, kittens, and bonded pairs'],
+        ['other', 'I’m applying for another pet', 'Rabbits, birds, small animals, or foster consultations'],
+      ]],
+    ],
+  ],
+  [
+    'title' => 'Applicant’s Personal Information', 'code' => '#APP-PERS',
+    'description' => 'Please provide your current contact details and identification information.',
+    'fields' => [
+      ['full_name', 'Full Name', 'text', null, 'Enter your full legal name'],
+      ['email', 'Email', 'email', null, 'you@example.com'],
+      ['address', 'Home Address', 'textarea', null, 'House/unit, street, barangay, city'],
+      ['phone', 'Contact Number', 'tel', null, '+63 900 000 0000'],
+      ['dob', 'Date of Birth (Must be 18+)', 'date'],
+      ['income_source', 'Source of Income', 'checks', [
+        ['employed', 'Employed (Full-time)'], ['freelance', 'Freelance / Remote Contractor'],
+        ['allowance', 'Allowance / Student Support'], ['retired', 'Retired / Pensioner'], ['other', 'Other Income Source'],
+      ]],
+      ['income', 'Monthly Income / Allowance Range', 'select', [
+        ['below20k', 'Below ₱20k'], ['20k-50k', '₱20k – ₱50k'],
+        ['50k-100k', '₱50k – ₱100k'], ['above100k', '₱100k+'],
+      ]],
+      ['facebook', 'Facebook Link (or preferred social profile)', 'text', null, 'https://facebook.com/your-profile', true],
+      ['contact_preference', 'How do you prefer to be contacted?', 'cards', [
+        ['call', 'Phone Call'], ['email', 'Email'], ['sms', 'SMS / Viber'],
+      ]],
+      ['valid_id', 'Upload Valid ID', 'file'],
+    ],
+  ],
+  [
+    'title' => 'Adoption Information', 'code' => '#ADP-INF',
+    'description' => 'Share your preferred rescue, household composition, and motivation for adopting.',
+    'fields' => [
+      ['shelter', 'Shelter Location', 'select', [['bulacan', 'Bulacan Rescue Haven'], ['bacolod', 'Bacolod Sanctuary']]],
+      ['target_pet', 'Pet you want to adopt', 'text', null, 'Pet name or ID'],
+      ['alternative', 'If the animal is already adopted, are you willing to adopt another pet?', 'cards', [
+        ['open', 'Yes, open to other compatible rescues'], ['specific', 'No, specifically interested in this pet'],
+        ['recommendation', 'I need a recommendation from an adoption counselor'],
+      ]],
+      ['household_count', 'How many are you in the house?', 'cards', [
+        ['1', '1 person (solo)'], ['2-3', '2–3 people'], ['4-5', '4–5 people'], ['6+', '6+ people'],
+      ]],
+      ['household_people', 'How old are they and who do they live with?', 'textarea', null, 'List household members, ages, and relationships'],
+      ['prior_experience', 'Does the applicant have prior experience with animal guardianship?', 'cards', [
+        ['experienced', 'Experienced guardian', 'Currently has pets or previously owned cats or dogs independently'],
+        ['first', 'First-time pet parent', 'Eager to learn and follow shelter guidance'],
+        ['family', 'Occasional pet sitter / family pet experience'],
+      ]],
+      ['financial_payer', 'Who will be financially responsible for the rescue’s needs?', 'cards', [
+        ['primary', 'Primary Applicant'], ['shared', 'Shared Household'], ['sponsor', 'Co-sign / Sponsor'],
+      ]],
+      ['reason', 'Reason for Adopting', 'textarea', null, 'Tell us why you want to adopt'],
+    ],
+  ],
+  [
+    'title' => 'Household Information', 'code' => '#APP-HOUSE',
+    'description' => 'Help us understand your residence and ensure everyone at home is ready.',
+    'fields' => [
+      ['residence_type', 'Type of Residence', 'cards', [
+        ['house', 'Single Family House (with yard)'], ['townhouse', 'Townhouse / Duplex'],
+        ['condo', 'Apartment / Condominium'], ['gated', 'Gated Community Compound'],
+        ['rural', 'Rural / Farm property'], ['other', 'Other residence type'],
+      ]],
+      ['residence', 'Residence Ownership', 'select', [
+        ['owned', 'Owned (Sole Owner / Family)'], ['rented', 'Rented (Pet-friendly approved)'],
+        ['family', 'Living with Parents / Relatives'], ['employer', 'Employer-Provided Housing'],
+      ]],
+      ['household_members', 'Number of household members (including yourself)', 'cards', [
+        ['1', '1 person'], ['2-3', '2–3 people'], ['4-5', '4–5 people'], ['6+', '6+ people'],
+      ]],
+      ['agreement', 'Are all members of your household on board with the adoption?', 'cards', [
+        ['yes', 'Yes, everyone is enthusiastic and fully supportive'],
+        ['mostly', 'Mostly on board — some members have questions'],
+        ['surprise', 'Surprise gift / not everyone is aware yet'],
+      ]],
+      ['household_notes', 'Notes on household agreement or allergy considerations', 'textarea', null, 'Children, allergies, other pets, or anything we should know', true],
+    ],
+  ],
+  [
+    'title' => 'Animal Care / Experience', 'code' => '#APP-CARE',
+    'description' => 'Tell us about your history with companion animals and veterinary care readiness.',
+    'fields' => [
+      ['care_experience', 'Which best describes your experience as an animal guardian?', 'cards', [
+        ['current', 'Currently have companion pets'], ['lifelong', 'Lifelong pet owner'],
+        ['rescue', 'Previous rescue pet guardian'], ['special', 'Experienced with senior or special-needs pets'],
+        ['first', 'First-time primary caregiver'],
+      ]],
+      ['current_animals', 'Are there companion animals currently living in your household?', 'checks', [
+        ['dogs', 'Dogs'], ['cats', 'Cats'], ['other', 'Small mammals / Birds / Other'], ['none', 'None currently'],
+      ]],
+      ['past_rescue', 'Have you ever given a home to a rescue before?', 'cards', [
+        ['shelter', 'Yes, from a registered shelter or rescue foundation'],
+        ['street', 'Yes, rescued an abandoned or stray animal directly'],
+        ['no', 'No, this will be my first rescue adoption'],
+      ]],
+      ['disease_knowledge', 'How familiar are you with common animal diseases or viruses?', 'cards', [
+        ['very', 'Very familiar & vigilant'], ['moderate', 'Moderately familiar'], ['novice', 'Novice / Learning'],
+      ]],
+      ['clinic', 'Veterinary Clinic Name', 'text', null, 'Clinic name'],
+      ['clinic_location', 'Clinic Location', 'text', null, 'Clinic address or city'],
+      ['emergency', 'Is this clinic open 24/7 for emergencies?', 'select', [
+        ['yes', 'Yes, 24/7 emergency facility'], ['partner', 'Standard hours with emergency partner'],
+        ['no', 'Standard clinic hours only'], ['unsure', 'Unsure / Need shelter recommendation'],
+      ]],
+      ['breeding_history', 'Have you ever bred or sold companion animals?', 'cards', [
+        ['never', 'No, never and never will'], ['no', 'No, never engaged in breeding or resale'],
+        ['yes', 'Yes — subject to committee evaluation'],
+      ]],
+    ],
+  ],
+  [
+    'title' => 'Home Environment', 'code' => '#APP-ENV',
+    'description' => 'Help us verify that your physical living space is safe and secure for a rescue.',
+    'fields' => [
+      ['outdoor_space', 'Do you have a yard or outdoor space accessible to the rescue?', 'checks', [
+        ['fenced', 'Fully fenced private yard (height: 5ft+)'], ['unfenced', 'Unfenced private yard / open lawn'],
+        ['balcony', 'Balcony / Terrace with secure pet railing or netting'],
+        ['park', 'Common apartment park / community dog run'], ['indoor', 'No outdoor yard / Indoor-only home'],
+      ]],
+      ['pet_stay', 'Where will the rescue primarily stay?', 'checks', [
+        ['inside', 'Inside main home with family'], ['room', 'Designated indoor pet room'],
+        ['mixed', 'Indoors at night, secure yard during day'], ['crate', 'Crated / Penned when away'],
+        ['porch', 'Enclosed porch / climate-controlled terrace'],
+      ]],
+      ['move_plans', 'Are you planning to move in the future?', 'select', [
+        ['none', 'No immediate plans (Permanent residence)'], ['6-12', 'Yes, within 6–12 months'],
+        ['1-3', 'Yes, within 1–3 years'], ['possible', 'Possible relocation / Lease dependent'],
+      ]],
+      ['move_commitment', 'If you move, will the rescue move with you?', 'select', [
+        ['yes', 'Yes, 100% committed'], ['housing', 'Yes, will ensure pet-friendly housing'],
+        ['conditional', 'Conditional / Family guardianship transfer'],
+      ]],
+      ['home_photos', 'Current Home Environment Photos', 'file'],
+    ],
+  ],
+  [
+    'title' => 'Health and Vaccination', 'code' => '#APP-HLTH',
+    'description' => 'Share the current health and preventive care status of companion animals in your home.',
+    'fields' => [
+      ['vaccination', 'Are your companion animals’ vaccinations up to date?', 'cards', [
+        ['current', 'Yes, fully up to date'], ['partial', 'Partially up to date'],
+        ['none', 'No current companion animals'], ['overdue', 'No, overdue or not vaccinated'],
+      ]],
+      ['parasites', 'Have your dogs ever been diagnosed with heartworm or blood parasite disease?', 'cards', [
+        ['no', 'No, routinely tested negative & on preventive care'], ['cleared', 'Yes, treated and fully cleared'],
+        ['treatment', 'Currently undergoing treatment'], ['na', 'Not applicable'],
+      ]],
+      ['altered', 'Are your companion animals spayed/neutered?', 'cards', [
+        ['all', 'Yes, all altered'], ['some', 'Some altered'], ['none', 'No, not yet'], ['na', 'Not applicable'],
+      ]],
+      ['not_altered_reason', 'If not yet spayed/neutered, please share the reason', 'textarea', null, 'Provide details if applicable', true],
+      ['recent_illness', 'In the past 6–12 months, has a companion animal experienced serious illness or passed away?', 'cards', [
+        ['no', 'No — all animals have remained in stable health'], ['illness', 'Yes, an animal experienced serious illness'],
+        ['passed', 'Yes, an animal passed away'],
+      ]],
+      ['illness_details', 'Please share what happened (diagnosis, cause, or reason)', 'textarea', null, 'Provide details if applicable', true],
+    ],
+  ],
+  [
+    'title' => 'Adoption Commitment and Readiness', 'code' => '#APP-READY',
+    'description' => 'Confirm your long-term care plan and commitment to responsible rescue guardianship.',
+    'fields' => [
+      ['readiness', 'How would you rate yourself in the following areas when it comes to adopting and caring for a rescue?', 'rating', [
+        ['patience', 'Patience & Positive Reinforcement Training', 'Helping a rescue adjust using kind, consistent training'],
+        ['financial', 'Ongoing Financial Readiness', 'Food, veterinary care, grooming, and emergency funds'],
+        ['medical', 'Emergency Medical Preparedness', 'Ability to handle unexpected treatment or hospitalization'],
+        ['time', 'Daily Time Commitment & Stimulation', 'Exercise, enrichment, companionship, and training'],
+        ['decompression', 'Rescue Decompression & 3-3-3 Rule', 'Patience during transition and settling into a new home'],
+      ]],
+      ['daily_care', 'Who will be responsible for the daily care of the rescue?', 'cards', [
+        ['primary', 'Primary Applicant'], ['partner', 'Shared with Partner / Spouse'],
+        ['family', 'Designated Family Member'], ['caretaker', 'Assisted by Household Caretaker'],
+      ]],
+      ['care_plan', 'Primary caregiver name(s) and daytime supervision plan', 'textarea', null, 'Describe feeding, exercise, and supervision arrangements'],
+      ['life_commitment', 'If your circumstances change, are you committed to keeping the rescue?', 'cards', [
+        ['yes', 'Yes, 100% committed — the rescue is immediate family'],
+        ['housing', 'Yes, I will filter for pet-friendly housing'],
+        ['contact', 'I will contact Adoptly before any major decision'],
+      ]],
+      ['kapon', 'Are you willing to have the rescue spayed or neutered (kapon)?', 'cards', [
+        ['agree', 'Yes, fully agree and will strictly comply'], ['already', 'The rescue is already spayed/neutered'],
+        ['consult', 'I request additional consultation'],
+      ]],
+      ['breeding_pledge', 'Zero Commercial Breeding Pledge', 'cards', [
+        ['pledge', 'I affirm this rescue will remain a companion and never be used for breeding'],
+      ]],
+    ],
+  ],
+  [
+    'title' => 'Virtual Interview Schedule', 'code' => '#APP-SLOTS',
+    'description' => 'Provide your preferred one-hour interview slot in Asia/Manila time.',
+    'fields' => [
+      ['timezone', 'Standard Timezone', 'select', [['manila', 'Asia/Manila (PHT)'], ['other', 'Another timezone']]],
+      ['date', 'Option 1 — Primary Preferred Date', 'date'], ['time', 'Option 1 — 1-Hour Time Window', 'time'],
+      ['date2', 'Option 2 — Alternative Date', 'date'], ['time2', 'Option 2 — 1-Hour Time Window', 'time'],
+      ['date3', 'Option 3 — Alternative Date', 'date'], ['time3', 'Option 3 — 1-Hour Time Window', 'time'],
+      ['platform', 'Preferred Video Conferencing Platform', 'cards', [
+        ['meet', 'Google Meet', 'Calendar invite link sent by email'],
+        ['zoom', 'Zoom Video', 'Meeting ID and passcode sent by SMS or email'],
+        ['viber', 'WhatsApp / Viber', 'Direct video call to your mobile number'],
+      ]],
+      ['interview_notes', 'Special Notes or Household Availability', 'textarea', null, 'Optional scheduling notes', true],
+    ],
+  ],
+];
+
+if (!isset($_SESSION['adoptly'])) {
+  $_SESSION['adoptly'] = ['page' => 0, 'answers' => [], 'files' => []];
 }
 
-// Step routing
-if (isset($_GET['step'])) {
-    $target_step = (int)$_GET['step'];
-    if ($target_step >= 1 && $target_step <= 12) {
-        $_SESSION['adoptly_app']['step'] = $target_step;
-    }
-}
-
-// Form handling
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $current_step = isset($_POST['current_step']) ? (int)$_POST['current_step'] : 1;
-    $direction = $_POST['action'] ?? 'next';
+  $action = $_POST['action'] ?? 'next';
+  $page = (int)($_POST['page'] ?? $_SESSION['adoptly']['page']);
 
-    foreach ($_POST as $k => $v) {
-        if ($k !== 'current_step' && $k !== 'action') {
-            $_SESSION['adoptly_app'][$k] = $v;
-        }
-    }
-
-    if ($direction === 'prev') {
-        $_SESSION['adoptly_app']['step'] = max(1, $current_step - 1);
-    } else {
-        $_SESSION['adoptly_app']['step'] = min(12, $current_step + 1);
-    }
-
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit;
-}
-
-$data = $_SESSION['adoptly_app'];
-$step = (int)$data['step'];
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Adoptly — A home. A heart. A forever.</title>
-  <!-- Google Fonts: Poppins Regular (400) & Bold (700) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Poppins', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              coral: '#E05A4F',      /* Coral Red (Primary) */
-              coralHover: '#C94940',
-              black: '#1F1F1F',      /* Deep Black (Text/Logo) */
-              grayBg: '#F2F2F2',     /* Light Gray (Background) */
-              white: '#FFFFFF',      /* White (Surface) */
-              softCoral: '#FFE1DD',  /* Soft Coral (Accent) */
-              warmBeige: '#F7E9D7',  /* Warm Beige (Secondary) */
-              green: '#4CAF50',      /* Green (Online/Active) */
-              red: '#E53935'         /* Red (Offline) */
-            }
-          }
-        }
+  if ($action === 'restart') {
+    $_SESSION['adoptly'] = ['page' => 0, 'answers' => [], 'files' => []];
+  } elseif ($action === 'back') {
+    $_SESSION['adoptly']['page'] = max(0, $page - 1);
+  } elseif ($action === 'goto') {
+    $_SESSION['adoptly']['page'] = max(0, min(12, (int)($_POST['target'] ?? 0)));
+  } else {
+    foreach ($_POST as $key => $value) {
+      if (!in_array($key, ['action', 'page'], true)) {
+        $_SESSION['adoptly']['answers'][$key] = is_array($value)
+          ? array_map('strip_tags', $value)
+          : trim(strip_tags($value));
       }
     }
-  </script>
+    foreach ($_FILES as $key => $file) {
+      if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_OK) {
+        $_SESSION['adoptly']['files'][$key] = basename($file['name']);
+      }
+    }
+    $_SESSION['adoptly']['page'] = min(12, $page + 1);
+  }
+  header('Location: ' . strtok($_SERVER['REQUEST_URI'], '?'));
+  exit;
+}
+
+$page = (int)$_SESSION['adoptly']['page'];
+$answers = $_SESSION['adoptly']['answers'];
+$files = $_SESSION['adoptly']['files'];
+
+function e($value): string { return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8'); }
+function answer(string $key, $default = '') { global $answers; return $answers[$key] ?? $default; }
+function selected(string $key, string $value): bool {
+  $answer = answer($key);
+  return is_array($answer) ? in_array($value, $answer, true) : $answer === $value;
+}
+function labelFor(string $key, array $sections): string {
+  $value = answer($key);
+  foreach ($sections as $section) foreach ($section['fields'] as $field) {
+    if ($field[0] !== $key || empty($field[3])) continue;
+    foreach ($field[3] as $option) if (($option[0] ?? '') === $value) return $option[1] ?? $value;
+  }
+  return is_array($value) ? implode(', ', $value) : (string)$value;
+}
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adoptly — Adoption Application</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #F2F2F2;
-      color: #1F1F1F;
-    }
-    .brand-logo-text {
-      letter-spacing: -0.03em;
-    }
+    :root{--coral:#df594d;--coral-dark:#c94b41;--soft:#ffe1dd;--ink:#1f1f1f;--line:#eee2d8;--muted:#77706b}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;font-family:Poppins,sans-serif;font-weight:400;color:var(--ink);background:#332b27 url('https://images.unsplash.com/photo-1718885433034-908d5bca08cf?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=88&w=2000') center/cover fixed no-repeat}body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(25,20,18,.36),rgba(25,20,18,.64));z-index:0}.page{position:relative;z-index:1;display:flex;min-height:100vh;flex-direction:column;align-items:center;padding:30px 20px 20px}.top{display:flex;flex-direction:column;align-items:center;margin-bottom:22px}.brand{color:var(--coral);filter:drop-shadow(0 2px 14px rgba(0,0,0,.2))}.word{position:relative;display:flex;align-items:center;font-size:34px;font-weight:700;letter-spacing:-2.5px;line-height:1}.word svg{width:32px;height:32px;margin:0 1px;fill:#fff}.word b{position:absolute;top:-8px;right:-13px;font-size:12px}.brand small{display:block;margin-top:6px;color:#fff;font-size:10px;font-weight:700}.brand i{color:var(--coral);font-style:normal}.status{display:flex;align-items:center;gap:6px;margin-top:17px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.92);color:#3c9952;font-size:9px;font-weight:700}.status i{width:7px;height:7px;border-radius:50%;background:#4caf50}.status span{padding-left:7px;border-left:1px solid #ddd;color:#777;font-weight:400}.card{width:100%;max-width:700px;margin:auto;padding:34px 38px;border:1px solid rgba(255,255,255,.65);border-radius:24px;background:rgba(255,255,255,.97);box-shadow:0 24px 70px rgba(28,19,17,.28);backdrop-filter:blur(12px)}h1{margin:0;font-size:25px;font-weight:700;line-height:1.25;letter-spacing:-.035em}.intro{text-align:center}.badge{display:inline-flex;padding:5px 11px;border-radius:999px;background:var(--soft);color:#d64f44;font-size:9px;font-weight:700;text-transform:uppercase}.intro h1{margin-top:13px}.intro-copy{margin:25px 0;color:#65605c;font-size:12px;line-height:1.75;text-align:left}.intro-copy strong{display:block;padding-top:4px;color:var(--coral);font-size:14px}.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:27px;padding-bottom:17px;border-bottom:1px solid var(--line)}.heading h1{margin-top:9px;font-weight:700}.heading code{color:#aaa39c;font-size:10px;font-weight:700}.description{max-width:480px;margin:7px 0 0;color:var(--muted);font-size:10px;font-weight:700;line-height:1.55}.fields{display:flex;flex-direction:column;gap:20px}.field{display:block;margin:0;padding:0;border:0}.field>span,.field legend{display:block;margin-bottom:8px;font-size:11px;font-weight:700}.field em{color:var(--coral);font-style:normal}.field input:not([type=radio]):not([type=checkbox]),.field select,.field textarea{width:100%;outline:none;border:1px solid #ddd7d1;border-radius:11px;background:#fff;color:#252321;font-size:12px;transition:.2s}.field input:not([type=radio]):not([type=checkbox]):not([type=file]),.field select{height:44px;padding:0 13px}.field textarea{padding:12px 13px;resize:vertical}.field input[type=file]{padding:11px 13px;border-style:dashed;background:#fff8f7}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--coral);box-shadow:0 0 0 3px rgba(223,89,77,.1)}.options{display:grid;gap:9px}.option{position:relative;display:flex;align-items:flex-start;gap:11px;padding:13px 14px;border:1.5px solid #e2ddd8;border-radius:13px;background:#fff;cursor:pointer}.option.active,.option:has(input:checked){border-color:var(--coral);background:#fff6f4}.option input{position:absolute;opacity:0}.mark{position:relative;flex:0 0 16px;width:16px;height:16px;margin-top:1px;border:1.5px solid #bcb5af;background:#fff}.radio{border-radius:50%;box-shadow:inset 0 0 0 4px #fff}.option.active .radio,.option:has(input:checked) .radio{border-color:var(--coral);background:var(--coral)}.check{border-radius:4px}.option.active .check,.option:has(input:checked) .check{border-color:var(--coral);background:var(--coral)}.option.active .check:after,.option:has(input:checked) .check:after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.option strong,.option small{display:block}.option strong{font-size:11px}.option small{margin-top:3px;color:#87817c;font-size:9px}.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:28px;padding-top:19px;border-top:1px solid var(--line)}button{border:0;font-family:Poppins,sans-serif;font-size:10px;font-weight:700;cursor:pointer}.primary{display:inline-flex;align-items:center;gap:12px;min-height:42px;padding:0 20px;border-radius:10px;background:var(--coral);color:#fff;box-shadow:0 7px 17px rgba(197,65,54,.18)}.secondary{min-height:40px;padding:0 18px;border:1px solid #d8d3ce;border-radius:10px;background:#fff;color:#57514c}.text-button{background:none;color:#88817b}.process{display:flex;flex-direction:column;gap:17px;color:#5e5955;font-size:12px}.process-row{display:flex;gap:13px}.process-row>b{display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:50%;background:var(--soft);color:#d64f44}.process-row p{margin:2px 0;line-height:1.6}.process-row strong{display:block}.process aside{padding:15px 17px;border-radius:13px;background:#f8eee2}.summary{display:grid;gap:10px}.summary>div{position:relative;padding:14px 55px 14px 15px;border:1px solid #ebddd1;border-radius:13px;background:#fcf6ef}.summary small,.summary strong,.summary span{display:block}.summary small{color:#d45348;font-size:8px;font-weight:700;text-transform:uppercase}.summary strong{font-size:12px}.summary span{margin-top:2px;color:#7c756f;font-size:10px}.summary form{position:absolute;top:12px;right:12px}.summary form button{background:none;color:#d45348}.declaration{display:flex;gap:10px;margin-top:18px;padding:14px;border-radius:12px;background:#f5eee6;color:#5c5651;font-size:10px;line-height:1.55}.declaration input{width:15px;height:15px;accent-color:var(--coral)}.confirmation{padding:18px 0;text-align:center}.confirmation .tick{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 20px;border-radius:50%;background:var(--coral);color:#fff;font-size:30px;box-shadow:0 0 0 8px var(--soft)}.confirmation p{color:var(--muted);font-size:11px}.site-footer{margin-top:22px;color:rgba(255,255,255,.92);font-size:10px;font-style:italic;text-align:center}.site-footer small{display:block;margin-top:5px;color:rgba(255,255,255,.65);font-style:normal}@media(max-width:600px){.page{padding:22px 12px}.card{padding:25px 20px;border-radius:20px}.word{font-size:30px}.heading{align-items:center}.intro .actions{flex-direction:column-reverse;align-items:stretch}.intro .primary{justify-content:center}}
+  </style>
+  <style>
+    .intro{text-align:left}.intro h1{margin-top:0;padding-bottom:22px;border-bottom:1px solid var(--line)}
+    .process-row strong{display:inline}.process-undecided{padding-top:8px}.process-undecided h2{margin:0 0 7px;font-size:15px}.process-undecided p{margin:0 0 8px;line-height:1.65}.process-undecided a,.faq a{color:#2e2a27;font-weight:700;text-underline-offset:3px}.process aside{padding:17px 0;border-block:1px solid var(--line);border-radius:0;background:transparent}.faq{margin:0;color:var(--muted);font-size:10px}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 15px}.field{grid-column:1/-1}
+    .field-phone,.field-dob,.field-clinic,.field-clinic_location,.field-move_plans,.field-move_commitment,.field-date,.field-time,.field-date2,.field-time2,.field-date3,.field-time3{grid-column:span 1}
+    .field-income_source .options,.field-residence_type .options,.field-current_animals .options,.field-pet_stay .options,.field-outdoor_space .options,.field-daily_care .options{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .field-household_count .options,.field-household_members .options,.field-financial_payer .options{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .field-contact_preference .options,.field-platform .options{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .field-home_photos input[type=file],.field-valid_id input[type=file]{min-height:90px;padding:32px 18px;text-align:center}
+    .rating-table{overflow:hidden;border:1px solid #e6e0da;border-radius:11px}.rating-head,.rating-row{display:grid;grid-template-columns:minmax(250px,1fr) repeat(5,38px);align-items:center}.rating-head{padding:8px 12px;background:#f7f3ef;color:var(--muted);font-size:8px;font-weight:700;text-transform:uppercase}.rating-head span:not(:first-child){text-align:center}.rating-row{min-height:56px;padding:8px 12px;border-top:1px solid #eee8e2}.rating-row>span strong,.rating-row>span small{display:block}.rating-row>span strong{font-size:10px}.rating-row>span small{margin-top:2px;color:#918a83;font-size:8px}.rating-row label{display:grid;place-items:center;cursor:pointer}.rating-row input{position:absolute;opacity:0}.rating-row label span{display:grid;place-items:center;width:17px;height:17px;border:1px solid #bbb4ad;border-radius:50%;color:transparent;font-size:0}.rating-row label:has(input:checked) span{border-color:var(--coral);background:var(--coral);box-shadow:inset 0 0 0 4px white}
+    .milestones,.application-snapshot{margin-top:20px;padding:15px;border:1px solid #e7e1db;border-radius:12px;text-align:left}.milestones>small,.application-snapshot>small{display:block;margin-bottom:12px;color:var(--muted);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.milestones>small{grid-column:1/-1}.milestones>div{display:flex;flex-direction:column;gap:4px;font-size:8px}.milestones>div>span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#ebe6e1;color:#8d867f}.milestones>div>.done{background:var(--coral);color:white}.milestones>div>.current{border:1px solid var(--coral);background:white;color:var(--coral)}.milestones em{color:#9a938d;font-style:normal}.application-snapshot{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.application-snapshot>small{grid-column:1/-1}.application-snapshot strong,.application-snapshot span{display:block;overflow:hidden;font-size:9px;text-overflow:ellipsis;white-space:nowrap}.application-snapshot span{margin-top:3px;color:#8b847e;font-size:8px}.confirmation-notice{margin-top:16px;padding:13px 15px;border-left:3px solid var(--coral);background:#fff6f4;color:#6d6660;font-size:9px;line-height:1.55;text-align:left}.confirmation-actions{display:flex;justify-content:space-between;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+    @media(max-width:600px){.fields{grid-template-columns:1fr}.field-phone,.field-dob,.field-clinic,.field-clinic_location,.field-move_plans,.field-move_commitment,.field-date,.field-time,.field-date2,.field-time2,.field-date3,.field-time3{grid-column:1}.field-income_source .options,.field-residence_type .options,.field-current_animals .options,.field-pet_stay .options,.field-outdoor_space .options,.field-daily_care .options,.field-household_count .options,.field-household_members .options,.field-financial_payer .options,.field-contact_preference .options,.field-platform .options{grid-template-columns:1fr}.rating-head,.rating-row{grid-template-columns:minmax(130px,1fr) repeat(5,28px);padding-inline:8px}.milestones,.application-snapshot{grid-template-columns:1fr 1fr}}
   </style>
 </head>
-<body class="min-h-screen bg-brand-grayBg flex flex-col justify-between items-center py-8 px-4 sm:px-6">
-
-  <!-- ================= TOP NAVIGATION / BRAND LOGO HEADER ================= -->
-  <header class="w-full max-w-4xl flex flex-col items-center mb-6">
-    <!-- Adoptly Brand Mark -->
-    <a href="?step=1" class="flex flex-col items-center group cursor-pointer text-decoration-none">
-      <div class="flex items-center gap-1.5 select-none">
-        <span class="text-3xl sm:text-4xl font-extrabold text-brand-coral brand-logo-text">AD</span>
-        <!-- Paw Emblem 'O' -->
-        <span class="inline-flex items-center justify-center text-brand-black">
-          <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-brand-black transition-transform group-hover:scale-110" viewBox="0 0 24 24">
-            <ellipse cx="6" cy="8.5" rx="2" ry="3"/>
-            <ellipse cx="10.5" cy="6" rx="2" ry="3"/>
-            <ellipse cx="15" cy="6" rx="2" ry="3"/>
-            <ellipse cx="19.5" cy="8.5" rx="2" ry="3"/>
-            <path d="M12.75 10.5c-1.5 0-3.5 1-4.25 2.5-1 2-.75 4 0 5.25.75 1.25 2.25 2 4.25 2s3.5-.75 4.25-2c.75-1.25 1-3.25 0-5.25-.75-1.5-2.75-2.5-4.25-2.5z"/>
-          </svg>
-        </span>
-        <span class="text-3xl sm:text-4xl font-extrabold text-brand-coral brand-logo-text relative">
-          PTLY
-          <!-- Floating Heart accent above Y -->
-          <span class="absolute -top-1.5 -right-3 text-brand-coral text-sm">♥</span>
-        </span>
-      </div>
-      <p class="text-xs sm:text-sm font-semibold text-brand-black mt-1 tracking-tight flex items-center gap-1">
-        A home. A heart. A forever. <span class="text-brand-coral">♥</span>
-      </p>
-    </a>
-
-    <!-- Status Indicators & Online Badge -->
-    <div class="mt-4 flex items-center gap-3">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-brand-green border border-emerald-200">
-        <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span> ONLINE
-      </span>
-      <span class="text-xs text-neutral-500 font-medium">Asia/Manila (PHT)</span>
-    </div>
+<body>
+<div class="page">
+  <header class="top">
+    <div class="brand"><div class="word"><span>AD</span><svg viewBox="0 0 40 40"><ellipse cx="9" cy="13" rx="4.5" ry="6.5"/><ellipse cx="20" cy="8" rx="4.5" ry="6.5"/><ellipse cx="31" cy="13" rx="4.5" ry="6.5"/><path d="M20 17c-7 0-12 6-12 12 0 5 4 8 8.5 6.5a11 11 0 0 1 7 0C28 37 32 34 32 29c0-6-5-12-12-12Z"/></svg><span>PTLY</span><b>♥</b></div><small>A home. A heart. A forever. <i>♥</i></small></div>
+    <div class="status"><i></i> ONLINE <span>Asia/Manila (PHT)</span></div>
   </header>
 
-  <!-- ================= MAIN APPLICATION CARD ================= -->
-  <main class="w-full max-w-2xl bg-brand-white rounded-3xl border border-brand-warmBeige/80 shadow-[0_15px_35px_rgba(224,90,79,0.08)] p-6 sm:p-10 mb-8 transition-all">
-
-    <?php if ($step === 1): /* P1: Hero Intro */ ?>
-      <div class="text-center">
-        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral mb-4">
-          Bring Love Home
-        </span>
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-brand-black mb-6">
-          Adoption Application
-        </h1>
-        <div class="space-y-4 text-xs sm:text-sm text-neutral-700 leading-relaxed text-justify sm:text-left mb-8">
-          <p>Every rescue in our care has a story. Some were abandoned, some hurt, and many have never known what it feels like to be truly loved. By opening this form, you are already becoming part of their journey to healing.</p>
-          <p>At Adoptly, we believe that you can't buy love, but you can rescue it. Adoption is more than just giving a rescue a home — it's giving them a second chance at life.</p>
-          <p>Your answers here will help us make sure each rescue finds not just any home, but the right one.</p>
-          <p class="font-bold text-brand-coral text-base pt-2">Ready to bring love home?</p>
-        </div>
-        <form method="POST" class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-brand-warmBeige/60">
-          <input type="hidden" name="current_step" value="1"/>
-          <a href="#" class="text-xs font-semibold text-neutral-500 hover:text-brand-coral transition-colors order-2 sm:order-1">
-            Cancel & return to shelter catalog
-          </a>
-          <button type="submit" name="action" value="next" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-brand-coral hover:bg-brand-coralHover text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95 order-1 sm:order-2">
-            Start Here →
-          </button>
-        </form>
+  <main class="card">
+  <?php if ($page === 0): ?>
+    <section class="intro">
+      <h1>Bring Love Home: Adoption Application</h1>
+      <div class="intro-copy"><p>Every rescue in our care has a story. Some were abandoned, some hurt, and many have never known what it feels like to be truly loved. By opening this form, you are already becoming part of their journey to healing.</p><p>At Adoptly, we believe that you can’t buy love, but you can rescue it. Adoption is more than just giving a rescue a home. It’s giving them a second chance at life—the chance to sleep without fear, to eat without wondering where the next meal will come from, and to finally feel that they belong.</p><p>Your answers here will help us make sure that each rescue finds not just any home, but the right one. One filled with patience, compassion, and the promise of forever.</p><p>Thank you for choosing adoption and for believing that every animal deserves love.</p><strong>Ready to bring love home?</strong></div>
+      <form method="post" class="actions"><input type="hidden" name="page" value="0"><button type="button" class="text-button">Cancel & return to shelter catalog</button><button class="primary" name="action" value="next">Start Here →</button></form>
+    </section>
+  <?php elseif ($page === 1): ?>
+    <section><div class="heading"><h1>Adoption Process</h1></div>
+      <div class="process">
+        <div class="process-row"><p><strong>Step 1: Fill out this form</strong> and wait to be contacted by our team. Please give us at least one week to complete the initial screening.</p></div>
+        <div class="process-row"><p><strong>Step 2: Virtual interview</strong> with one of our adoption specialists.</p></div>
+        <div class="process-row"><p><strong>Step 3: Once approved</strong>, visit our shelter, settle the adoption fee of Php 1,000 per rescue, and welcome love home through your chosen rescue.</p></div>
+        <div class="process-undecided"><h2>Still undecided about adopting?</h2><p>That’s okay. You can still fill out this form, and one of our volunteers will reach out to walk you through what it really takes to be a responsible fur parent.</p><a href="#foster">Foster Volunteer Application Form →</a></div>
+        <aside><strong>Important reminders:</strong><p>Our shelters are located in Bulacan and Bacolod. Adopters must be willing to travel to meet and pick up their chosen rescue.</p><p>In some cases, adopters may also pick up their rescue during scheduled adoption events.</p><p>The Php 1,000 adoption fee supports rehabilitation and shelter upkeep while ensuring adopters are ready to meet their new family member’s lifelong needs.</p></aside>
+        <p class="faq">For more details, please check our <a href="#faqs">FAQs</a>.</p>
       </div>
-
-    <?php elseif ($step === 2): /* P2: Process & Reminders */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <h1 class="text-2xl font-bold text-brand-black">Adoption Process</h1>
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Overview</span>
-        </div>
-        <div class="space-y-5 text-sm text-neutral-700 leading-relaxed mb-8">
-          <div class="space-y-4">
-            <div class="flex items-start gap-3.5">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral shrink-0 mt-0.5">Step 1</span>
-              <p><strong class="text-brand-black font-semibold">Initial Screening:</strong> Fill out this form and allow up to one week for our team to review your application.</p>
-            </div>
-            <div class="flex items-start gap-3.5">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral shrink-0 mt-0.5">Step 2</span>
-              <p><strong class="text-brand-black font-semibold">Virtual Interview:</strong> Attend a 1-on-1 interview with an adoption specialist via Google Meet or Zoom.</p>
-            </div>
-            <div class="flex items-start gap-3.5">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral shrink-0 mt-0.5">Step 3</span>
-              <p><strong class="text-brand-black font-semibold">Shelter Visit & Meet:</strong> Once approved, visit our shelter, settle the adoption fee of Php 1,000, and welcome your rescue home.</p>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-brand-warmBeige space-y-2">
-            <h3 class="font-bold text-brand-black">Important Reminders:</h3>
-            <ul class="list-disc pl-5 space-y-1.5 text-xs text-neutral-600">
-              <li>Our shelters are located in Bulacan and Bacolod. Adopters must travel to pick up their rescue.</li>
-              <li>A Php 1,000 fee per rescue covers rehabilitation and validates capable guardianship.</li>
-            </ul>
-          </div>
-        </div>
-        <form method="POST" class="flex items-center justify-between pt-4 border-t border-brand-warmBeige">
-          <input type="hidden" name="current_step" value="2"/>
-          <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-50">Back</button>
-          <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Begin Application →</button>
-        </form>
-      </div>
-
-    <?php elseif ($step === 3): /* P3: Species Intent */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 1 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Adoption Information</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#ADP-SPEC</span>
-        </div>
-        <form method="POST" class="space-y-6">
-          <input type="hidden" name="current_step" value="3"/>
-          <fieldset class="space-y-3">
-            <legend class="text-sm font-semibold text-brand-black mb-2">Which pet are you applying to adopt? <span class="text-brand-coral">*</span></legend>
-            <label class="flex items-start gap-3.5 p-4 rounded-2xl border-2 <?= $data['intent'] === 'dog' ? 'border-brand-coral bg-brand-softCoral/20' : 'border-neutral-200' ?> cursor-pointer transition-all">
-              <input type="radio" name="intent" value="dog" class="mt-1 text-brand-coral focus:ring-brand-coral" <?= $data['intent'] === 'dog' ? 'checked' : '' ?>/>
-              <div>
-                <span class="text-sm font-bold text-brand-black block">I'm applying to adopt a dog from the shelter</span>
-                <span class="text-xs text-neutral-500">Find companion dogs, puppies, and senior canines</span>
-              </div>
-            </label>
-            <label class="flex items-start gap-3.5 p-4 rounded-2xl border-2 <?= $data['intent'] === 'cat' ? 'border-brand-coral bg-brand-softCoral/20' : 'border-neutral-200' ?> cursor-pointer transition-all">
-              <input type="radio" name="intent" value="cat" class="mt-1 text-brand-coral focus:ring-brand-coral" <?= $data['intent'] === 'cat' ? 'checked' : '' ?>/>
-              <div>
-                <span class="text-sm font-bold text-brand-black block">I'm applying to adopt a cat from the shelter</span>
-                <span class="text-xs text-neutral-500">Find indoor companions, kittens, and bonded pairs</span>
-              </div>
-            </label>
-            <label class="flex items-start gap-3.5 p-4 rounded-2xl border-2 <?= $data['intent'] === 'undecided' ? 'border-brand-coral bg-brand-softCoral/20' : 'border-neutral-200' ?> cursor-pointer transition-all">
-              <input type="radio" name="intent" value="undecided" class="mt-1 text-brand-coral focus:ring-brand-coral" <?= $data['intent'] === 'undecided' ? 'checked' : '' ?>/>
-              <div>
-                <span class="text-sm font-bold text-brand-black block">I'm applying for other pet</span>
-                <span class="text-xs text-neutral-500">Rabbits, birds, or other companions</span>
-              </div>
-            </label>
-          </fieldset>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 4): /* P5: Personal Information */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 2 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Personal Information</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-PERS</span>
-        </div>
-        <form method="POST" class="space-y-5">
-          <input type="hidden" name="current_step" value="4"/>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Full Name <span class="text-brand-coral">*</span></label>
-            <input type="text" name="full_name" required value="<?= htmlspecialchars($data['full_name']) ?>" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Email <span class="text-brand-coral">*</span></label>
-              <input type="email" name="email" required value="<?= htmlspecialchars($data['email']) ?>" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Contact Number <span class="text-brand-coral">*</span></label>
-              <div class="flex">
-                <span class="inline-flex items-center px-3 border border-r-0 border-neutral-300 bg-neutral-50 text-xs font-semibold text-neutral-600 rounded-l-xl">+63</span>
-                <input type="tel" name="contact_number" required value="<?= htmlspecialchars($data['contact_number']) ?>" class="w-full text-sm rounded-r-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Home Address <span class="text-brand-coral">*</span></label>
-            <textarea name="home_address" rows="2" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"><?= htmlspecialchars($data['home_address']) ?></textarea>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Date of Birth (Must be 18+) <span class="text-brand-coral">*</span></label>
-              <input type="text" name="dob" value="<?= htmlspecialchars($data['dob']) ?>" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Facebook / Social Profile Link</label>
-              <input type="text" name="facebook_link" value="<?= htmlspecialchars($data['facebook_link']) ?>" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">Monthly Income Range <span class="text-brand-coral">*</span></label>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <?php foreach (['below20k' => 'Below ₱20k', '20k-50k' => '₱20k - ₱50k', '50k-100k' => '₱50k - ₱100k', 'above100k' => '₱100k+'] as $val => $lbl): ?>
-                <label class="p-2.5 text-center text-xs font-bold rounded-xl border-2 cursor-pointer transition-all <?= $data['income_range'] === $val ? 'border-brand-coral bg-brand-coral text-white shadow-sm' : 'border-neutral-200 text-neutral-700 bg-white hover:border-brand-coral/50' ?>">
-                  <input type="radio" name="income_range" value="<?= $val ?>" class="sr-only" <?= $data['income_range'] === $val ? 'checked' : '' ?>/>
-                  <?= $lbl ?>
-                </label>
-              <?php endforeach; ?>
-            </div>
-          </div>
-          <div class="p-4 border-2 border-dashed border-brand-coral/40 bg-brand-softCoral/20 rounded-2xl text-center">
-            <span class="text-xs font-bold text-brand-black">Verified Government ID: <span class="font-mono text-brand-coral"><?= htmlspecialchars($data['gov_id_filename']) ?></span></span>
-            <p class="text-[11px] text-neutral-500 mt-0.5">Philippine Passport, UMID, Driver's License, or National ID</p>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 5): /* P4: Pet Selection & Preparedness */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 3 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Pet Selection & Household Size</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#ADP-INF</span>
-        </div>
-        <form method="POST" class="space-y-6">
-          <input type="hidden" name="current_step" value="5"/>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Shelter Location <span class="text-brand-coral">*</span></label>
-            <select name="shelter_location" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5">
-              <option value="bulacan-haven" <?= $data['shelter_location'] === 'bulacan-haven' ? 'selected' : '' ?>>Bulacan Rescue Haven</option>
-              <option value="bacolod-sanctuary" <?= $data['shelter_location'] === 'bacolod-sanctuary' ? 'selected' : '' ?>>Bacolod Sanctuary</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Pet you want to adopt <span class="text-brand-coral">*</span></label>
-            <input type="text" name="target_pet" value="<?= htmlspecialchars($data['target_pet']) ?>" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"/>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">If already adopted, are you open to other pets? <span class="text-brand-coral">*</span></label>
-            <div class="space-y-2">
-              <label class="flex items-center p-3 rounded-xl border-2 <?= $data['alternative_adoption'] === 'open' ? 'border-brand-coral bg-brand-softCoral/20' : 'border-neutral-200' ?> cursor-pointer">
-                <input type="radio" name="alternative_adoption" value="open" class="text-brand-coral focus:ring-brand-coral" <?= $data['alternative_adoption'] === 'open' ? 'checked' : '' ?>/>
-                <span class="ml-2.5 text-xs font-bold text-brand-black">Yes, open to other compatible rescues</span>
-              </label>
-              <label class="flex items-center p-3 rounded-xl border-2 <?= $data['alternative_adoption'] === 'specific' ? 'border-brand-coral bg-brand-softCoral/20' : 'border-neutral-200' ?> cursor-pointer">
-                <input type="radio" name="alternative_adoption" value="specific" class="text-brand-coral focus:ring-brand-coral" <?= $data['alternative_adoption'] === 'specific' ? 'checked' : '' ?>/>
-                <span class="ml-2.5 text-xs font-semibold text-neutral-700">No, specifically interested in this pet</span>
-              </label>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Reason for Adopting <span class="text-brand-coral">*</span></label>
-            <textarea name="reason_for_adopting" rows="3" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"><?= htmlspecialchars($data['reason_for_adopting']) ?></textarea>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 6): /* P6: Household Information */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 4 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Household Information</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-HOUSE</span>
-        </div>
-        <form method="POST" class="space-y-6">
-          <input type="hidden" name="current_step" value="6"/>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Residence Ownership <span class="text-brand-coral">*</span></label>
-            <select name="residence_ownership" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5">
-              <option value="Owned (Sole Owner / Family)">Owned (Sole Owner / Family)</option>
-              <option value="Rented (Landlord pet-friendly agreement approved)">Rented (Pet-friendly approved)</option>
-              <option value="Living with Parents / Relatives">Living with Parents / Relatives</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">Household Agreement <span class="text-brand-coral">*</span></label>
-            <label class="flex items-start p-3.5 rounded-2xl border-2 border-brand-coral bg-brand-softCoral/20">
-              <input type="radio" checked name="agreement_status" value="Yes, everyone in the home is enthusiastic and fully supportive" class="text-brand-coral mt-0.5"/>
-              <span class="ml-2.5 text-xs font-bold text-brand-black">Yes, everyone in the home is enthusiastic and fully supportive</span>
-            </label>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Household Notes or Allergy Considerations</label>
-            <textarea name="household_notes" rows="2" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5"><?= htmlspecialchars($data['household_notes']) ?></textarea>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 7): /* P7: Home Environment */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 5 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Home Environment</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-ENV</span>
-        </div>
-        <form method="POST" class="space-y-6">
-          <input type="hidden" name="current_step" value="7"/>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">Where will the rescue primarily stay? <span class="text-brand-coral">*</span></label>
-            <label class="flex items-start p-3.5 rounded-2xl border-2 border-brand-coral bg-brand-softCoral/20">
-              <input type="checkbox" checked class="rounded text-brand-coral focus:ring-brand-coral mt-0.5"/>
-              <span class="ml-2.5 text-xs font-bold text-brand-black">Inside main home with family (free roaming in shared areas)</span>
-            </label>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Future Move Plans <span class="text-brand-coral">*</span></label>
-              <select name="move_plans" class="w-full text-sm rounded-xl border-neutral-300 focus:border-brand-coral focus:ring-brand-coral p-2.5">
-                <option value="none">No immediate plans (Permanent residence)</option>
-                <option value="6-12m">Within 6–12 months</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Will the rescue move with you? <span class="text-brand-coral">*</span></label>
-              <select name="move_commitment" class="w-full text-sm rounded-xl border-brand-coral bg-brand-softCoral/15 font-bold text-brand-black p-2.5">
-                <option value="100_percent">Yes, 100% committed to bringing rescue</option>
-              </select>
-            </div>
-          </div>
-          <div class="p-4 rounded-2xl border border-brand-warmBeige bg-brand-warmBeige/20">
-            <span class="text-xs font-bold text-brand-black block mb-2">Uploaded Environment Photos (2 Files Verified)</span>
-            <div class="grid grid-cols-2 gap-2.5 text-xs">
-              <div class="p-2.5 bg-white rounded-xl border border-brand-warmBeige truncate font-medium">📸 living_room_fenced_gate.jpg</div>
-              <div class="p-2.5 bg-white rounded-xl border border-brand-warmBeige truncate font-medium">📸 balcony_netting.jpg</div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 8): /* P8: Animal Care & Experience */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 6 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Animal Care & Clinic Details</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-CARE</span>
-        </div>
-        <form method="POST" class="space-y-5">
-          <input type="hidden" name="current_step" value="8"/>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Veterinary Clinic Name <span class="text-brand-coral">*</span></label>
-              <input type="text" name="clinic_name" value="<?= htmlspecialchars($data['clinic_name']) ?>" class="w-full text-sm rounded-xl border-neutral-300 p-2.5"/>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-brand-black mb-1">Clinic Location <span class="text-brand-coral">*</span></label>
-              <input type="text" name="clinic_location" value="<?= htmlspecialchars($data['clinic_location']) ?>" class="w-full text-sm rounded-xl border-neutral-300 p-2.5"/>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Is this clinic open 24/7 for emergencies? <span class="text-brand-coral">*</span></label>
-            <select name="clinic_emergency" class="w-full text-sm rounded-xl border-neutral-300 p-2.5">
-              <option value="Yes, 24/7 emergency facility">Yes, 24/7 emergency facility</option>
-              <option value="Standard clinic hours only">Standard clinic hours only</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">Zero Commercial Breeding Policy <span class="text-brand-coral">*</span></label>
-            <label class="flex items-start p-3.5 rounded-2xl border-2 border-brand-coral bg-brand-softCoral/20">
-              <input type="radio" checked name="breeding_history" value="No, never and never will" class="text-brand-coral mt-0.5"/>
-              <div class="ml-2.5 text-xs">
-                <span class="font-bold text-brand-black block">No, never and never will</span>
-                <span class="text-neutral-500">I pledge strict adherence to the mandatory spay/neuter policy and animal welfare laws.</span>
-              </div>
-            </label>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 9): /* P9 & P10: Health, Kapon & Readiness */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 7 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Health & Mandatory Kapon</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-HLTH</span>
-        </div>
-        <form method="POST" class="space-y-6">
-          <input type="hidden" name="current_step" value="9"/>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Vaccination Status <span class="text-brand-coral">*</span></label>
-            <select name="vax_status" class="w-full text-sm rounded-xl border-neutral-300 p-2.5">
-              <option value="Yes, fully up to date">Yes, fully up to date (Core vaccines current)</option>
-              <option value="No current companion animals">No current companion animals</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-2">Spay / Neuter (Kapon) Mandatory Agreement <span class="text-brand-coral">*</span></label>
-            <label class="flex items-start p-3.5 rounded-2xl border-2 border-brand-coral bg-brand-softCoral/20">
-              <input type="radio" checked name="spay_neuter_agreement" value="fully_agree" class="text-brand-coral mt-0.5"/>
-              <div class="ml-2.5 text-xs">
-                <span class="font-bold text-brand-black block">Yes, fully agree and will strictly comply</span>
-                <span class="text-neutral-500">I will coordinate sterilization on schedule at my expense if not yet performed.</span>
-              </div>
-            </label>
-          </div>
-          <div class="p-4 rounded-2xl border border-brand-warmBeige bg-brand-warmBeige/15">
-            <span class="text-xs font-bold text-brand-black block mb-2">Readiness Self-Rating (Scale: 1 to 5)</span>
-            <div class="space-y-1.5 text-xs">
-              <div class="flex justify-between font-medium"><span>Patience & Training:</span><span class="font-bold text-brand-coral">5 / 5 ★</span></div>
-              <div class="flex justify-between font-medium"><span>Financial Care Readiness:</span><span class="font-bold text-brand-coral">4 / 5 ★</span></div>
-              <div class="flex justify-between font-medium"><span>Decompression & 3-3-3 Rule:</span><span class="font-bold text-brand-coral">5 / 5 ★</span></div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Next →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 10): /* P11: Virtual Interview Preferences */ ?>
-      <div>
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Step 8 of 8</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Virtual Interview Schedule</h1>
-          </div>
-          <span class="text-xs font-mono text-neutral-400">#APP-SLOTS</span>
-        </div>
-        <form method="POST" class="space-y-5">
-          <input type="hidden" name="current_step" value="10"/>
-          <p class="text-xs text-neutral-600 leading-relaxed">
-            Please provide your preferred 1-hour interview slots in Asia/Manila (PHT) time:
-          </p>
-          <div class="space-y-3">
-            <div class="p-3.5 border-2 border-brand-coral rounded-2xl bg-brand-softCoral/20">
-              <span class="text-xs font-bold text-brand-coral block mb-2">Option 1 (Primary Preference)</span>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <input type="text" name="slot1_date" value="<?= htmlspecialchars($data['slot1_date']) ?>" class="p-2 border rounded-xl"/>
-                <input type="text" name="slot1_time" value="<?= htmlspecialchars($data['slot1_time']) ?>" class="p-2 border rounded-xl"/>
-              </div>
-            </div>
-            <div class="p-3.5 border border-neutral-200 rounded-2xl bg-white">
-              <span class="text-xs font-semibold text-neutral-700 block mb-2">Option 2 (Alternative Slot)</span>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <input type="text" name="slot2_date" value="<?= htmlspecialchars($data['slot2_date']) ?>" class="p-2 border rounded-xl"/>
-                <input type="text" name="slot2_time" value="<?= htmlspecialchars($data['slot2_time']) ?>" class="p-2 border rounded-xl"/>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-brand-black mb-1">Video Platform <span class="text-brand-coral">*</span></label>
-            <select name="platform" class="w-full text-sm rounded-xl border-neutral-300 p-2.5">
-              <option value="Google Meet">Google Meet (Link will be emailed)</option>
-              <option value="Zoom">Zoom Video</option>
-              <option value="Viber">Viber Video Call</option>
-            </select>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-brand-warmBeige">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-7 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-sm">Review Summary →</button>
-          </div>
-        </form>
-      </div>
-
-    <?php elseif ($step === 11): /* P14: Summary & Declaration */ ?>
-      <div>
-        <div class="flex flex-wrap items-center justify-between pb-4 mb-6 border-b border-brand-warmBeige gap-2">
-          <div>
-            <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-softCoral text-brand-coral">Final Review</span>
-            <h1 class="text-2xl font-bold text-brand-black mt-2">Application Summary</h1>
-          </div>
-          <button onclick="window.print()" type="button" class="px-3.5 py-1.5 text-xs font-bold border border-brand-coral text-brand-coral rounded-xl hover:bg-brand-softCoral/30 transition-colors">
-            🖨️ Print / Save PDF
-          </button>
-        </div>
-        <div class="space-y-3.5 mb-6 text-xs">
-          <div class="border border-brand-warmBeige rounded-2xl p-4 bg-brand-warmBeige/15 flex justify-between items-start">
-            <div class="space-y-1">
-              <span class="font-bold text-brand-coral uppercase text-[10px]">Target Pet</span>
-              <p class="font-bold text-sm text-brand-black"><?= htmlspecialchars($data['target_pet']) ?></p>
-              <p class="text-neutral-600">Shelter: <?= htmlspecialchars($data['shelter_location']) ?></p>
-            </div>
-            <a href="?step=5" class="text-xs font-bold text-brand-coral hover:underline">Edit</a>
-          </div>
-          <div class="border border-brand-warmBeige rounded-2xl p-4 bg-brand-warmBeige/15 flex justify-between items-start">
-            <div class="space-y-1">
-              <span class="font-bold text-brand-coral uppercase text-[10px]">Applicant Contact</span>
-              <p class="font-bold text-sm text-brand-black"><?= htmlspecialchars($data['full_name']) ?></p>
-              <p class="text-neutral-600"><?= htmlspecialchars($data['email']) ?> • +63 <?= htmlspecialchars($data['contact_number']) ?></p>
-            </div>
-            <a href="?step=4" class="text-xs font-bold text-brand-coral hover:underline">Edit</a>
-          </div>
-          <div class="border border-brand-warmBeige rounded-2xl p-4 bg-brand-warmBeige/15 flex justify-between items-start">
-            <div class="space-y-1">
-              <span class="font-bold text-brand-coral uppercase text-[10px]">Interview Schedule</span>
-              <p class="font-bold text-sm text-brand-black"><?= htmlspecialchars($data['slot1_date']) ?> (<?= htmlspecialchars($data['slot1_time']) ?>)</p>
-              <p class="text-neutral-600">Platform: <?= htmlspecialchars($data['platform']) ?></p>
-            </div>
-            <a href="?step=10" class="text-xs font-bold text-brand-coral hover:underline">Edit</a>
-          </div>
-        </div>
-        <form method="POST" class="space-y-5 pt-4 border-t border-brand-warmBeige">
-          <input type="hidden" name="current_step" value="11"/>
-          <label class="flex items-start gap-2.5 p-3.5 rounded-2xl border border-brand-warmBeige bg-brand-warmBeige/20 cursor-pointer">
-            <input type="checkbox" required checked class="mt-0.5 rounded text-brand-coral focus:ring-brand-coral"/>
-            <span class="text-xs text-brand-black font-medium leading-relaxed">
-              I certify that all statements made here are true and complete. I formally agree to Adoptly's screening protocol, spay/neuter requirement, and zero commercial breeding terms.
-            </span>
+      <form method="post" class="actions"><input type="hidden" name="page" value="1"><button class="secondary" name="action" value="back">Back</button><button class="primary" name="action" value="next">Begin Application →</button></form>
+    </section>
+  <?php elseif ($page >= 2 && $page <= 10): $section = $sections[$page - 2]; ?>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="page" value="<?= $page ?>">
+      <div class="heading"><div><div class="badge">Step <?= $page - 1 ?> of <?= count($sections) ?></div><h1><?= e($section['title']) ?></h1><p class="description"><?= e($section['description']) ?></p></div><code><?= e($section['code']) ?></code></div>
+      <div class="fields">
+      <?php foreach ($section['fields'] as $field):
+        [$key, $label, $type] = $field; $options = $field[3] ?? null; $placeholder = $field[4] ?? ''; $optional = $field[5] ?? false; ?>
+        <?php if ($type === 'rating'): ?>
+          <fieldset class="field field-<?= e($key) ?> rating-field"><legend><?= e($label) ?> <em>*</em></legend><div class="rating-table">
+            <div class="rating-head"><span>Capability & commitment</span><?php for ($rating = 1; $rating <= 5; $rating++): ?><span><?= $rating ?></span><?php endfor; ?></div>
+            <?php foreach ($options as $option): ?><div class="rating-row"><span><strong><?= e($option[1]) ?></strong><small><?= e($option[2] ?? '') ?></small></span>
+              <?php for ($rating = 1; $rating <= 5; $rating++): $ratingKey = $key . '-' . $option[0]; ?><label><input type="radio" name="<?= e($ratingKey) ?>" value="<?= $rating ?>" <?= answer($ratingKey) === (string)$rating ? 'checked' : '' ?> required><span><?= $rating ?></span></label><?php endfor; ?>
+            </div><?php endforeach; ?>
+          </div></fieldset>
+        <?php elseif ($type === 'cards' || $type === 'checks'): ?>
+          <fieldset class="field field-<?= e($key) ?>"><legend><?= e($label) ?> <?php if (!$optional): ?><em>*</em><?php endif; ?></legend><div class="options">
+          <?php foreach ($options as $option): $active = selected($key, $option[0]); ?>
+            <label class="option <?= $active ? 'active' : '' ?>"><input type="<?= $type === 'cards' ? 'radio' : 'checkbox' ?>" name="<?= e($key) ?><?= $type === 'checks' ? '[]' : '' ?>" value="<?= e($option[0]) ?>" <?= $active ? 'checked' : '' ?> <?= !$optional && $type === 'cards' ? 'required' : '' ?>><span class="mark <?= $type === 'cards' ? 'radio' : 'check' ?>"></span><span><strong><?= e($option[1]) ?></strong><?php if (!empty($option[2])): ?><small><?= e($option[2]) ?></small><?php endif; ?></span></label>
+          <?php endforeach; ?></div></fieldset>
+        <?php else: ?>
+          <label class="field field-<?= e($key) ?>"><span><?= e($label) ?> <?php if (!$optional): ?><em>*</em><?php endif; ?></span>
+          <?php if ($type === 'select'): ?><select name="<?= e($key) ?>" <?= !$optional ? 'required' : '' ?>><option value="" disabled <?= answer($key) === '' ? 'selected' : '' ?>>Select an option</option><?php foreach ($options as $option): ?><option value="<?= e($option[0]) ?>" <?= selected($key, $option[0]) ? 'selected' : '' ?>><?= e($option[1]) ?></option><?php endforeach; ?></select>
+          <?php elseif ($type === 'textarea'): ?><textarea name="<?= e($key) ?>" rows="3" placeholder="<?= e($placeholder) ?>" <?= !$optional ? 'required' : '' ?>><?= e(answer($key)) ?></textarea>
+          <?php elseif ($type === 'file'): ?><input type="file" name="<?= e($key) ?>" accept="image/*,.pdf" <?= $key === 'home_photos' ? 'multiple' : '' ?> <?= empty($files[$key]) ? 'required' : '' ?>><?php if (!empty($files[$key])): ?><small>Uploaded: <?= e($files[$key]) ?></small><?php endif; ?>
+          <?php else: ?><input type="<?= e($type) ?>" name="<?= e($key) ?>" value="<?= e(answer($key)) ?>" placeholder="<?= e($placeholder) ?>" <?= !$optional ? 'required' : '' ?>><?php endif; ?>
           </label>
-          <div class="flex items-center justify-between pt-4">
-            <button type="submit" name="action" value="prev" class="px-6 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700">Back</button>
-            <button type="submit" name="action" value="next" class="px-8 py-2.5 rounded-xl bg-brand-coral hover:bg-brand-coralHover text-xs font-bold text-white shadow-md active:scale-95 transition-all">Submit Application →</button>
-          </div>
-        </form>
+        <?php endif; ?>
+      <?php endforeach; ?>
       </div>
-
-    <?php elseif ($step >= 12): /* P13: Submitted / Confirmation */ ?>
-      <div class="text-center space-y-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-coral text-white mx-auto shadow-md ring-4 ring-brand-softCoral">
-          <svg class="w-8 h-8 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <h1 class="text-2xl sm:text-3xl font-bold text-brand-black">Thank You! Application Submitted</h1>
-          <p class="text-xs sm:text-sm text-neutral-600 mt-2 max-w-md mx-auto">
-            Your adoption application has been submitted to our screening team.
-          </p>
-          <p class="text-xs font-mono text-neutral-500 mt-1">Reference ID: <strong class="text-brand-coral">#AD-92841</strong></p>
-        </div>
-        <!-- Progress Steps -->
-        <div class="bg-brand-grayBg border border-brand-warmBeige rounded-2xl p-4 text-xs font-semibold grid grid-cols-2 sm:grid-cols-4 gap-2 text-left">
-          <div class="text-brand-coral">✓ 1. Submitted</div>
-          <div class="text-brand-black">⏳ 2. Screening (24-48h)</div>
-          <div class="text-neutral-400">📅 3. Interview</div>
-          <div class="text-neutral-400">🏡 4. Meet & Pick Up</div>
-        </div>
-        <div class="pt-4 flex flex-col sm:flex-row justify-center gap-3">
-          <a href="?step=11" class="px-5 py-2.5 rounded-xl border border-neutral-300 text-xs font-bold text-neutral-700 hover:bg-neutral-50">Review Answers</a>
-          <a href="?step=1" class="px-6 py-2.5 rounded-xl bg-brand-coral text-white text-xs font-bold hover:bg-brand-coralHover shadow-sm">Start New Application</a>
-        </div>
+      <div class="actions"><button class="secondary" name="action" value="back">Back</button><button class="primary" name="action" value="next">Next →</button></div>
+    </form>
+  <?php elseif ($page === 11): ?>
+    <section><div class="heading"><div><div class="badge">Final Review</div><h1>Review Your Application Summary</h1><p class="description">Please review all your provided details carefully before submitting. You can jump back to edit any section if changes are needed.</p></div></div>
+      <div class="summary">
+      <?php foreach ([
+        ['Chosen Pet & Motivation', labelFor('target_pet',$sections), labelFor('shelter',$sections), 4],
+        ['Personal Information', answer('full_name'), answer('email').' · '.answer('phone'), 3],
+        ['Household Information', labelFor('residence_type',$sections), labelFor('household_members',$sections), 5],
+        ['Animal Care & Experience', labelFor('care_experience',$sections), answer('clinic'), 6],
+        ['Home Environment & Photos', labelFor('move_plans',$sections), $files['home_photos'] ?? 'No filename', 7],
+        ['Health & Kapon Readiness', labelFor('vaccination',$sections), labelFor('kapon',$sections), 8],
+        ['Proposed Virtual Interview', answer('date').' '.answer('time'), labelFor('platform',$sections), 10],
+      ] as $item): ?><div><small><?= e($item[0]) ?></small><strong><?= e($item[1] ?: 'Not specified') ?></strong><span><?= e($item[2]) ?></span><form method="post"><input type="hidden" name="page" value="11"><input type="hidden" name="target" value="<?= $item[3] ?>"><button name="action" value="goto">Edit</button></form></div><?php endforeach; ?>
       </div>
-    <?php endif; ?>
-
+      <form method="post"><input type="hidden" name="page" value="11"><label class="declaration"><input type="checkbox" name="declaration" value="yes" required><span>I certify that all information provided is true, complete, and accurate. I agree to Adoptly’s screening process, welfare standards, mandatory kapon policy, and zero commercial breeding terms.</span></label><div class="actions"><button class="secondary" name="action" value="back">Back</button><button class="primary" name="action" value="next">Submit Application →</button></div></form>
+    </section>
+  <?php else: ?>
+    <section class="confirmation">
+      <div class="tick">✓</div><h1>Thank You! Your Application Has Been Received</h1>
+      <p>We’re thrilled you’ve taken the first step toward giving a rescue pet their forever home. Our adoption review specialists are already screening your responses.</p>
+      <code>Reference ID: <strong>#AD-92841</strong></code>
+      <div class="milestones"><small>Application milestones & timeline</small>
+        <div><span class="done">✓</span><strong>1. Submitted</strong><em>Today</em></div>
+        <div><span class="current">•</span><strong>2. Screening & Review</strong><em>Est. 24–48 hours</em></div>
+        <div><span>3</span><strong>3. Virtual Interview</strong><em>Date pending</em></div>
+        <div><span>4</span><strong>4. Meet & Handover</strong><em>Final approval</em></div>
+      </div>
+      <div class="application-snapshot"><small>Application snapshot</small>
+        <div><strong><?= e(answer('target_pet', 'Chosen rescue')) ?></strong><span><?= e(labelFor('intent', $sections)) ?></span></div>
+        <div><strong><?= e(answer('date', 'Interview pending')) ?></strong><span><?= e(labelFor('platform', $sections)) ?></span></div>
+        <div><strong><?= e(answer('full_name', 'Applicant')) ?></strong><span><?= e(answer('email')) ?></span></div>
+      </div>
+      <div class="confirmation-notice"><strong>Confirmation sent:</strong> A verification link, application copy, and initial screening checklist have been emailed to you.</div>
+      <div class="confirmation-actions">
+        <form method="post"><input type="hidden" name="page" value="12"><input type="hidden" name="target" value="11"><button class="secondary" name="action" value="goto">Review Answers</button></form>
+        <form method="post"><input type="hidden" name="page" value="12"><button class="primary" name="action" value="restart">Start New Application</button></form>
+      </div>
+    </section>
+  <?php endif; ?>
   </main>
-
-  <!-- ================= BRAND FOOTER QUOTE & ATTRIBUTION ================= -->
-  <footer class="text-center text-xs text-neutral-500 space-y-1 pb-4">
-    <p class="italic text-brand-black font-medium">
-      “A small act of love can change <span class="text-brand-coral font-bold not-italic">two</span> lives.”
-    </p>
-    <p class="text-[11px] text-neutral-400 font-mono">
-      Adoptly • Connecting pets to loving homes and hearts.
-    </p>
-  </footer>
-
+  <footer class="site-footer">“A small act of love can change <strong>two</strong> lives.”<small>Adoptly • Connecting pets to loving homes and hearts.</small></footer>
+</div>
 </body>
 </html>
