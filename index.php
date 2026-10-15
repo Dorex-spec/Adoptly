@@ -113,7 +113,7 @@
       </p>
 
       <!-- Hero Pet Image -->
-      <img src="../photos/New_Hero_Bg.png" alt="Group of pets looking out of a cardboard box"
+      <img src="../photos/New_Hero_Bg.jpg" alt="Group of pets looking out of a cardboard box"
         class="mt-8 mx-auto max-w-3xl w-full h-72 sm:h-80 md:h-[420px] object-cover rounded-2xl">
 
       <!-- Search Filter Widget -->

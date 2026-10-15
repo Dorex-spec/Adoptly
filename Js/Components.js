@@ -5,10 +5,10 @@ const navbarHTML = `
         <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Browse_page.php">Browse pets</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Adoption_process.php">Adoption Process</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Donation.php">Donate</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="About.php">About</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="../php/Browse_page.php">Browse pets</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="../php/Adoption_process.php">Adoption Process</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="../php/Donation.php">Donate</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="../php/About.php">About</a>
       </nav>
       <div class="flex items-center gap-4">
         <button class="fav" type="button" aria-label="View Saved Pets">
@@ -16,8 +16,8 @@ const navbarHTML = `
             <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
           </svg>
         </button>
-        <a class="text-sm font-semibold text-gray-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block" href="Log_in.php">Login</a>
-        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition" href="Sign_in.php">Sign in</a>
+        <a class="text-sm font-semibold text-gray-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block" href="../php/Log_in.php">Login</a>
+        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition" href="../php/Sign_in.php">Sign in</a>
       </div>
     </div>
   </header>
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (headerPlaceholder) {
     headerPlaceholder.innerHTML = navbarHTML;
   }
-
+  
   if (footerPlaceholder) {
     footerPlaceholder.innerHTML = footerHTML;
   }
