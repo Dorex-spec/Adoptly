@@ -530,7 +530,7 @@
   </main>
   <!-- ==================== 8. GLOBAL FOOTER ==================== -->
   <div id="footer-placeholder"></div>
-  <script src="js/Components.js"></script>
+  <script src="Js/Components.js"></script>
 
 
 </body>
