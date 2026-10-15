@@ -95,40 +95,7 @@
 
 <body class="min-h-screen flex flex-col antialiased selection:bg-brand-primary selection:text-white">
     <!-- BEGIN: MainHeader -->
-    <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a class="flex items-center" href="#">
-                <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
-            </a>
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600">
-                <a class="hover:text-brand-primary transition-colors" href="../php/Browse_page.php">Browse pets</a>
-                <a class="hover:text-brand-primary transition-colors" href="../php/Adoption_process.php">adoption
-                    process</a>
-                <a class="hover:text-brand-primary transition-colors" href="../php/Donation.php">Donate</a>
-                <a class="hover:text-brand-primary transition-colors" href="../php/About_us.php">About</a>
-            </nav>
-            <!-- Header Action Items -->
-            <div class="flex items-center space-x-6">
-                <!-- Favorites Icon -->
-                <button class="fav" type="button" aria-label="View Saved Pets">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20"
-                        height="20">
-                        <path
-                            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                    </svg>
-                </button>
-                <!-- Login Link -->
-                <a class="text-sm font-semibold text-brand-primary hover:underline" href="../php/Log_in.php">Login</a>
-                <!-- Sign in Button -->
-                <a class="px-6 py-2.5 rounded-full bg-brand-primary text-white text-sm font-semibold hover:bg-brand-hover shadow-sm transition-colors"
-                    href="../php/Sign_in.php">
-                    Sign in
-                </a>
-            </div>
-        </div>
-    </header>
+    <div id="navbar-placeholder"></div>
     <!-- END: MainHeader -->
     <!-- BEGIN: BreadcrumbNavigation -->
     <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-6 py-4 w-full">
@@ -920,73 +887,8 @@
     </main>
     <!-- END: MainContentContainer -->
     <!-- BEGIN: MainFooter -->
-    <footer class="w-full bg-[#27292d] text-white pt-14 pb-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-gray-700/60">
-                <!-- Footer Column 1: Brand & Bio -->
-                <div class="md:col-span-4 space-y-4">
-                    <a href="#" class="flex items-center">
-                        <img src="footer.png" alt="Adoptly Logo" class="h-10 w-auto">
-                    </a>
-                    <p class="text-xs text-gray-400 max-w-xs leading-relaxed">
-                        Helping rescue pets find safe, loving homes and lifelong companionship.
-                    </p>
-                    <!-- Social Icons -->
-                    <div class="flex items-center space-x-2.5 pt-2">
-                        <a class="w-7 h-7 rounded bg-[#373a40] flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary transition-colors text-xs font-bold"
-                            href="#">f</a>
-                        <a class="w-7 h-7 rounded bg-[#373a40] flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary transition-colors text-xs font-bold"
-                            href="#">t</a>
-                        <a class="w-7 h-7 rounded bg-[#373a40] flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary transition-colors text-xs font-bold"
-                            href="#">in</a>
-                        <a class="w-7 h-7 rounded bg-[#373a40] flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary transition-colors text-xs font-bold"
-                            href="#">ig</a>
-                        <a class="w-7 h-7 rounded bg-[#373a40] flex items-center justify-center text-gray-300 hover:text-white hover:bg-brand-primary transition-colors text-xs font-bold"
-                            href="#">yt</a>
-                    </div>
-                </div>
-                <!-- Footer Column 2: Browse Links -->
-                <div class="md:col-span-2 md:col-start-6 space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-200">Browse</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Browse Pets</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Adoption Process</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Success Stories</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <!-- Footer Column 3: Resources Links -->
-                <div class="md:col-span-2 space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-200">Resources</h4>
-                    <ul class="space-y-2 text-xs text-gray-400">
-                        <li class=""><a class="hover:text-white transition-colors" href="#">FAQ</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Pet Care Tips</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Volunteer</a></li>
-                        <li class=""><a class="hover:text-white transition-colors" href="#">Support Center</a></li>
-                    </ul>
-                </div>
-                <!-- Footer Column 4: Contact Links -->
-                <div class="md:col-span-3 space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-200">Contact</h4>
-                    <ul class="space-y-1.5 text-xs text-gray-400 leading-relaxed">
-                        <li class=""><a class="hover:text-white transition-colors"
-                                href="mailto:helloadoptly@gmail.com">helloadoptly@gmail.com</a></li>
-                        <li class="">+1 (234) 567-890</li>
-                        <li class="">New York, USA</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Legal & Copyright Line -->
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500">
-                <div class="">© 2026 Adoptly. All rights reserved.</div>
-                <div class="flex space-x-4 mt-2 sm:mt-0">
-                    <a class="hover:text-gray-400" href="#">Privacy Policy</a>
-                    <span class="">|</span>
-                    <a class="hover:text-gray-400" href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="js/Components.js"></script>
     <!-- END: MainFooter -->
 
     <script>

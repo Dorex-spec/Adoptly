@@ -203,41 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
 
 <body class="min-h-full flex flex-col font-sans text-charcoal bg-[#FAF7F5] antialiased selection:bg-brand selection:text-white">
   <!-- MAIN HEADER SECTION -->
-  <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-
-      <!-- Brand Logo -->
-      <a class="flex items-center" href="#">
-        <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
-      </a>
-
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-          href="../php/Browse_page.php">Browse pets</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-          href="../php/Adoption_process.php">Adoption Process</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-          href="../php/DOnation.php">Donate</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-          href="../php/About_us.php">About</a>
-      </nav>
-
-      <!-- Right Actions -->
-      <div class="flex items-center gap-4">
-        <!-- Homepage Coral Round Heart Button -->
-        <button class="fav" type="button" aria-label="View Saved Pets">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-          </svg>
-        </button>
-
-        <!-- Sign In Button -->
-        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition"
-          href="../php/Sign_in.php">Sign in</a>
-      </div>
-    </div>
-  </header>
+  <div id="navbar-placeholder"></div>
 
   <!-- MAIN CONTENT -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 flex items-center justify-center">
@@ -430,65 +396,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
   </main>
 
   <!-- MAIN FOOTER -->
-  <footer class="w-full bg-[#1F1F1F] text-white border-t border-neutral-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-neutral-800">
-        <div class="lg:col-span-2 space-y-4">
-          <a href="#" class="inline-block">
-            <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-9 w-auto object-contain">
-          </a>
-          <p class="text-sm text-neutral-400 max-w-sm leading-relaxed">
-            Helping rescue pets find safe, loving homes and lifelong companionship. Partnered with certified no-kill shelters nationwide.
-          </p>
-          <div aria-label="Social links" class="flex items-center gap-2 pt-2">
-            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">f</a>
-            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">t</a>
-            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">in</a>
-            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">li</a>
-            <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-brand text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition-colors" href="#">yt</a>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Browse</h3>
-          <ul class="space-y-2 text-sm text-neutral-400">
-            <li><a class="hover:text-brand transition-colors" href="#">Browse Pets</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">Adoption Process</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">Success Stories</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">About Us</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Resources</h3>
-          <ul class="space-y-2 text-sm text-neutral-400">
-            <li><a class="hover:text-brand transition-colors" href="#">FAQ</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">Pet Care Tips</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">Volunteer</a></li>
-            <li><a class="hover:text-brand transition-colors" href="#">Support Center</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-xs font-bold tracking-widest text-neutral-300 uppercase mb-3">Contact</h3>
-          <ul class="space-y-2 text-sm text-neutral-400">
-            <li><a class="hover:text-brand transition-colors" href="mailto:helloadoptly@gmail.com">helloadoptly@gmail.com</a></li>
-            <li class="text-neutral-300 font-medium">+1 (234) 567-890</li>
-            <li>New York, USA</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-400 gap-4">
-        <p>© 2026 Adoptly. All rights reserved.</p>
-        <div class="flex items-center gap-6">
-          <a class="hover:text-brand transition-colors" href="#">Privacy Policy</a>
-          <span>|</span>
-          <a class="hover:text-brand transition-colors" href="#">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div id="footer-placeholder"></div>
+  <script src="js/Components.js"></script>
 
   <!-- 1. Social Login Input Prompt Popup -->
   <div id="socialPromptPopup" class="popup-overlay">

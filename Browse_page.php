@@ -60,26 +60,7 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
 <body class="min-h-screen flex flex-col antialiased selection:bg-rose-100 selection:text-brand">
 
 <!-- NavigationBar -->
-<header class="w-full bg-[#FAF5F3] border-b border-[#F0E6E3] sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-    <a href="#" class="flex items-center">
-  <img src="../photos/image-removebg-preview (1).png" alt=".logo" class="h-10 w-auto">
-</a>
-    <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-      <a class="text-brand font-semibold transition-colors" href="../php/Browse_page.php">Browse pets</a>
-      <a class="text-gray-600 hover:text-brand transition-colors" href="../php/Adoption_process.php">adoption process</a>
-      <a class="text-gray-600 hover:text-brand transition-colors" href="../php/Donation.php">Donate</a>
-      <a class="text-gray-600 hover:text-brand transition-colors" href="../php/About_us.php">About</a>
-    </nav>
-    <div class="flex items-center space-x-6">
-      <button aria-label="Favorites" class="fav">
-          <i class="fa-solid fa-heart"></i>
-        </button>
-      <a class="text-sm font-medium text-brand hover:underline" href="../php/Log_in.php">Login</a>
-      <a class="px-6 py-2 rounded-full bg-brand text-white text-sm font-medium hover:bg-brand-hover transition-colors shadow-sm" href="../php/Sign_in.php">Sign in</a>
-    </div>
-  </div>
-</header>
+<div id="navbar-placeholder"></div>
 
 <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
   <nav class="text-xs text-gray-500 mb-6 flex items-center gap-2">
@@ -4814,62 +4795,8 @@ body { background-color: #FAF5F3; font-family: 'Poppins', sans-serif; color: #33
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-[#23262A] text-[#9A9EA6] mt-20 relative overflow-hidden">
-  <i class="fa-solid fa-paw absolute -top-10 left-40 text-white/[0.03] text-[160px] pointer-events-none select-none"></i>
-  <i class="fa-solid fa-paw absolute top-0 right-20 text-white/[0.03] text-[200px] pointer-events-none select-none"></i>
-  <i class="fa-solid fa-cat absolute -bottom-8 left-10 text-white/[0.03] text-8xl pointer-events-none select-none"></i>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8 relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-      <div class="lg:col-span-2 space-y-5">
-        <a href="#" class="flex items-center">
-  <img src="../photos/Adoptly logo.png" alt="Adoptly Logo" class="h-9 w-auto">
-</a>
-        <p class="text-sm text-gray-400 max-w-xs leading-relaxed">
-          Helping rescue pets find safe, loving homes and lifelong companionship.
-        </p>
-        <div class="flex items-center gap-3 pt-1">
-          <a href="#" class="w-9 h-9 rounded bg-[#35393F] text-gray-300 flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
-          <a href="#" class="w-9 h-9 rounded bg-[#35393F] text-gray-300 flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fa-brands fa-twitter text-sm"></i></a>
-          <a href="#" class="w-9 h-9 rounded bg-[#35393F] text-gray-300 flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
-          <a href="#" class="w-9 h-9 rounded bg-[#35393F] text-gray-300 flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
-          <a href="#" class="w-9 h-9 rounded bg-[#35393F] text-gray-300 flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fa-brands fa-youtube text-sm"></i></a>
-        </div>
-      </div>
-      <div class="space-y-4">
-        <h4 class="text-sm font-semibold text-white">Browse</h4>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="#" class="hover:text-brand transition-colors">Browse Pets</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">Adoption Process</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">Success Stories</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">About Us</a></li>
-        </ul>
-      </div>
-      <div class="space-y-4">
-        <h4 class="text-sm font-semibold text-white">Resources</h4>
-        <ul class="space-y-2.5 text-sm">
-          <li><a href="#" class="hover:text-brand transition-colors">FAQ</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">Pet Care Tips</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">Volunteer</a></li>
-          <li><a href="#" class="hover:text-brand transition-colors">Support Center</a></li>
-        </ul>
-      </div>
-      <div class="space-y-4">
-        <h4 class="text-sm font-semibold text-white">Contact</h4>
-        <ul class="space-y-2.5 text-sm text-gray-400">
-          <li>helloadoptly@gmail.com</li>
-          <li>+1 (234) 567-890</li>
-          <li>New York, USA</li>
-        </ul>
-      </div>
-    </div>
-    <div class="mt-12 pt-6 border-t border-white/10 text-center text-xs text-gray-500">
-      © 2026 Adoptly. All rights reserved. &nbsp;|&nbsp;
-      <a href="#" class="hover:text-brand transition-colors">Privacy Policy</a> &nbsp;
-      <a href="#" class="hover:text-brand transition-colors">Terms of Service</a>
-    </div>
-  </div>
-</footer>
+<div id="footer-placeholder"></div>
+<script src="js/Components.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

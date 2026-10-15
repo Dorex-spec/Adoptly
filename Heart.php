@@ -108,40 +108,7 @@
 
 <body class="bg-pageBg text-neutral-800 font-poppins min-h-screen flex flex-col antialiased">
     <!-- BEGIN: MainHeader -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EAE6E4] px-4 lg:px-8 py-3.5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <!-- Brand Logo / Wordmark -->
-            <a class="flex items-center" href="../php/index.php">
-                <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
-            </a>
-            <!-- Primary Navigation Links -->
-            <nav aria-label="Main Navigation"
-                class="hidden md:flex items-center space-x-7 text-sm font-medium text-neutral-600">
-                <a class="transition-colors hover:text-neutral-900" href="../php/Browse_page.php">Browse pets</a>
-                <a class="hover:text-neutral-900 transition-colors" href="../php/Adoption_process.php">adoption
-                    process</a>
-                <a class="hover:text-neutral-900 transition-colors" href="../php/Donation.php">Donate</a>
-                <a class="hover:text-neutral-900 transition-colors" href="../php/About_us.php">About</a>
-            </nav>
-            <!-- Right Header Actions (Favorites active state, Login, Sign In) -->
-            <div class="flex items-center space-x-4">
-                <!-- Active Favorite Pets Button indicating current page -->
-                <button class="fav" type="button" aria-label="View Saved Pets">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20"
-                        height="20">
-                        <path
-                            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                    </svg>
-                </button>
-                <a class="text-sm font-medium text-neutral-600 hover:text-neutral-900 px-2 py-1"
-                    href="../php/Log_in.php">Login</a>
-                <a class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-coral hover:bg-coral-600 rounded-lg shadow-sm transition duration-150 ease-in-out"
-                    href="../php/Sign_in.php">
-                    Sign in
-                </a>
-            </div>
-        </div>
-    </header>
+    <div id="navbar-placeholder"></div>
     <!-- END: MainHeader -->
     <!-- BEGIN: MainContent -->
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
@@ -638,67 +605,8 @@
     </main>
     <!-- END: MainContent -->
     <!-- BEGIN: GlobalFooter -->
-    <footer class="bg-[#181818] text-white pt-12 pb-8 border-t border-neutral-800" data-purpose="global-footer">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 pb-10 border-b border-neutral-800">
-                <div class="md:col-span-2 space-y-4">
-                    <a href="#" class="flex items-center">
-                        <img src="footer.png" alt="Adoptly Logo" class="h-10 w-auto">
-                    </a>
-                    <p class="text-xs text-neutral-400 max-w-sm leading-relaxed">
-                        Helping rescue pets find safe, loving homes and lifelong companionship. Partnered with certified
-                        no-kill shelters nationwide.
-                    </p>
-                    <div class="flex items-center space-x-2 pt-2">
-                        <a class="w-7 h-7 rounded bg-neutral-800 hover:bg-coral text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition"
-                            href="#">f</a>
-                        <a class="w-7 h-7 rounded bg-neutral-800 hover:bg-coral text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition"
-                            href="#">t</a>
-                        <a class="w-7 h-7 rounded bg-neutral-800 hover:bg-coral text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition"
-                            href="#">in</a>
-                        <a class="w-7 h-7 rounded bg-neutral-800 hover:bg-coral text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition"
-                            href="#">li</a>
-                        <a class="w-7 h-7 rounded bg-neutral-800 hover:bg-coral text-neutral-300 hover:text-white flex items-center justify-center text-xs font-bold transition"
-                            href="#">yt</a>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-200">Browse</h4>
-                    <ul class="space-y-2 text-xs text-neutral-400">
-                        <li><a class="hover:text-white transition" href="#">Browse Pets</a></li>
-                        <li><a class="hover:text-white transition" href="#">Adoption Process</a></li>
-                        <li><a class="hover:text-white transition" href="#">Success Stories</a></li>
-                        <li><a class="hover:text-white transition" href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-3">
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-200">Resources</h4>
-                    <ul class="space-y-2 text-xs text-neutral-400">
-                        <li><a class="hover:text-white transition" href="#">FAQ</a></li>
-                        <li><a class="hover:text-white transition" href="#">Pet Care Tips</a></li>
-                        <li><a class="hover:text-white transition" href="#">Volunteer</a></li>
-                        <li><a class="hover:text-white transition" href="#">Support Center</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-3">
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-200">Contact</h4>
-                    <ul class="space-y-2 text-xs text-neutral-400">
-                        <li class="hover:text-white cursor-pointer">helloadoptly@gmail.com</li>
-                        <li>+1 (234) 567-890</li>
-                        <li>New York, USA</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-2">
-                <p>© 2026 Adoptly. All rights reserved.</p>
-                <div class="flex space-x-4">
-                    <a class="hover:text-neutral-400 transition" href="#">Privacy Policy</a>
-                    <span>|</span>
-                    <a class="hover:text-neutral-400 transition" href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="js/Components.js"></script>
     <!-- END: GlobalFooter -->
     <script>
         // Filter + Sort functionality for Saved Animals

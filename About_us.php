@@ -1,12 +1,17 @@
-<!DOCTYPE html><html class="scroll-smooth" lang="en" style=""><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Adoptly - About Us</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&amp;display=swap" rel="stylesheet" class="">
-<script>
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en" style="">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Adoptly - About Us</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&amp;display=swap"
+    rel="stylesheet" class="">
+  <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
@@ -27,21 +32,24 @@
       }
     }
   </script>
-<style>
+  <style>
     :root {
       --coral: #E05A4F;
     }
+
     body {
       font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
       background-color: #FCF9F8;
       color: #1F1F1F;
     }
+
     .wireframe-box-x {
       position: relative;
       background-color: #F6F3F2;
       border: 1.5px dashed #DCD9D9;
       overflow: hidden;
     }
+
     .wireframe-box-x::before,
     .wireframe-box-x::after {
       content: '';
@@ -52,108 +60,93 @@
       height: 100%;
       pointer-events: none;
     }
+
     .wireframe-box-x::before {
       background: linear-gradient(to bottom right, transparent calc(50% - 1px), #DCD9D9 calc(50% - 0.5px), #DCD9D9 calc(50% + 0.5px), transparent calc(50% + 1px));
     }
+
     .wireframe-box-x::after {
       background: linear-gradient(to top right, transparent calc(50% - 1px), #DCD9D9 calc(50% - 0.5px), #DCD9D9 calc(50% + 0.5px), transparent calc(50% + 1px));
     }
+
     .video-x-box {
       position: relative;
       background-color: #1E242B;
       border: 2px dashed #475569;
       overflow: hidden;
     }
+
     .video-x-box::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(to bottom right, transparent calc(50% - 1px), #334155 calc(50% - 0.5px), #334155 calc(50% + 0.5px), transparent calc(50% + 1px));
     }
+
     .video-x-box::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(to top right, transparent calc(50% - 1px), #334155 calc(50% - 0.5px), #334155 calc(50% + 0.5px), transparent calc(50% + 1px));
     }
 
     /* Heart button (same as Adoption Process) */
-      .fav { 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        width: 36px; 
-        height: 36px; 
-        border: 0; 
-        border-radius: 50%; 
-        background: #FFE1DD; 
-        color: var(--coral); 
-        cursor: pointer; 
-        transition: all .2s ease; 
-      }
+    .fav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: #FFE1DD;
+      color: var(--coral);
+      cursor: pointer;
+      transition: all .2s ease;
+    }
 
-      .fav:hover { 
-        background: var(--coral); 
-        color: #fff; 
-      }
+    .fav:hover {
+      background: var(--coral);
+      color: #fff;
+    }
   </style>
 </head>
-<body class="min-h-screen w-full flex flex-col bg-[#FCF9F8] text-[#1F1F1F] antialiased selection:bg-[#E05A4F] selection:text-white" style="font-family: Poppins, sans-serif;">
-<!-- ==================== 1. GLOBAL HEADER NAVIGATION ==================== -->
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200 transition-all">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-<!-- Brand & Diamond Logo -->
-<a class="flex items-center" href="#">
-    <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
-</a>
-<!-- Navigation Links -->
-<nav class="hidden md:flex items-center gap-8 text-[15px] font-medium text-neutral-600">
-<a class="hover:text-[#E05A4F] transition-colors" href="../php/Browse_page.php">Browse pets</a>
-<a class="hover:text-[#E05A4F] transition-colors" href="../php/Adoption_process.php">adoption process</a>
-<a class="hover:text-[#E05A4F] transition-colors" href="../php/Donation.php">Donate</a>
-<a class="text-[#E05A4F] font-semibold flex items-center gap-1.5 relative py-1" href="../php/About_us.php">
-          About
-          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#E05A4F] rounded-full"></span>
-</a>
-</nav>
-<!-- Header Actions -->
-<div class="flex items-center gap-4 sm:gap-5">
-<!-- Favorites Heart with Counter -->
-    <button class="fav" type="button" aria-label="View Saved Pets">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-        </svg>
-    </button>
-<a class="text-sm font-semibold text-neutral-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block" href="../php/Log_in.php">Login</a>
-<a class="px-5 py-2.5 rounded-xl bg-[#E05A4F] text-white text-sm font-semibold hover:bg-[#c94b41] active:scale-95 transition shadow-sm flex items-center gap-2" href="#apply">
-<span class="">Start Application</span>
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</a>
-</div>
-</div>
-</header>
-<!-- ==================== MAIN CONTENT WRAPPER ==================== -->
-<main class="flex-grow w-full">
-<!-- 2. BREADCRUMBS & HERO SECTION -->
-<section class="relative bg-[#FCF9F8] border-b border-neutral-200/80 py-10 sm:py-16">
-<div class="max-w-5xl mx-auto px-4 sm:px-6">
-<!-- Breadcrumbs -->
-<nav class="flex items-center gap-2 text-xs font-semibold text-neutral-400 mb-6 uppercase tracking-wider">
-<a class="hover:text-neutral-700 transition" href="../php/index.php">HOME</a>
-<span class="text-neutral-300">/</span>
-<span class="text-[#E05A4F]">ABOUT US</span>
-</nav>
-<!-- Framed Hero Card -->
-        <div class="bg-white/60 bg-blend-overlay bg-cover bg-center rounded-3xl border border-neutral-200 shadow-sm p-8 sm:p-14 text-center relative overflow-hidden" style="background-image: url('../photos/About%20us/Hero_card_pic.jpg');">
+
+<body
+  class="min-h-screen w-full flex flex-col bg-[#FCF9F8] text-[#1F1F1F] antialiased selection:bg-[#E05A4F] selection:text-white"
+  style="font-family: Poppins, sans-serif;">
+  <!-- ==================== 1. GLOBAL HEADER NAVIGATION ==================== -->
+  <div id="navbar-placeholder"></div>
+  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+  <main class="flex-grow w-full">
+    <!-- 2. BREADCRUMBS & HERO SECTION -->
+    <section class="relative bg-[#FCF9F8] border-b border-neutral-200/80 py-10 sm:py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <!-- Breadcrumbs -->
+        <nav class="flex items-center gap-2 text-xs font-semibold text-neutral-400 mb-6 uppercase tracking-wider">
+          <a class="hover:text-neutral-700 transition" href="../php/index.php">HOME</a>
+          <span class="text-neutral-300">/</span>
+          <span class="text-[#E05A4F]">ABOUT US</span>
+        </nav>
+        <!-- Framed Hero Card -->
+        <div
+          class="bg-white/60 bg-blend-overlay bg-cover bg-center rounded-3xl border border-neutral-200 shadow-sm p-8 sm:p-14 text-center relative overflow-hidden"
+          style="background-image: url('../photos/About%20us/Hero_card_pic.jpg');">
           <!-- Badges Row -->
           <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFE1DD]/90 border border-[#E05A4F]/20 text-[#E05A4F] text-xs font-semibold tracking-wide">
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFE1DD]/90 border border-[#E05A4F]/20 text-[#E05A4F] text-xs font-semibold tracking-wide">
               <span class="w-2 h-2 rounded-full bg-[#E05A4F] animate-pulse"></span>
               Our Mission &amp; Purpose
             </div>
-            <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-neutral-200 text-neutral-700 text-xs font-semibold tracking-wide">
+            <div
+              class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-neutral-200 text-neutral-700 text-xs font-semibold tracking-wide">
               <svg class="w-3.5 h-3.5 text-[#2E7D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
               </svg>
@@ -161,16 +154,21 @@
             </div>
           </div>
           <!-- Headline -->
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 leading-[1.18] mb-6 max-w-3xl mx-auto relative z-10">
+          <h1
+            class="text-3xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 leading-[1.18] mb-6 max-w-3xl mx-auto relative z-10">
             Connecting Pets to <br class="hidden sm:inline">
             <span class="text-[#E05A4F]">Loving Homes &amp; Hearts.</span>
           </h1>
           <!-- Paragraph -->
-          <p class="text-base sm:text-lg text-neutral-700 font-medium leading-relaxed max-w-2xl mx-auto mb-10 relative z-10">
-            Adoptly was born out of a simple conviction: every animal deserves a safe haven, and every adopter deserves a compassionate, stress-free adoption journey. We empower verified rescue organizations and families with human-centered technology.
+          <p
+            class="text-base sm:text-lg text-neutral-700 font-medium leading-relaxed max-w-2xl mx-auto mb-10 relative z-10">
+            Adoptly was born out of a simple conviction: every animal deserves a safe haven, and every adopter deserves
+            a compassionate, stress-free adoption journey. We empower verified rescue organizations and families with
+            human-centered technology.
           </p>
           <!-- Bottom Micro-Badges / Trust Checks Row -->
-          <div class="pt-6 border-t border-neutral-300/50 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-medium text-neutral-800 relative z-10">
+          <div
+            class="pt-6 border-t border-neutral-300/50 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-medium text-neutral-800 relative z-10">
             <div class="flex items-center gap-2 bg-white/90 border border-neutral-200 px-3.5 py-2 rounded-xl">
               <svg class="w-4 h-4 text-[#2E7D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
@@ -191,360 +189,350 @@
             </div>
           </div>
         </div>
-</div>
-
-</section>
-<!-- 3. WHAT IS ADOPTLY? (Core Value & Pillars) -->
-<section class="py-20 sm:py-24 bg-[#FCF9F8]" id="what-is-adoptly">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<!-- Section Heading -->
-<div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-<span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">ABOUT THE PLATFORM</span>
-<h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">What is Adoptly?</h2>
-<p class="text-base text-neutral-600 font-normal leading-relaxed">
-            Adoptly is an all-in-one animal welfare hub designed to eliminate the logistical barriers between local shelters, rescue networks, and prospective adopters across the country.
-          </p>
-</div>
-<!-- Vision & Core Pillars Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-<!-- Pillar 1 -->
-<div class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
-<div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<h3 class="text-xl font-bold text-neutral-900">Shelter-First Support</h3>
-<p class="text-sm text-neutral-600 leading-relaxed">
-              We empower rescue facilities with modern digital tooling, intake syndication, and pre-screened applications—completely free of charge for 501(c)(3) organizations.
-            </p>
-</div>
-<!-- Pillar 2 -->
-<div class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
-<div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<h3 class="text-xl font-bold text-neutral-900">Radical Transparency</h3>
-<p class="text-sm text-neutral-600 leading-relaxed">
-              Every medical log, vaccination status, behavior report, and shelter fee is verified and displayed clearly so adopters can make knowledgeable, lifelong commitments.
-            </p>
-</div>
-<!-- Pillar 3 -->
-<div class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
-<div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<h3 class="text-xl font-bold text-neutral-900">Human &amp; Pet Matching</h3>
-<p class="text-sm text-neutral-600 leading-relaxed">
-              Our lifestyle-based matching algorithm pairs dogs, cats, and small animals based on energy levels, housing compatibility, and family routines—not just breed labels.
-            </p>
-</div>
-</div>
-<!-- 4. HOW WE WORK / TWO COLUMN NARRATIVE & WIREFRAME IMAGE -->
-<div class="bg-white rounded-3xl p-8 sm:p-12 border border-neutral-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-  <!-- Text Narrative -->
-  <div class="lg:col-span-7 space-y-6">
-    <div class="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 text-xs font-bold rounded-md">How We Work</div>
-    <h3 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight leading-tight">
-      A humane alternative to bureaucratic adoption hurdles.
-    </h3>
-    <p class="text-neutral-600 font-normal leading-relaxed">
-      Traditional rescue processes often suffer from fragmented email threads, paper applications, and lengthy waiting times that unintentionally discourage loving adopters. Adoptly centralizes digital communication, home check coordination, and verified medical documentation into a single transparent pipeline.
-    </p>
-    <div class="grid grid-cols-2 gap-6 pt-2">
-      <div>
-        <div class="text-3xl font-extrabold text-[#E05A4F]">850+</div>
-        <div class="text-xs font-semibold text-neutral-500 mt-1 uppercase tracking-wider">Shelter &amp; rescue partners</div>
       </div>
-      <div>
-        <div class="text-3xl font-extrabold text-[#E05A4F]">96%</div>
-        <div class="text-xs font-semibold text-neutral-500 mt-1 uppercase tracking-wider">Adoption success rate</div>
-      </div>
-    </div>
-  </div>
-  <!-- Supporting Image -->
-  <div class="lg:col-span-5">
-    <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-inner">
-        <img src="../photos/About us/How we work wireframe image.jpeg" alt="Rescue team caring for animals" class="w-full h-full object-cover">
-    </div>
-  </div>
-</div>
 
-</div>
-</div>
-</section>
-<!-- 5. VIDEO PRESENTATION SECTION -->
-<section class="py-20 sm:py-24 bg-white border-y border-neutral-200" id="video-presentation">
-<div class="max-w-5xl mx-auto px-4 sm:px-6">
-<!-- Header -->
-<div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
-<span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">BEHIND THE MISSION</span>
-<h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">See Adoptly in Action</h2>
-<p class="text-sm sm:text-base text-neutral-600 leading-relaxed">
-            Watch a brief 2-minute walkthrough showing how our network connects shelter volunteers directly with compassionate adopters in real time.
+    </section>
+    <!-- 3. WHAT IS ADOPTLY? (Core Value & Pillars) -->
+    <section class="py-20 sm:py-24 bg-[#FCF9F8]" id="what-is-adoptly">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Heading -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">ABOUT THE PLATFORM</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">What is Adoptly?</h2>
+          <p class="text-base text-neutral-600 font-normal leading-relaxed">
+            Adoptly is an all-in-one animal welfare hub designed to eliminate the logistical barriers between local
+            shelters, rescue networks, and prospective adopters across the country.
           </p>
-</div>
-<!-- Full Centered Video Media Frame with "X" Diagonal Wireframe Treatment -->
-<div class="video-x-box w-full aspect-[16/9] rounded-3xl flex flex-col items-center justify-center p-6 sm:p-8 text-center shadow-2xl relative group cursor-pointer">
-<!-- Play Button Overlay -->
-<div class="relative z-10 flex flex-col items-center gap-4">
-<div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 text-[#E05A4F] flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-white transition-all duration-300">
-<svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-</div>
-<div class="bg-black/70 backdrop-blur-md px-5 py-2.5 rounded-xl text-white border border-white/20">
-<span class="text-xs font-bold tracking-wider uppercase block">[ VIDEO PRESENTATION WIREFRAME ]</span>
-<p class="text-[11px] text-neutral-300 mt-0.5">Adoptly Overview: From Shelter Rescue to Forever Home (02:45)</p>
-</div>
-</div>
-<!-- Video Controls Simulation Bar (Bottom) -->
-<div class="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 z-10 flex items-center justify-between text-white/80 text-xs bg-black/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
-<div class="flex items-center gap-3">
-<span class="font-medium cursor-pointer hover:text-white">▶ Play</span>
-<span class="text-neutral-400">00:00 / 02:45</span>
-</div>
-<div class="flex items-center gap-3">
-<span class="text-neutral-300">HD 1080p</span>
-<span class="cursor-pointer hover:text-white">⛶ Fullscreen</span>
-</div>
-</div>
-</div>
-<!-- Video Caption / Context Notes -->
-<div class="mt-4 text-center text-xs text-neutral-500 italic">
+        </div>
+        <!-- Vision & Core Pillars Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <!-- Pillar 1 -->
+          <div
+            class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900">Shelter-First Support</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              We empower rescue facilities with modern digital tooling, intake syndication, and pre-screened
+              applications—completely free of charge for 501(c)(3) organizations.
+            </p>
+          </div>
+          <!-- Pillar 2 -->
+          <div
+            class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900">Radical Transparency</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Every medical log, vaccination status, behavior report, and shelter fee is verified and displayed clearly
+              so adopters can make knowledgeable, lifelong commitments.
+            </p>
+          </div>
+          <!-- Pillar 3 -->
+          <div
+            class="bg-white p-8 rounded-2xl border border-neutral-200/90 shadow-sm hover:border-[#E05A4F]/40 hover:shadow-md transition space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-[#FFE1DD]/70 flex items-center justify-center text-[#E05A4F]">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900">Human &amp; Pet Matching</h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              Our lifestyle-based matching algorithm pairs dogs, cats, and small animals based on energy levels, housing
+              compatibility, and family routines—not just breed labels.
+            </p>
+          </div>
+        </div>
+        <!-- 4. HOW WE WORK / TWO COLUMN NARRATIVE & WIREFRAME IMAGE -->
+        <div
+          class="bg-white rounded-3xl p-8 sm:p-12 border border-neutral-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <!-- Text Narrative -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 text-xs font-bold rounded-md">How We Work
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight leading-tight">
+              A humane alternative to bureaucratic adoption hurdles.
+            </h3>
+            <p class="text-neutral-600 font-normal leading-relaxed">
+              Traditional rescue processes often suffer from fragmented email threads, paper applications, and lengthy
+              waiting times that unintentionally discourage loving adopters. Adoptly centralizes digital communication,
+              home check coordination, and verified medical documentation into a single transparent pipeline.
+            </p>
+            <div class="grid grid-cols-2 gap-6 pt-2">
+              <div>
+                <div class="text-3xl font-extrabold text-[#E05A4F]">850+</div>
+                <div class="text-xs font-semibold text-neutral-500 mt-1 uppercase tracking-wider">Shelter &amp; rescue
+                  partners</div>
+              </div>
+              <div>
+                <div class="text-3xl font-extrabold text-[#E05A4F]">96%</div>
+                <div class="text-xs font-semibold text-neutral-500 mt-1 uppercase tracking-wider">Adoption success rate
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Supporting Image -->
+          <div class="lg:col-span-5">
+            <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-inner">
+              <img src="../photos/About us/How we work wireframe image.jpeg" alt="Rescue team caring for animals"
+                class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </section>
+    <!-- 5. VIDEO PRESENTATION SECTION -->
+    <section class="py-20 sm:py-24 bg-white border-y border-neutral-200" id="video-presentation">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">BEHIND THE MISSION</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">See Adoptly in Action</h2>
+          <p class="text-sm sm:text-base text-neutral-600 leading-relaxed">
+            Watch a brief 2-minute walkthrough showing how our network connects shelter volunteers directly with
+            compassionate adopters in real time.
+          </p>
+        </div>
+        <!-- Full Centered Video Media Frame with "X" Diagonal Wireframe Treatment -->
+        <div
+          class="video-x-box w-full aspect-[16/9] rounded-3xl flex flex-col items-center justify-center p-6 sm:p-8 text-center shadow-2xl relative group cursor-pointer">
+          <!-- Play Button Overlay -->
+          <div class="relative z-10 flex flex-col items-center gap-4">
+            <div
+              class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 text-[#E05A4F] flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-white transition-all duration-300">
+              <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+            </div>
+            <div class="bg-black/70 backdrop-blur-md px-5 py-2.5 rounded-xl text-white border border-white/20">
+              <span class="text-xs font-bold tracking-wider uppercase block">[ VIDEO PRESENTATION WIREFRAME ]</span>
+              <p class="text-[11px] text-neutral-300 mt-0.5">Adoptly Overview: From Shelter Rescue to Forever Home
+                (02:45)</p>
+            </div>
+          </div>
+          <!-- Video Controls Simulation Bar (Bottom) -->
+          <div
+            class="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 z-10 flex items-center justify-between text-white/80 text-xs bg-black/50 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
+            <div class="flex items-center gap-3">
+              <span class="font-medium cursor-pointer hover:text-white">▶ Play</span>
+              <span class="text-neutral-400">00:00 / 02:45</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-neutral-300">HD 1080p</span>
+              <span class="cursor-pointer hover:text-white">⛶ Fullscreen</span>
+            </div>
+          </div>
+        </div>
+        <!-- Video Caption / Context Notes -->
+        <div class="mt-4 text-center text-xs text-neutral-500 italic">
           * Video features actual footage from Austin Paws Rescue and Heartland Animal Sanctuary partners.
         </div>
-</div>
-</section>
-<!-- 6. MESSAGE FROM THE TEAM! -->
-<section class="py-20 sm:py-24 bg-[#FCF9F8]">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<!-- Section Title -->
-<div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
-<span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">HEART OF ADOPTLY</span>
-<h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">Message from the Team!</h2>
-<p class="text-base text-neutral-600 font-normal leading-relaxed">
-            We are a group of animal lovers, veterinarians, designers, and software engineers dedicated to giving every shelter pet a second chance.
+      </div>
+    </section>
+    <!-- 6. MESSAGE FROM THE TEAM! -->
+    <section class="py-20 sm:py-24 bg-[#FCF9F8]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#E05A4F]">HEART OF ADOPTLY</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">Message from the Team!</h2>
+          <p class="text-base text-neutral-600 font-normal leading-relaxed">
+            We are a group of animal lovers, veterinarians, designers, and software engineers dedicated to giving every
+            shelter pet a second chance.
           </p>
-</div>
-<!-- Team Quote Feature Card -->
-<div class="bg-white rounded-3xl p-8 sm:p-12 border border-neutral-200 shadow-sm mb-12 relative overflow-hidden">
-<div class="absolute top-6 right-8 text-neutral-100 select-none text-9xl font-serif font-black leading-none pointer-events-none">“</div>
-<div class="relative z-10 max-w-3xl space-y-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-[#FFE1DD] text-[#E05A4F] text-xs font-bold rounded-md">
+        </div>
+        <!-- Team Quote Feature Card -->
+        <div
+          class="bg-white rounded-3xl p-8 sm:p-12 border border-neutral-200 shadow-sm mb-12 relative overflow-hidden">
+          <div
+            class="absolute top-6 right-8 text-neutral-100 select-none text-9xl font-serif font-black leading-none pointer-events-none">
+            “</div>
+          <div class="relative z-10 max-w-3xl space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 bg-[#FFE1DD] text-[#E05A4F] text-xs font-bold rounded-md">
               Founder's Note
             </div>
-<blockquote class="text-xl sm:text-2xl font-medium text-neutral-900 leading-relaxed italic">
-              "We founded Adoptly because we witnessed shelter directors working 16-hour shifts handling paperwork when their true passion was caring for animals. By providing intuitive, trustworthy digital tools, we give shelters their time back and help every pet find their forever lap."
+            <blockquote class="text-xl sm:text-2xl font-medium text-neutral-900 leading-relaxed italic">
+              "We founded Adoptly because we witnessed shelter directors working 16-hour shifts handling paperwork when
+              their true passion was caring for animals. By providing intuitive, trustworthy digital tools, we give
+              shelters their time back and help every pet find their forever lap."
             </blockquote>
-<div class="flex items-center gap-4 pt-2">
-<!-- Avatar Wireframe -->
-<div class="wireframe-box-x w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
-<span class="text-[11px] font-bold text-neutral-500 relative z-10">X</span>
-</div>
-<div>
-<div class="font-bold text-neutral-900 text-base">Mariel Jasmine S. Florido</div>
-<div class="text-xs text-neutral-500">Founder, Adoptly Animal Welfare Initiative</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Leadership & Key Team Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Team Member 1 -->
-<div class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
-<div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
-<span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
-</div>
-<div>
-<h4 class="font-bold text-neutral-900 text-base">Nica B. Padilla</h4>
-<p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Head of Shelter Operations &amp; DVM</p>
-</div>
-<p class="text-xs text-neutral-500 leading-relaxed">
+            <div class="flex items-center gap-4 pt-2">
+              <!-- Avatar Wireframe -->
+              <div class="wireframe-box-x w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center">
+                <span class="text-[11px] font-bold text-neutral-500 relative z-10">X</span>
+              </div>
+              <div>
+                <div class="font-bold text-neutral-900 text-base">Mariel Jasmine S. Florido</div>
+                <div class="text-xs text-neutral-500">Founder, Adoptly Animal Welfare Initiative</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Leadership & Key Team Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Team Member 1 -->
+          <div
+            class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
+            <div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
+              <span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-neutral-900 text-base">Nica B. Padilla</h4>
+              <p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Head of Shelter Operations &amp; DVM</p>
+            </div>
+            <p class="text-xs text-neutral-500 leading-relaxed">
               12+ years in shelter medicine and veterinary advocacy across national rescues.
             </p>
-</div>
-<!-- Team Member 2 -->
-<div class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
-<div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
-<span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
-</div>
-<div>
-<h4 class="font-bold text-neutral-900 text-base">John Rey Darrell T Labrador</h4>
-<p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Product &amp; Platform Architect</p>
-</div>
-<p class="text-xs text-neutral-500 leading-relaxed">
+          </div>
+          <!-- Team Member 2 -->
+          <div
+            class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
+            <div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
+              <span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-neutral-900 text-base">John Rey Darrell T Labrador</h4>
+              <p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Product &amp; Platform Architect</p>
+            </div>
+            <p class="text-xs text-neutral-500 leading-relaxed">
               Specializes in streamlined humane UX and transparent non-profit software systems.
             </p>
-</div>
-<!-- Team Member 3 -->
-<div class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
-<div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
-<span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
-</div>
-<div>
-<h4 class="font-bold text-neutral-900 text-base">Marc Lourenz Murillo</h4>
-<p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Adoption Experience Lead</p>
-</div>
-<p class="text-xs text-neutral-500 leading-relaxed">
+          </div>
+          <!-- Team Member 3 -->
+          <div
+            class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
+            <div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
+              <span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-neutral-900 text-base">Marc Lourenz Murillo</h4>
+              <p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Adoption Experience Lead</p>
+            </div>
+            <p class="text-xs text-neutral-500 leading-relaxed">
               Dedicated foster parent and community coordinator with over 80+ successful placements.
             </p>
-</div>
-<!-- Team Member 4 -->
-<div class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
-<div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
-<span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
-</div>
-<div>
-<h4 class="font-bold text-neutral-900 text-base">Enrico Jazper Oani</h4>
-<p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Shelter Liaison &amp; Partner Support</p>
-</div>
-<p class="text-xs text-neutral-500 leading-relaxed">
+          </div>
+          <!-- Team Member 4 -->
+          <div
+            class="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm hover:border-[#E05A4F]/40 transition flex flex-col items-center text-center space-y-3">
+            <div class="wireframe-box-x w-24 h-24 rounded-2xl flex items-center justify-center shadow-inner">
+              <span class="text-xs font-bold text-neutral-500 relative z-10">[ PHOTO X ]</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-neutral-900 text-base">Enrico Jazper Oani</h4>
+              <p class="text-xs text-[#E05A4F] font-semibold mt-0.5">Shelter Liaison &amp; Partner Support</p>
+            </div>
+            <p class="text-xs text-neutral-500 leading-relaxed">
               Direct point of contact for municipal animal control and private rescue onboarding.
             </p>
-</div>
-</div>
-</div>
-</section>
-<!-- 7. NEWSLETTER & ENGAGEMENT SECTION -->
-<section class="py-20 sm:py-24 bg-white border-t border-neutral-200">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <!-- Main Card Container -->
-    <div class="relative border border-neutral-200 rounded-3xl shadow-sm flex flex-col overflow-hidden">
-      
-      <!-- Single Background Image (Anchored to top) -->
-      <div class="absolute inset-0 bg-cover bg-top z-0" style="background-image: url('../photos/About us/about_as bg pic.webp');"></div>
-      
-      <!-- Semi-transparent White Overlay (55%) -->
-      <div class="absolute inset-0 bg-white/55 z-0"></div>
-
-      <!-- Content Area (Relative z-10 to sit above the background layer) -->
-      <div class="relative z-10 p-8 sm:p-14 space-y-12">
-        <!-- Newsletter / Email Update / Sign Up Block -->
-        <div class="text-center max-w-2xl mx-auto space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFE1DD] text-[#E05A4F] text-xs font-bold shadow-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            <span class="">Stay Informed</span>
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
-            Get Heartwarming Stories &amp; Rescue Updates
-          </h2>
-          <p class="text-sm text-neutral-800 font-medium leading-relaxed">
-            Subscribe to our monthly newsletter for adoption advice, shelter impact metrics, and featured animals ready for homes. No spam, ever.
-          </p>
-          
-          <!-- Interactive Email Input & Button -->
-          <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2" onsubmit="event.preventDefault();">
-            <input class="flex-1 px-4 py-3 rounded-xl border border-neutral-300 bg-white/90 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#E05A4F] focus:border-transparent transition shadow-inner placeholder:text-neutral-500" placeholder="Enter your email address..." required="" type="email">
-            <button class="px-6 py-3 rounded-xl bg-[#E05A4F] text-white text-sm font-semibold hover:bg-[#c94b41] active:scale-95 transition shadow-sm whitespace-nowrap" type="submit">
-              Sign up
-            </button>
-          </form>
-          <span class="text-[11px] text-neutral-700 font-medium block">We respect your privacy. Unsubscribe at any time.</span>
-        </div>
-
-        <!-- Divider & Next Steps Action Area -->
-        <div class="border-t border-neutral-400/50 pt-8">
-          <div class="text-center max-w-xl mx-auto mb-8">
-            <h3 class="text-xl font-bold text-neutral-900">Ready to take the next step?</h3>
-            <p class="text-xs sm:text-sm text-neutral-800 font-medium mt-1">Explore adoptable pets near you or learn how our safe adoption screening works.</p>
-          </div>
-          
-          <!-- Action CTAs: Start Adopting & Learn the Process -->
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <!-- Primary CTA -> Browse Pet Page -->
-            <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#E05A4F] text-white font-semibold text-sm hover:bg-[#c94b41] active:scale-95 transition shadow-sm flex items-center justify-center gap-2" href="../php/Browse_page.php">
-              <span class="">Start Adopting</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            </a>
-            <!-- Secondary CTA -> Adoption Process Page -->
-            <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl border-2 border-neutral-300 bg-white/95 text-neutral-900 font-semibold text-sm hover:bg-white hover:border-neutral-400 active:scale-95 transition shadow-sm flex items-center justify-center gap-2" href="../php/Adoption_process.php">
-              <span class="">Learn the process</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            </a>
           </div>
         </div>
       </div>
-      
-    </div>`
-  </div>
-</section>
-</main>
-<!-- ==================== 8. GLOBAL FOOTER ==================== -->
-<footer class="bg-[#181818] text-white border-t border-neutral-800">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-<!-- Brand Summary Column -->
-<div class="lg:col-span-2 space-y-4">
-<div class="flex items-center tracking-tight">
-    <a href="#" class="inline-block">
-        <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-8 w-auto object-contain">
-    </a>
-</div>
-<p class="text-sm text-neutral-400 max-w-sm leading-relaxed">
-            Helping rescue pets find safe, loving homes and lifelong companionship across verified shelters nationwide. Partnered with certified no-kill shelters nationwide.
-          </p>
-<!-- Social Icon Badges -->
-<div class="flex items-center gap-2.5 pt-2">
-<a aria-label="Facebook" class="w-8 h-8 rounded-lg bg-[#252525] hover:bg-[#E05A4F] text-neutral-300 hover:text-white flex items-center justify-center transition text-xs font-bold" href="#">f</a>
-<a aria-label="Twitter" class="w-8 h-8 rounded-lg bg-[#252525] hover:bg-[#E05A4F] text-neutral-300 hover:text-white flex items-center justify-center transition text-xs font-bold" href="#">t</a>
-<a aria-label="Instagram" class="w-8 h-8 rounded-lg bg-[#252525] hover:bg-[#E05A4F] text-neutral-300 hover:text-white flex items-center justify-center transition text-xs font-bold" href="#">in</a>
-<a aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-[#252525] hover:bg-[#E05A4F] text-neutral-300 hover:text-white flex items-center justify-center transition text-xs font-bold" href="#">li</a>
-<a aria-label="YouTube" class="w-8 h-8 rounded-lg bg-[#252525] hover:bg-[#E05A4F] text-neutral-300 hover:text-white flex items-center justify-center transition text-xs font-bold" href="#">yt</a>
-</div>
-</div>
-<!-- Col 1: Browse -->
-<div class="space-y-3">
-<h4 class="text-sm font-bold text-white uppercase tracking-wider">Browse</h4>
-<ul class="space-y-2 text-sm text-neutral-400">
-<li class=""><a class="hover:text-white transition" href="../php/Browse_page.php">Browse Pets</a></li>
-<li class=""><a class="hover:text-white transition" href="../php/Adoption_process.php">Adoption Process</a></li>
-<li class=""><a class="hover:text-white transition" href="#stories">Success Stories</a></li>
-<li class=""><a class="text-white font-semibold transition" href="../php/About_us.p">About Us</a></li>
-</ul>
-</div>
-<!-- Col 2: Resources -->
-<div class="space-y-3">
-<h4 class="text-sm font-bold text-white uppercase tracking-wider">Resources</h4>
-<ul class="space-y-2 text-sm text-neutral-400">
-<li class=""><a class="hover:text-white transition" href="#faq">FAQ</a></li>
-<li class=""><a class="hover:text-white transition" href="#care-tips">Pet Care Tips</a></li>
-<li class=""><a class="hover:text-white transition" href="#volunteer">Volunteer</a></li>
-<li class=""><a class="hover:text-white transition" href="#support">Support Center</a></li>
-</ul>
-</div>
-<!-- Col 3: Contact -->
-<div class="space-y-3">
-<h4 class="text-sm font-bold text-white uppercase tracking-wider">Contact</h4>
-<ul class="space-y-2 text-sm text-neutral-400">
-<li class="">
-<a class="hover:text-white transition flex items-center gap-1.5" href="mailto:helloadoptly@gmail.com">
-<svg class="w-3.5 h-3.5 text-[#E05A4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">helloadoptly@gmail.com</span>
-</a>
-</li>
-<li class="flex items-center gap-1.5 text-neutral-400">
-<svg class="w-3.5 h-3.5 text-[#E05A4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">+1 (234) 567-890</span>
-</li>
-<li class="text-neutral-400">New York, USA</li>
-</ul>
-</div>
-</div>
-<!-- Legal Sub-Footer Bar -->
-<div class="pt-8 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
-<div class="">© 2026 Adoptly. All rights reserved.</div>
-<div class="flex items-center gap-6">
-<a class="hover:text-neutral-300 transition" href="#privacy">Privacy Policy</a>
-<span class="text-neutral-700">|</span>
-<a class="hover:text-neutral-300 transition" href="#terms">Terms of Service</a>
-</div>
-</div>
-</div>
-</footer>
+    </section>
+    <!-- 7. NEWSLETTER & ENGAGEMENT SECTION -->
+    <section class="py-20 sm:py-24 bg-white border-t border-neutral-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <!-- Main Card Container -->
+        <div class="relative border border-neutral-200 rounded-3xl shadow-sm flex flex-col overflow-hidden">
+
+          <!-- Single Background Image (Anchored to top) -->
+          <div class="absolute inset-0 bg-cover bg-top z-0"
+            style="background-image: url('../photos/About us/about_as bg pic.webp');"></div>
+
+          <!-- Semi-transparent White Overlay (55%) -->
+          <div class="absolute inset-0 bg-white/55 z-0"></div>
+
+          <!-- Content Area (Relative z-10 to sit above the background layer) -->
+          <div class="relative z-10 p-8 sm:p-14 space-y-12">
+            <!-- Newsletter / Email Update / Sign Up Block -->
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFE1DD] text-[#E05A4F] text-xs font-bold shadow-sm">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                <span class="">Stay Informed</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
+                Get Heartwarming Stories &amp; Rescue Updates
+              </h2>
+              <p class="text-sm text-neutral-800 font-medium leading-relaxed">
+                Subscribe to our monthly newsletter for adoption advice, shelter impact metrics, and featured animals
+                ready for homes. No spam, ever.
+              </p>
+
+              <!-- Interactive Email Input & Button -->
+              <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2" onsubmit="event.preventDefault();">
+                <input
+                  class="flex-1 px-4 py-3 rounded-xl border border-neutral-300 bg-white/90 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#E05A4F] focus:border-transparent transition shadow-inner placeholder:text-neutral-500"
+                  placeholder="Enter your email address..." required="" type="email">
+                <button
+                  class="px-6 py-3 rounded-xl bg-[#E05A4F] text-white text-sm font-semibold hover:bg-[#c94b41] active:scale-95 transition shadow-sm whitespace-nowrap"
+                  type="submit">
+                  Sign up
+                </button>
+              </form>
+              <span class="text-[11px] text-neutral-700 font-medium block">We respect your privacy. Unsubscribe at any
+                time.</span>
+            </div>
+
+            <!-- Divider & Next Steps Action Area -->
+            <div class="border-t border-neutral-400/50 pt-8">
+              <div class="text-center max-w-xl mx-auto mb-8">
+                <h3 class="text-xl font-bold text-neutral-900">Ready to take the next step?</h3>
+                <p class="text-xs sm:text-sm text-neutral-800 font-medium mt-1">Explore adoptable pets near you or learn
+                  how our safe adoption screening works.</p>
+              </div>
+
+              <!-- Action CTAs: Start Adopting & Learn the Process -->
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <!-- Primary CTA -> Browse Pet Page -->
+                <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#E05A4F] text-white font-semibold text-sm hover:bg-[#c94b41] active:scale-95 transition shadow-sm flex items-center justify-center gap-2"
+                  href="../php/Browse_page.php">
+                  <span class="">Start Adopting</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    </path>
+                  </svg>
+                </a>
+                <!-- Secondary CTA -> Adoption Process Page -->
+                <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl border-2 border-neutral-300 bg-white/95 text-neutral-900 font-semibold text-sm hover:bg-white hover:border-neutral-400 active:scale-95 transition shadow-sm flex items-center justify-center gap-2"
+                  href="../php/Adoption_process.php">
+                  <span class="">Learn the process</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>`
+      </div>
+    </section>
+  </main>
+  <!-- ==================== 8. GLOBAL FOOTER ==================== -->
+  <div id="footer-placeholder"></div>
+  <script src="js/Components.js"></script>
 
 
-</body></html>
+</body>
 
+</html>
