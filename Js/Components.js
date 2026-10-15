@@ -2,7 +2,7 @@ const navbarHTML = `
   <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       <a class="flex items-center" href="#">
-        <img src="photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+        <img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
         <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="../php/Browse_page.php">Browse pets</a>

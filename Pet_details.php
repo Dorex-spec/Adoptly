@@ -888,7 +888,7 @@
     <!-- END: MainContentContainer -->
     <!-- BEGIN: MainFooter -->
     <div id="footer-placeholder"></div>
-    <script src="js/Components.js"></script>
+    <script src="../js/Components.js"></script>
     <!-- END: MainFooter -->
 
     <script>
