@@ -995,11 +995,11 @@
       </p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a class="w-full sm:w-auto px-7 py-3 rounded-full text-xs font-bold bg-brand text-white hover:bg-brand-hover shadow-lg transition"
-          href="../php/Browse_page.php">
+          href="Browse_page.php">
           Start Adopting
         </a>
         <a class="w-full sm:w-auto px-7 py-3 rounded-full text-xs font-bold bg-white text-gray-800 hover:bg-gray-100 shadow-lg transition"
-          href="../php/Adoption_process.php">
+          href="Adoption_process.php">
           Learn the process
         </a>
       </div>
