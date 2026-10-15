@@ -1013,7 +1013,7 @@
   <!-- BEGIN: MainFooter -->
   <div id="footer-placeholder"></div>
   <!-- END: MainFooter -->
-  <script src="js/Components.js"></script>
+  <script src="Js/Components.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const categoryBtns = document.querySelectorAll('.pet-category-btn');
