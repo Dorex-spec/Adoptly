@@ -26,7 +26,7 @@ require __DIR__ . '/data.php';
       </nav>
 
       <div class="header-actions">
-        <button class="fav" type="button" aria-label="View Saved Pets">❤</button>
+        <a class="fav" href="Heart.php" aria-label="View Saved Pets">❤</a>
         <a class="header-actions__login" href="Log_in.php">Login</a>
         <a class="btn btn--coral btn--sm" href="Sign_in.php">Sign in</a>
       </div>

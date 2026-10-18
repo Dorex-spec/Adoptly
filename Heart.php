@@ -114,7 +114,7 @@
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
         <!-- BEGIN: Breadcrumbs -->
         <nav aria-label="Breadcrumb" class="flex items-center text-xs font-medium text-neutral-500 mb-4">
-            <a class="hover:text-neutral-800" href="../php/index.php">Home</a>
+            <a class="hover:text-neutral-800" href="index.php">Home</a>
             <span class="mx-2 text-neutral-400">/</span>
             <span class="text-neutral-900 font-semibold">Saved Animals</span>
         </nav>
