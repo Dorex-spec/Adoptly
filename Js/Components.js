@@ -55,7 +55,7 @@ const footerHTML = `
         <div class="md:col-span-2 space-y-3">
           <h4 class="text-sm font-bold text-white tracking-wide">Resources</h4>
           <ul class="space-y-2 text-xs text-gray-400">
-            <li><a class="hover:text-white transition" href="#faq">FAQ</a></li>
+            <li><a class="hover:text-white transition" href="Adoption_process.php#faq">FAQ</a></li>
           </ul>
         </div>
         <div class="md:col-span-3 space-y-3">

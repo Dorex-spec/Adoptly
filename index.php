@@ -960,7 +960,7 @@
             <h4 class="font-bold text-gray-900 text-sm">Sarah &amp; Charlie</h4>
             <p class="text-xs text-gray-400 mb-5">Adopted 6 months ago</p>
             <a class="inline-flex items-center px-5 py-2 border border-brand text-brand rounded-full text-xs font-bold hover:bg-brand-light transition"
-              href="#stories">
+              href="Donation.php#stories">
               Read More Stories
             </a>
           </div>
