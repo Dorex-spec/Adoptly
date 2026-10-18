@@ -62,7 +62,7 @@ require __DIR__ . '/data.php';
         </div>
         <h3 class="video__title video__title--below">Behind the Scenes: A Day at Austin Paws &amp; Rescue Shelter</h3>
 
-      <div class="stories">
+      <div class="stories" id="stories">
         <div class="stories__header">
           <div>
             <h3 class="stories__title">Real Stories of Hope</h3>

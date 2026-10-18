@@ -1,7 +1,7 @@
 const navbarHTML = `
   <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <a class="flex items-center" href="#">
+      <a class="flex items-center" href="index.php">
         <img src="photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
@@ -48,7 +48,7 @@ const footerHTML = `
           <ul class="space-y-2 text-xs text-gray-400">
             <li><a class="hover:text-white transition" href="Browse_page.php">Browse Pets</a></li>
             <li><a class="hover:text-white transition" href="Adoption_process.php">Adoption Process</a></li>
-            <li><a class="hover:text-white transition" href="Success_stories.php">Success Stories</a></li>
+            <li><a class="hover:text-white transition" href="Donation.php#stories">Success Stories</a></li>
             <li><a class="hover:text-white transition" href="About_us.php">About Us</a></li>
           </ul>
         </div>
@@ -56,9 +56,6 @@ const footerHTML = `
           <h4 class="text-sm font-bold text-white tracking-wide">Resources</h4>
           <ul class="space-y-2 text-xs text-gray-400">
             <li><a class="hover:text-white transition" href="#faq">FAQ</a></li>
-            <li><a class="hover:text-white transition" href="#tips">Pet Care Tips</a></li>
-            <li><a class="hover:text-white transition" href="#volunteer">Volunteer</a></li>
-            <li><a class="hover:text-white transition" href="#support">Support Center</a></li>
           </ul>
         </div>
         <div class="md:col-span-3 space-y-3">
