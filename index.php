@@ -763,7 +763,7 @@
       <!-- More Pets Link -->
       <div class="text-center mt-12">
         <a class="inline-flex items-center text-sm font-bold text-gray-800 hover:text-brand transition"
-          href="../php/Browse_page.php">
+          href="Browse_page.php">
           More pets
           <svg class="w-4 h-4 ml-1 text-brand stroke-current stroke-2" fill="none" viewBox="0 0 24 24">
             <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
