@@ -1,23 +1,3 @@
-<?php
-session_start();
-
-$popupType = '';
-$popupTitle = '';$popupMessage = '';
-
-// Handle Form Submission (Both Email form and Social popup form)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-
-    // Check if session user already exists AND matches the exact email entered
-    if (isset($_SESSION['loggedInUser']) && strtolower($_SESSION['loggedInUser']) === strtolower($email)) {$popupType = 'error';
-        $popupTitle = 'Sign In Error';$popupMessage = 'This account has already been Signed in.';
-    } elseif (empty($email) || !str_ends_with(strtolower($email), '@gmail.com')) {$popupType = 'error';
-        $popupTitle = 'Sign In Error';$popupMessage = 'Invalid account. You must use an @gmail.com address.';
-    } else {
-        $_SESSION['loggedInUser'] = strtolower($email);$popupType = 'success';
-        $popupTitle = 'Login Successful';$popupMessage = '✔️ Your account is now logged in for this session.';
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,10 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
     <title>Adoptly - Sign In</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Google Fonts: Poppins -->
+    <!-- Google Fonts & Custom CSS -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Css/style.css">
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -50,166 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
             }
         };
     </script>
-    <style>
-        :root {
-            --coral: #E05A4F;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F8F5F4;
-        }
-
-        /* Suppress browser's native built-in password reveal icon */
-        input[type="password"]::-ms-reveal,
-        input[type="password"]::-ms-clear,
-        input[type="text"]::-ms-reveal,
-        input[type="text"]::-ms-clear {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-
-        .popup-overlay {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            background-color: rgba(0, 0, 0, 0.45) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-            display: none;
-            align-items: center !important;
-            justify-content: center !important;
-            z-index: 99999 !important;
-        }
-
-        .popup-card {
-            background: #ffffff !important;
-            border-radius: 20px !important;
-            padding: 28px !important;
-            max-width: 400px !important;
-            width: 100% !important;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2) !important;
-            animation: popupFadeIn 0.2s ease-out;
-        }
-
-        @keyframes popupFadeIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .prompt-input {
-            width: 100% !important;
-            padding: 12px 14px !important;
-            border: 1px solid #e05a4f !important;
-            border-radius: 10px !important;
-            font-size: 14px !important;
-            outline: none !important;
-            margin-top: 12px !important;
-            margin-bottom: 20px !important;
-            box-sizing: border-box !important;
-        }
-
-        .prompt-input:focus {
-            box-shadow: 0 0 0 3px rgba(224, 90, 79, 0.15) !important;
-        }
-
-        .popup-cancel-btn {
-            background: #f3f4f6 !important;
-            color: #4b5563 !important;
-            border: none !important;
-            padding: 10px 18px !important;
-            border-radius: 10px !important;
-            cursor: pointer !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
-        }
-
-        .popup-submit-btn {
-            background: #e05a4f !important;
-            color: #ffffff !important;
-            border: none !important;
-            padding: 10px 18px !important;
-            border-radius: 10px !important;
-            cursor: pointer !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
-        }
-
-        .popup-close-btn {
-            background: #e05a4f !important;
-            color: #ffffff !important;
-            border: none !important;
-            padding: 10px 24px !important;
-            border-radius: 10px !important;
-            cursor: pointer !important;
-            font-weight: 600 !important;
-            width: 100% !important;
-            font-size: 14px !important;
-        }
-
-        /* Heart button (same as Adoption Process) */
-        .fav { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 36px; 
-            height: 36px; 
-            border: 0; 
-            border-radius: 50%; 
-            background: #FFE1DD; 
-            color: var(--coral); 
-            cursor: pointer; 
-            transition: all .2s ease; 
-        }
-
-        .fav:hover { 
-            background: var(--coral); 
-            color: #fff; 
-        }
-    </style>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between bg-[#F8F5F4] font-sans">
     <!-- MAIN HEADER SECTION -->
-    <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-
-            <!-- Brand Logo -->
-            <a class="flex items-center" href="#">
-                <img src="photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
-            </a>
-
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="Browse_page.php">Browse pets</a>
-                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="Adoption_process.php">Adoption Process</a>
-                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="Donation.php">Donate</a>
-                <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full"
-                    href="About_us.php">About</a>
-            </nav>
-
-            <!-- Right Actions -->
-            <div class="flex items-center gap-4">
-                <button class="fav" type="button" aria-label="View Saved Pets">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                    </svg>
-                </button>
-
-                <!-- Sign In Button -->
-                <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition"
-                    href="Log_in.php">Log In</a>
-            </div>
-        </div>
-    </header>
+    <div id="navbar-placeholder"></div>
 
     <!-- MAIN CONTENT -->
     <main class="flex-grow py-8 md:py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
@@ -237,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
                     <!-- Image Container with 100% Certified Shelters Badge -->
                     <div class="rounded-2xl h-56 sm:h-64 w-full relative flex flex-col items-center justify-end p-4 overflow-hidden bg-[#F5EFEB]">
                         <!-- Background Image -->
-                        <img src="../photos/for log in&sign in/new_happy_dog.webp" alt="Happy rescue dog" class="absolute inset-0 w-full h-full object-cover object-bottom z-0" />
+                        <img src="photos/new_happy_dog.webp" alt="Happy rescue dog" class="absolute inset-0 w-full h-full object-cover object-bottom z-0" />
 
                         <!-- Trust Badge Overlaid at Bottom of Image -->
                         <div class="relative z-10 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm border border-[#34D399]/40 text-[#059669] text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm">
@@ -299,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
                     </div>
 
                     <!-- Email Form -->
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="space-y-5">
+                    <form action="Sign_in.php" method="POST" class="space-y-5">
                         
                         <!-- Email Input -->
                         <div>
@@ -367,76 +194,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-[#121212] text-gray-400 text-sm mt-12 border-t border-neutral-800">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 pt-14 pb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-                <!-- Left Brand Description -->
-                <div class="lg:col-span-2 space-y-4">
-                    <a href="#" class="inline-block">
-                        <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-9 w-auto object-contain">
-                    </a>
-
-                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm">
-                        Helping rescue pets find safe, loving homes and lifelong companionship. Partnered with certified
-                        no-kill shelters nationwide.
-                    </p>
-                    <!-- Social Icons -->
-                    <div class="flex items-center gap-2.5 pt-2">
-                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold" href="#">f</a>
-                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold" href="#">t</a>
-                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold" href="#">in</a>
-                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold" href="#">li</a>
-                        <a class="w-8 h-8 rounded-lg bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center text-gray-300 transition text-xs font-bold" href="#">yt</a>
-                    </div>
-                </div>
-                <!-- Column 1: Browse -->
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Browse</h3>
-                    <ul class="space-y-2.5 text-xs text-gray-400">
-                        <li><a class="hover:text-white transition" href="#">Browse Pets</a></li>
-                        <li><a class="hover:text-white transition" href="#">Adoption Process</a></li>
-                        <li><a class="hover:text-white transition" href="#">Success Stories</a></li>
-                        <li><a class="hover:text-white transition" href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <!-- Column 2: Resources -->
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Resources</h3>
-                    <ul class="space-y-2.5 text-xs text-gray-400">
-                        <li><a class="hover:text-white transition" href="#">FAQ</a></li>
-                        <li><a class="hover:text-white transition" href="#">Pet Care Tips</a></li>
-                        <li><a class="hover:text-white transition" href="#">Volunteer</a></li>
-                        <li><a class="hover:text-white transition" href="#">Support Center</a></li>
-                    </ul>
-                </div>
-                <!-- Column 3: Contact -->
-                <div>
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-white mb-4">Contact</h3>
-                    <ul class="space-y-2.5 text-xs text-gray-400">
-                        <li class="hover:text-white transition">helloadoptly@gmail.com</li>
-                        <li class="hover:text-white transition">+1 (234) 567-890</li>
-                        <li class="hover:text-white transition">New York, USA</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Copyright Sub-bar -->
-            <div class="mt-12 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-                <p>© 2026 Adoptly. All rights reserved.</p>
-                <div class="flex items-center gap-4 mt-3 sm:mt-0">
-                    <a class="hover:text-gray-300 transition" href="#">Privacy Policy</a>
-                    <span>|</span>
-                    <a class="hover:text-gray-300 transition" href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <!-- 1. Social Login Input Prompt Popup -->
     <div id="socialPromptPopup" class="popup-overlay">
         <div class="popup-card">
             <h3 id="socialPromptTitle" style="font-size: 20px; font-weight: 800; color: #1c1917; margin: 0 0 8px 0;">Sign in with Google</h3>
             <p id="socialPromptMessage" style="font-size: 14px; color: #6b7280; margin: 0 0 16px 0;">Please enter your Google account to continue:</p>
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+            <form action="Sign_in.php" method="POST">
                 <input type="email" name="email" id="socialEmailInput" class="prompt-input" placeholder="e.g. user@gmail.com" required>
                 <div style="display: flex; justify-content: flex-end; gap: 12px;">
                     <button type="button" class="popup-cancel-btn" onclick="closeSocialPrompt()">Cancel</button>
@@ -456,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
         </div>
     </div>
 
-    <!-- JavaScript to Handle Popups and Password Toggle -->
+    <script src="Js/Components.js"></script>
     <script>
         function handlePasswordInput() {
             const passwordInput = document.getElementById('password');
@@ -531,12 +296,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {$email = isset($_POST['email']) ? tr
         function closePopup() {
             document.getElementById('customPopup').style.display = 'none';
         }
-
-        <?php if (!empty($popupType)): ?>
-            document.addEventListener('DOMContentLoaded', function() {
-                showPopup('<?php echo $popupType; ?>', '<?php echo addslashes($popupTitle); ?>', '<?php echo addslashes($popupMessage); ?>');
-            });
-        <?php endif; ?>
     </script>
 </body>
 </html>

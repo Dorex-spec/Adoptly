@@ -80,7 +80,7 @@ $footerCols = [
 <!-- HEADER -->
 <header class="header">
   <div class="container header-row">
-    <a href="#top" class="logo"><img src="photos/logoNav.png"></a>
+    <a href="index.php" class="logo"><img src="photos/logoNav.png"></a>
 
     <nav class="nav" aria-label="Main">
       <?php foreach ($navLinks as [$label, $href]): ?>
