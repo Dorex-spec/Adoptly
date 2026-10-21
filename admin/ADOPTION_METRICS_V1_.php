@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html>
 
 <html lang="en"><head>
@@ -59,119 +60,7 @@
 </head>
 <body class="min-h-screen bg-[#F2F2F2] text-[#1F1F1F] antialiased flex">
 <!-- Fixed Persistent Left Sidebar -->
-<aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-[#E5E5E5] z-50 flex flex-col justify-between">
-<div class="flex flex-col h-full overflow-y-auto">
-<!-- Brand Logo Header -->
-<div class="h-16 px-5 flex items-center gap-3 border-b border-[#E5E5E5] bg-white sticky top-0 z-10">
-<div class="w-9 h-9 rounded-lg bg-[#FFE1DD] flex items-center justify-center text-[#E05A4F]">
-<span class="material-symbols-outlined text-[22px]">pets</span>
-</div>
-<div class="flex flex-col">
-<span class="font-bold text-[15px] tracking-tight text-[#1F1F1F] leading-tight uppercase">Adoptly</span>
-<span class="text-[10px] tracking-widest text-[#E05A4F] uppercase font-bold leading-tight">Admin Portal</span>
-</div>
-</div>
-<!-- Navigation Links -->
-<nav class="p-3 space-y-4">
-<!-- Main Section -->
-<div>
-<div class="px-3 pb-1.5 text-[10px] text-[#8C8C8C] uppercase tracking-wider font-bold">Main</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">grid_view</span>
-<span>Dashboard / Overview</span>
-</a>
-<a class="flex items-center justify-between px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-[18px]">inbox</span>
-<span>Inbox &amp; Alerts</span>
-</div>
-<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#FFE5E5] text-[#E53935]">3</span>
-</a>
-</div>
-</div>
-<!-- Adoption Management -->
-<div>
-<div class="px-3 pb-1.5 text-[10px] text-[#8C8C8C] uppercase tracking-wider font-bold">Adoption Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">assignment</span>
-<span>Applications Review</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">calendar_month</span>
-<span>Meet &amp; Greets</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-<span>Adoption Contracts</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-<span>Ready for Adoption</span>
-</a>
-</div>
-</div>
-<!-- Pet Management -->
-<div>
-<div class="px-3 pb-1.5 text-[10px] text-[#8C8C8C] uppercase tracking-wider font-bold">Pet Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">format_list_bulleted</span>
-<span>Pet Listings</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">medical_services</span>
-<span>Intake &amp; Health</span>
-</a>
-</div>
-</div>
-<!-- User & Partner Management -->
-<div>
-<div class="px-3 pb-1.5 text-[10px] text-[#8C8C8C] uppercase tracking-wider font-bold">User &amp; Partner Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">groups</span>
-<span>Adopters &amp; Users</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">badge</span>
-<span>Staff Access</span>
-</a>
-</div>
-</div>
-<!-- Analytics & Reports -->
-<div>
-<div class="px-3 pb-1.5 text-[10px] text-[#8C8C8C] uppercase tracking-wider font-bold">Analytics &amp; Reports</div>
-<div class="space-y-0.5">
-<!-- Active Navigation Item -->
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#FFE1DD] text-[#E05A4F] text-xs font-semibold shadow-xs" href="#">
-<span class="material-symbols-outlined text-[18px] text-[#E05A4F]">analytics</span>
-<span>Adoption Metrics</span>
-</a>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#F8F8F8] hover:text-[#1F1F1F] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">download</span>
-<span>Export Reports</span>
-</a>
-</div>
-</div>
-</nav>
-</div>
-<!-- Bottom Status & Logout -->
-<div class="p-3 border-t border-[#E5E5E5] bg-[#FAFAFA] flex flex-col gap-2">
-<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-[#E5E5E5]">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-[#4CAF50] animate-pulse"></div>
-<span class="text-[11px] font-semibold text-[#1F1F1F]">All Systems Operational</span>
-</div>
-<span class="font-mono text-[11px] font-medium text-[#71717A]">99.98%</span>
-</div>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[#555555] hover:bg-[#FFE5E5] hover:text-[#E53935] text-xs font-medium transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px] text-[#E05A4F]">logout</span>
-<span>Admin Sign Out</span>
-</a>
-</div>
-</aside>
+<?php require __DIR__ . '/admin_sidebar.php'; ?>
 <!-- Fluid Main Content Shell -->
 <div class="pl-64 w-full min-h-screen min-w-0 flex flex-col bg-[#F2F2F2]">
 <!-- Sticky Top Navigation Header -->

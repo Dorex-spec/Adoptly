@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html>
 
 <html lang="en"><head>
@@ -143,101 +144,7 @@
 </head>
 <body class="bg-background font-body-md text-body-md text-on-surface antialiased w-full min-h-screen">
 <!-- Persistent Left Sidebar Navigation -->
-<aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col justify-between overflow-y-auto">
-<div class="flex flex-col">
-<!-- Brand Logo / Title Header -->
-<div class="h-14 px-space-lg flex items-center gap-space-sm border-b border-outline-variant bg-surface-container-lowest">
-<span class="material-symbols-outlined text-primary text-[24px]">pets</span>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold uppercase leading-none">Adoptly</span>
-<span class="font-label-sm text-label-sm tracking-widest text-primary uppercase font-bold leading-tight">Admin Portal</span>
-</div>
-</div>
-<!-- Nav Items -->
-<nav class="p-space-sm flex flex-col gap-space-xs" data-active-classes="bg-primary text-on-primary font-semibold">
-<div class="px-space-sm pt-space-sm pb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Main</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">grid_view</span>
-<span class="font-body-sm text-body-sm">Dashboard / Overview</span>
-</a>
-<a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<div class="flex items-center gap-space-sm">
-<span class="material-symbols-outlined text-[18px]">inbox</span>
-<span class="font-body-sm text-body-sm">Inbox &amp; Alerts</span>
-</div>
-<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-error text-on-error">3</span>
-</a>
-<div class="px-space-sm pt-space-md pb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Adoption Management</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">assignment</span>
-<span class="font-body-sm text-body-sm">Applications Review</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">calendar_month</span>
-<span class="font-body-sm text-body-sm">Meet &amp; Greets</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">verified</span>
-<span class="font-body-sm text-body-sm">Adoption Contracts</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-<span class="font-body-sm text-body-sm">Ready for Adoption</span>
-</a>
-<div class="px-space-sm pt-space-md pb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Pet Management</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg bg-secondary-container text-primary font-semibold transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px] text-primary">format_list_bulleted</span>
-<span class="font-body-sm text-body-sm text-on-surface font-semibold">Pet Listings</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">medical_services</span>
-<span class="font-body-sm text-body-sm">Intake &amp; Health</span>
-</a>
-<div class="px-space-sm pt-space-md pb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">User &amp; Partner Management</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">groups</span>
-<span class="font-body-sm text-body-sm">Adopters &amp; Users</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">badge</span>
-<span class="font-body-sm text-body-sm">Staff Access</span>
-</a>
-<div class="px-space-sm pt-space-md pb-space-xs">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Analytics &amp; Reports</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">analytics</span>
-<span class="font-body-sm text-body-sm">Adoption Metrics</span>
-</a>
-<a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px]">download</span>
-<span class="font-body-sm text-body-sm">Export Reports</span>
-</a>
-</nav>
-</div>
-<!-- Sidebar Footer -->
-<div class="p-space-sm border-t border-outline-variant bg-surface-container-lowest flex flex-col gap-space-xs">
-<div class="flex items-center justify-between px-space-sm py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant">
-<div class="flex items-center gap-1.5">
-<div class="w-2 h-2 rounded-full bg-[#4CAF50]"></div>
-<span class="font-label-sm text-label-sm text-on-surface font-semibold">All Systems Operational</span>
-</div>
-<span class="font-code-num text-code-num text-secondary">99.98%</span>
-</div>
-<a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded-lg text-secondary hover:bg-surface-container-low hover:text-on-surface transition-colors" href="#">
-<span class="material-symbols-outlined text-[18px] text-primary">logout</span>
-<span class="font-body-sm text-body-sm font-medium">Admin Sign Out</span>
-</a>
-</div>
-</aside>
+<?php require __DIR__ . '/admin_sidebar.php'; ?>
 <!-- Main Content Wrap -->
 <div class="pl-64 w-full min-w-0">
 <!-- Top Header -->
@@ -883,7 +790,7 @@
 </div>
 <p class="font-body-sm text-body-sm text-secondary leading-relaxed">
                 Publishing this dossier instantly opens public inquiries. Verified applications will sync into the 
-                <a class="text-primary underline font-semibold" href="#">Applications Review</a> queue for coordinator screening.
+                <a class="text-primary underline font-semibold" href="ADOPTION_REVIEW_V1.php">Applications Review</a> queue for coordinator screening.
               </p>
 </div>
 </div>

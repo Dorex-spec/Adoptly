@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html>
 
 <html class="h-full" lang="en"><head>
@@ -73,120 +74,9 @@
 <body class="h-full bg-[#f8f9fa] font-sans text-slate-800 antialiased overflow-x-hidden">
 <div class="flex min-h-screen w-full">
 <!-- 1. LEFT SIDEBAR (fixed width 64) -->
-<aside class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col justify-between sticky top-0 h-screen z-30 select-none">
-<div class="flex flex-col overflow-y-auto">
-<!-- Logo Header -->
-<div class="h-16 px-6 flex items-center gap-3 border-b border-slate-100">
-<div class="w-9 h-9 rounded-xl bg-brand-50 flex items-center justify-center text-brand">
-<span class="material-symbols-outlined text-[24px]">pets</span>
-</div>
-<div class="flex flex-col">
-<span class="font-bold text-[15px] tracking-tight text-slate-900 leading-none">ADOPTLY</span>
-<span class="text-[10px] tracking-widest text-brand font-semibold uppercase mt-0.5">Admin Portal</span>
-</div>
-</div>
-<!-- Navigation Menu -->
-<nav class="px-3 py-4 space-y-6 text-[13px]">
-<!-- Main Section -->
-<div>
-<div class="px-3 mb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Main</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">grid_view</span>
-<span>Dashboard / Overview</span>
-</a>
-<a class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-slate-400">inbox</span>
-<span>Inbox &amp; Alerts</span>
-</div>
-<span class="px-1.5 py-0.5 rounded text-[11px] font-semibold bg-brand-100 text-brand">3</span>
-</a>
-</div>
-</div>
-<!-- Adoption Management Section -->
-<div>
-<div class="px-3 mb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Adoption Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-brand text-white font-medium shadow-sm transition-all" href="#">
-<span class="material-symbols-outlined text-white">rate_review</span>
-<span>Applications Review</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">handshake</span>
-<span>Meet &amp; Greets</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">description</span>
-<span>Adoption Contracts</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">check_circle</span>
-<span>Ready for Adoption</span>
-</a>
-</div>
-</div>
-<!-- Pet Management Section -->
-<div>
-<div class="px-3 mb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pet Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">format_list_bulleted</span>
-<span>Pet Listings</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">medical_services</span>
-<span>Intake &amp; Health</span>
-</a>
-</div>
-</div>
-<!-- User & Partner Management Section -->
-<div>
-<div class="px-3 mb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">User &amp; Partner Management</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">groups</span>
-<span>Manage Users</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">badge</span>
-<span>Staff Access</span>
-</a>
-</div>
-</div>
-<!-- Analytics & Reports Section -->
-<div>
-<div class="px-3 mb-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Analytics &amp; Reports</div>
-<div class="space-y-0.5">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">analytics</span>
-<span>Adoption Metrics</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-slate-400">file_download</span>
-<span>Export Reports</span>
-</a>
-</div>
-</div>
-</nav>
-</div>
-<!-- Sidebar Footer -->
-<div class="p-3 border-t border-slate-200 bg-slate-50/70 space-y-2">
-<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-slate-200/80 text-[11px]">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-<span class="font-medium text-slate-700">All Systems Operational</span>
-</div>
-<span class="font-mono text-slate-400 font-semibold">99.98%</span>
-</div>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-white hover:text-brand transition-colors text-[13px] font-medium" href="#">
-<span class="material-symbols-outlined text-brand text-[18px]">logout</span>
-<span>Admin Sign Out</span>
-</a>
-</div>
-</aside>
+<?php require __DIR__ . '/admin_sidebar.php'; ?>
 <!-- 2. MAIN CONTENT AREA (fluid, flex-1, overflow-y-auto) -->
-<div class="flex-1 min-w-0 flex flex-col h-screen overflow-y-auto bg-[#f8f9fa]">
+<div class="ml-64 flex-1 min-w-0 flex flex-col h-screen overflow-y-auto bg-[#f8f9fa]">
 <!-- Top Header Navigation Bar -->
 <header class="h-16 bg-white border-b border-slate-200 flex-shrink-0 px-8 flex items-center justify-between sticky top-0 z-20">
 <!-- Breadcrumbs Navigation -->

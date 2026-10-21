@@ -30,7 +30,7 @@ $stories = [
     ],
     [
         'number' => '02', 'photo' => "Milo's Photo", 'badge' => '$50 Shelter & Nutrition Kit',
-        'image' => 'milo.jpg',
+        'image' => '',
         'title' => "Milo's Second Chance",
         'text'  => 'Found as a stray kitten during winter storms, Milo required intensive veterinary nursery care and rehabilitation. Your donations gave him warm shelter and a safe nursery bed.',
         'meta'  => 'Tabby Kitten • 5 mos', 'status' => 'Safe in Foster Care ✓',
@@ -44,33 +44,33 @@ $channels = [
         'numberLabel' => 'Mobile / Account Number',
         'number' => '0917-123-4567', 'numberNote' => '(0917-XXX-ADOPT)',
         'qr' => 'GCash QR Code', 'qrCaption' => 'Scan to Pay via GCash App',
-      'qrImage' => 'gcash.jpg',],
+      'qrImage' => '',],
     [
         'theme' => 'maya', 'logo' => 'M', 'name' => 'Maya / PayMaya', 'type' => 'E-Wallet',
         'accountName' => 'Adoptly Rescue & Care Fund',
         'numberLabel' => 'Mobile / Account Number',
         'number' => '0918-987-6543', 'numberNote' => '(0918-XXX-MAYA)',
         'qr' => 'Maya QR Code', 'qrCaption' => 'Scan to Pay via Maya App',
-      'qrImage' => 'maya.jpg',],
+      'qrImage' => '',],
     [
         'theme' => 'bdo', 'logo' => 'BDO', 'name' => 'BDO', 'type' => 'Bank Transfer',
         'accountName' => 'Adoptly Animal Foundation Org',
         'numberLabel' => 'Savings Account Number',
         'number' => '0012-3456-7890', 'numberNote' => 'PHP Savings',
         'branch' => 'BDO Ortigas North Branch', 'swift' => 'BNORPHMM',
-            'qr' => 'BDO QR Code', 'qrCaption' => 'Scan to Pay via BDO App', 'qrImage' => 'dbo.jpg',
+            'qr' => 'BDO QR Code', 'qrCaption' => 'Scan to Pay via BDO App', 'qrImage' => '',
     ],
 ];
 
 $exploreCards = [
     [
-        'image' => 'dog and cat pet.jpg',
+        'image' => 'photos/cat and dog pic.jpg',
         'alt' => 'Adopt a pet', 'tag' => 'Find a Companion', 'title' => 'Start Adopting',
         'text' => 'Explore thousands of verified rescue cats and dogs pets waiting for a loving home.',
         'cta' => 'Browse Pets', 'ctaClass' => 'btn--coral', 'badge' => '14,200+ Available',
     ],
     [
-        'image' => 'dogcat.jpg',
+        'image' => 'photos/livingroomwithfamily&pets.avif',
         'alt' => 'Adoption process guide', 'tag' => 'Adoption Pathway', 'title' => 'Learn the Process',
         'text' => 'Follow our simple, transparent 7-step guide to finding and bringing home your perfect companion.',
         'cta' => 'View Adoption Guide', 'ctaClass' => 'btn--glass', 'badge' => '7-Step Guide',
@@ -87,7 +87,7 @@ $socials = ['Facebook' => 'f', 'Twitter' => 't', 'Instagram' => 'in', 'LinkedIn'
 /** Newsletter form handling (server-side, no JavaScript). */
 $newsletter = ['status' => null, 'email' => ''];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form'] ?? '') === 'newsletter') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && ($_POST['form'] ?? '') === 'newsletter') {
     $email = trim((string) ($_POST['email'] ?? ''));
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // TODO: store the address or send it to your mailing-list provider here.
@@ -97,4 +97,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['form'] ?? '') === 'newslet
         $newsletter['email']  = $email;
     }
 }
-

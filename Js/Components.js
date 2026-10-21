@@ -1,23 +1,24 @@
 const navbarHTML = `
   <header class="w-full bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <a class="flex items-center" href="index.php">
-        <img src="photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
+      <a class="group relative flex items-center" href="index.html" aria-label="Adoptly home" title="Back to Home">
+        <img src="../photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
+        <span aria-hidden="true" class="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">Back to Home</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Browse_page.php">Browse pets</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Adoption_process.php">Adoption Process</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Donation.php">Donate</a>
-        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="About_us.php">About</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="index.html#browse">Browse pets</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="Adoption_process.html">Adoption Process</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="donation.html">Donate</a>
+        <a class="relative pb-1 hover:text-[#E05A4F] transition-colors after:content-[''] after:absolute after:left-1/2 after:bottom-0 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-current after:transition-all after:duration-300 hover:after:w-full" href="about_us.html">About</a>
       </nav>
       <div class="flex items-center gap-4">
-        <a href="Heart.php" class="fav" aria-label="View Saved Pets"">
+        <a href="heart.html" class="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFE1DD] text-[#E05A4F] shadow-sm transition-colors hover:bg-[#E05A4F] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E05A4F] focus-visible:ring-offset-2" aria-label="View Saved Pets">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
             <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
           </svg>
         </a>
-        <a class="text-sm font-semibold text-gray-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block" href="Log_in.php">Login</a>
-        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition" href="Sign_in.php">Sign in</a>
+        <a class="text-sm font-semibold text-gray-700 hover:text-[#E05A4F] transition-colors hidden sm:inline-block" href="log_in.html">Login</a>
+        <a class="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E05A4F] text-white hover:bg-red-500 shadow-sm transition" href="sign_in.html">Sign in</a>
       </div>
     </div>
   </header>
@@ -29,7 +30,7 @@ const footerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
         <div class="md:col-span-4 space-y-4">
           <div class="flex items-center space-x-2">
-            <img src="photos/adoptly logo.png" alt="Adoptly Logo" class="h-10 w-auto">
+            <img src="../photos/adoptly logo.png" alt="Adoptly Logo" class="h-10 w-auto">
           </div>
           <p class="text-xs text-gray-400 max-w-xs leading-relaxed">
             Helping rescue pets find safe, loving homes and lifelong companionship.
@@ -46,16 +47,16 @@ const footerHTML = `
         <div class="md:col-span-2 space-y-3">
           <h4 class="text-sm font-bold text-white tracking-wide">Browse</h4>
           <ul class="space-y-2 text-xs text-gray-400">
-            <li><a class="hover:text-white transition" href="Browse_page.php">Browse Pets</a></li>
-            <li><a class="hover:text-white transition" href="Adoption_process.php">Adoption Process</a></li>
-            <li><a class="hover:text-white transition" href="Donation.php#stories">Success Stories</a></li>
-            <li><a class="hover:text-white transition" href="About_us.php">About Us</a></li>
+            <li><a class="hover:text-white transition" href="index.html#browse">Browse Pets</a></li>
+            <li><a class="hover:text-white transition" href="Adoption_process.html">Adoption Process</a></li>
+            <li><a class="hover:text-white transition" href="donation.html#stories">Success Stories</a></li>
+            <li><a class="hover:text-white transition" href="about_us.html">About Us</a></li>
           </ul>
         </div>
         <div class="md:col-span-2 space-y-3">
           <h4 class="text-sm font-bold text-white tracking-wide">Resources</h4>
           <ul class="space-y-2 text-xs text-gray-400">
-            <li><a class="hover:text-white transition" href="Adoption_process.php#faq">FAQ</a></li>
+            <li><a class="hover:text-white transition" href="Adoption_process.html#faq">FAQ</a></li>
           </ul>
         </div>
         <div class="md:col-span-3 space-y-3">

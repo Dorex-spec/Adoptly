@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -51,122 +52,10 @@
 <!-- BEGIN: MasterLayoutWrapper -->
 <div class="flex min-h-screen w-full">
 <!-- BEGIN: LeftSidebar -->
-<aside class="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 select-none z-20">
-<!-- Brand Header -->
-<div class="h-16 px-6 border-b border-slate-100 flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-[#E05A4F] flex items-center justify-center text-white font-bold text-lg shadow-sm">
-<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
-</svg>
-</div>
-<div>
-<span class="block text-sm font-extrabold tracking-tight text-slate-900 leading-tight">ADOPTLY</span>
-<span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">ADMIN PORTAL</span>
-</div>
-</div>
-<!-- Navigation Menus -->
-<div class="flex-1 overflow-y-auto px-4 py-4 space-y-6">
-<!-- Group: Main -->
-<div>
-<span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">MAIN</span>
-<nav class="space-y-1">
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Dashboard / Overview</span>
-</a>
-<a class="flex items-center justify-between px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<div class="flex items-center gap-3">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Inbox &amp; Alerts</span>
-</div>
-<span class="bg-primary-50 text-primary-600 text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-primary-100">3</span>
-</a>
-</nav>
-</div>
-<!-- Group: Adoption Management -->
-<div>
-<span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">ADOPTION MANAGEMENT</span>
-<nav class="space-y-1">
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Applications Review</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Meet &amp; Greets</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Adoption Contracts</span>
-</a><a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Ready for Adoption</span>
-</a>
-</nav>
-</div>
-<!-- Group: Pet Management -->
-<div>
-<span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">PET MANAGEMENT</span>
-<nav class="space-y-1">
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Pet Listings</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Intake &amp; Health</span>
-</a>
-</nav>
-</div>
-<!-- Group: User & Partner Management (ACTIVE ITEM HERE) -->
-<div>
-<span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">USER &amp; PARTNER MANAGEMENT</span>
-<nav class="space-y-1">
-<!-- Active Selection State: Adopters & Users -->
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-bold text-white bg-[#E05A4F] rounded-lg shadow-sm" href="#">
-<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Adopters &amp; Users</span>
-</a>
-
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2H9.17A3.001 3.001 0 0112 14z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Staff Access</span>
-</a>
-</nav>
-</div>
-<!-- Group: Analytics & Reports -->
-<div>
-<span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">ANALYTICS &amp; REPORTS</span>
-<nav class="space-y-1">
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Adoption Metrics</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-xs font-semibold text-slate-600 rounded-lg hover:bg-slate-50 transition-colors" href="#">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="">Export Reports</span>
-</a>
-</nav>
-</div>
-</div>
-<!-- Footer System Status & Logout -->
-<div class="p-4 border-t border-slate-100 bg-slate-50/50">
-<div class="flex items-center justify-between mb-3 text-[11px] font-medium text-slate-500">
-<span class="flex items-center gap-1.5">
-<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-  All Systems Operational
-</span>
-<span class="font-mono text-slate-400">99.98%</span>
-</div>
-<button class="w-full flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-  Admin Sign Out
-</button>
-</div>
-</aside>
+<?php require __DIR__ . '/admin_sidebar.php'; ?>
 <!-- END: LeftSidebar -->
 <!-- BEGIN: MainContentArea -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<div class="ml-64 flex-1 flex flex-col min-w-0 overflow-hidden">
 <!-- BEGIN: TopGlobalHeader -->
 <header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
 <!-- Breadcrumbs & Global Search -->

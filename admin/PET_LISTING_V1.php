@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
 <!DOCTYPE html>
 
 <html lang="en"><head>
@@ -80,106 +81,7 @@
 </head>
 <body class="bg-[#F2F2F2] text-[#1F1F1F] min-h-screen antialiased flex flex-col">
 <!-- Fixed Left Sidebar -->
-<aside class="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-[#E5E5E5] z-50 flex flex-col justify-between overflow-y-auto">
-<div class="flex flex-col">
-<!-- Brand Logo / Header -->
-<div class="h-14 px-5 flex items-center gap-3 border-b border-[#E5E5E5] bg-white">
-<span class="material-symbols-outlined text-[#E05A4F] text-[26px]">pets</span>
-<div class="flex flex-col">
-<span class="font-bold text-[15px] tracking-tight text-[#1F1F1F] uppercase leading-none">Adoptly</span>
-<span class="text-[10px] tracking-widest text-[#E05A4F] uppercase font-bold leading-tight mt-0.5">Admin Portal</span>
-</div>
-</div>
-<!-- Navigation Links -->
-<nav class="p-3 flex flex-col gap-1 text-[13px]">
-<!-- Main Section -->
-<div class="px-3 pt-2 pb-1">
-<span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Main</span>
-</div>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">grid_view</span>
-<span>Dashboard / Overview</span>
-</a>
-<a class="flex items-center justify-between px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-[19px]">inbox</span>
-<span>Inbox &amp; Alerts</span>
-</div>
-<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#FFE1DD] text-[#E53935]">3</span>
-</a>
-<!-- Adoption Management -->
-<div class="px-3 pt-3 pb-1">
-<span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Adoption Management</span>
-</div>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">assignment</span>
-<span>Applications Review</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">calendar_month</span>
-<span>Meet &amp; Greets</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">verified</span>
-<span>Adoption Contracts</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">favorite</span>
-<span>Ready for Adoption</span>
-</a>
-<!-- Pet Management -->
-<div class="px-3 pt-3 pb-1">
-<span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Pet Management</span>
-</div>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#E05A4F] text-white font-semibold shadow-sm transition-colors" href="#">
-<span class="material-symbols-outlined text-[19px]">format_list_bulleted</span>
-<span>Pet Listings</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">medical_services</span>
-<span>Intake &amp; Health</span>
-</a>
-<!-- User & Partner -->
-<div class="px-3 pt-3 pb-1">
-<span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">User &amp; Partner Management</span>
-</div>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">groups</span>
-<span>Adopters &amp; Users</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">badge</span>
-<span>Staff Access</span>
-</a>
-<!-- Analytics -->
-<div class="px-3 pt-3 pb-1">
-<span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Analytics &amp; Reports</span>
-</div>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">analytics</span>
-<span>Adoption Metrics</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-[#1F1F1F] transition-colors font-medium" href="#">
-<span class="material-symbols-outlined text-[19px]">download</span>
-<span>Export Reports</span>
-</a>
-</nav>
-</div>
-<!-- Sidebar Bottom Status & Sign Out -->
-<div class="p-3 border-t border-[#E5E5E5] bg-gray-50 flex flex-col gap-2">
-<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-[#E5E5E5] shadow-xs">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-[#4CAF50]"></span>
-<span class="text-[11px] font-semibold text-[#1F1F1F]">System Online</span>
-</div>
-<span class="font-mono text-[11px] text-gray-500">99.98%</span>
-</div>
-<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-200 hover:text-[#1F1F1F] transition-colors text-[13px] font-medium" href="#">
-<span class="material-symbols-outlined text-[18px] text-[#E05A4F]">logout</span>
-<span>Admin Sign Out</span>
-</a>
-</div>
-</aside>
+<?php require __DIR__ . '/admin_sidebar.php'; ?>
 <!-- Main View Area (Offset by 64 Tailwind units = 256px) -->
 <div class="pl-64 flex flex-col min-h-screen w-full">
 <!-- Top Navigation Header -->
@@ -254,7 +156,7 @@
 <span>Batch Actions</span>
 <span class="material-symbols-outlined text-[16px]">expand_more</span>
 </button>
-<button class="h-9 px-4 rounded-md bg-[#E05A4F] hover:bg-[#c94940] text-white text-[13px] font-semibold flex items-center gap-1.5 shadow-xs transition-colors" type="button">
+<button class="h-9 px-4 rounded-md bg-[#E05A4F] hover:bg-[#c94940] text-white text-[13px] font-semibold flex items-center gap-1.5 shadow-xs transition-colors" type="button" onclick="window.location.href='ADD_PET_LISTING.php'">
 <span class="material-symbols-outlined text-[18px]">add</span>
 <span>Add New Pet</span>
 </button>

@@ -1,9 +1,9 @@
 <?php
 $navLinks = [
-  ['Browse Pets', 'Browse_page.php'],
-  ['Adoption Process', 'Adoption_process.php'],
-  ['Donate', 'Donation.php'],
-  ['About', 'About_us.php'],
+  ['Browse Pets', null],
+  ['Adoption Process', '#process'],
+  ['Donate', null],
+  ['About', null],
 ];
 $activePage = 'Adoption Process';
 
@@ -54,8 +54,8 @@ $faqs = [
 ];
 
 $ctas = [
-  ['01', 'Start Application', 'Complete our digital questionnaire to connect with verified shelters and foster homes.', 'Adoption_process_form.php', 'btn-fill'],
-  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', 'Browse_page.php', 'btn-outline'],
+  ['01', 'Start Application', 'Complete our digital questionnaire to connect with verified shelters and foster homes.', '#process', 'btn-fill'],
+  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', '#browse-pets', 'btn-outline'],
   ['03', 'Contact Support Team', 'Have specific questions about requirements, veterinary care or special adoptions?', 'mailto:support@adoptly.org', 'btn-dark'],
 ];
 
@@ -73,14 +73,14 @@ $footerCols = [
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Css/style.css">
+  <link rel="stylesheet" href="../Css/style.css">
 </head>
 <body>
 
 <!-- HEADER -->
 <header class="header">
   <div class="container header-row">
-    <a href="index.php" class="logo"><img src="photos/logoNav.png"></a>
+    <a href="../html/index.html" class="logo"><img src="../photos/logoNav.png"></a>
 
     <nav class="nav" aria-label="Main">
       <?php foreach ($navLinks as [$label, $href]): ?>
@@ -94,8 +94,8 @@ $footerCols = [
 
     <div class="header-actions">
       <button type="button" class="fav" aria-label="Favorites">❤</button>
-      <a href="../php/Log_in.php" class="login">Login</a>
-      <a href="../php/Sign_in.php" class="btn btn-fill small">Sign In</a>
+      <a href="#login" class="login">Login</a>
+      <a href="#signin" class="btn btn-fill small">Sign In</a>
     </div>
   </div>
 
@@ -300,7 +300,7 @@ $footerCols = [
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <a href="#top" class="logo footer-logo"><img src="../photos/Adoptly logo.png"></a>
+      <a href="#top" class="logo footer-logo"><img src="footer logo.png"></a>
       <p>Adoptly is a non-profit companion animal rescue network dedicated to connecting shelter pets with safe, loving and permanent forever homes through nationwide solidarity.</p>
     </div>
     <?php foreach ($footerCols as $heading => $links): ?>

@@ -136,7 +136,7 @@
         </nav>
         <!-- Framed Hero Card -->
         <div
-          class="bg-white/60 bg-blend-overlay bg-cover bg-center rounded-3xl border border-neutral-200 shadow-sm p-8 sm:p-14 text-center relative overflow-hidden"
+          class="bg-white/60 bg-blend-overlay bg-cover bg-top rounded-3xl border border-neutral-200 shadow-sm p-8 sm:p-14 text-center relative overflow-hidden"
           style="background-image: url('photos/About%20us/Hero_card_pic.jpg');">
           <!-- Badges Row -->
           <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
@@ -286,8 +286,8 @@
           <!-- Supporting Image -->
           <div class="lg:col-span-5">
             <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-inner">
-              <img src="../photos/About us/How we work wireframe image.jpeg" alt="Rescue team caring for animals"
-                class="w-full h-full object-cover">
+              <img src="photos/About%20us/How%20we%20work%20wireframe%20image.jpeg" alt="Rescue team caring for animals"
+                class="w-full h-full object-cover object-top">
             </div>
           </div>
         </div>
@@ -448,14 +448,8 @@
     <section class="py-20 sm:py-24 bg-white border-t border-neutral-200">
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
         <!-- Main Card Container -->
-        <div class="relative border border-neutral-200 rounded-3xl shadow-sm flex flex-col overflow-hidden">
-
-          <!-- Single Background Image (Anchored to top) -->
-          <div class="absolute inset-0 bg-cover bg-top z-0"
-            style="background-image: url('../photos/About us/about_as bg pic.webp');"></div>
-
-          <!-- Semi-transparent White Overlay (55%) -->
-          <div class="absolute inset-0 bg-white/55 z-0"></div>
+        <div class="relative border border-neutral-200 rounded-3xl shadow-sm flex flex-col overflow-hidden bg-white/60 bg-blend-overlay bg-cover bg-no-repeat bg-top"
+          style="background-image: url('photos/About%20us/about_as%20bg%20pic.webp'); background-position: center top; background-size: cover;">
 
           <!-- Content Area (Relative z-10 to sit above the background layer) -->
           <div class="relative z-10 p-8 sm:p-14 space-y-12">
