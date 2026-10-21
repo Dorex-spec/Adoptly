@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 // Navigation Links
 $navLinks = [
-  ['Browse Pets', 'Browse_page.php'],
+  ['Browse Pets', '../Html/Browse_page.html'],
   ['Adoption Process', 'Adoption_process.php'],
   ['Donate', 'Donation.php'],
   ['About', 'About_us.php'],
@@ -63,7 +63,7 @@ $faqs = [
 
 $ctas = [
   ['01', 'Start Application', 'Complete our digital questionnaire to connect with verified shelters and foster homes.', 'Adoption_process_form.php', 'btn-fill'],
-  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', 'Browse_page.php', 'btn-outline'],
+  ['02', 'Browse Available Pets', 'Meet all our dogs, cats, and special needs rescues waiting for their lifelong family.', '../Html/Browse_page.html', 'btn-outline'],
   ['03', 'Contact Support Team', 'Have specific questions about requirements, veterinary care or special adoptions?', 'mailto:support@adoptly.org', 'btn-dark'],
 ];
 

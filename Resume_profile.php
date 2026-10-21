@@ -1,7 +1,14 @@
 <?php
 declare(strict_types=1);
-require __DIR__ . '/profile_data.php';
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+$profileSaved = !empty($_SESSION['profile_saved']);
+unset($_SESSION['profile_saved']);
+require_once __DIR__ . '/profile_data.php';
+require_once __DIR__ . '/adoption_flow.php';
 $fullName = trim($user['first'] . ' ' . $user['last']);
+$profileReadiness = adoption_flow_percent('profile');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +19,13 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-  <link rel="stylesheet" href="../Css/style4.css">
+  <link rel="stylesheet" href="Css/style4.css">
 </head>
-<body>
+<body id="top">
 
 <header class="header">
   <div class="container header-row">
-    <a href="#top" class="logo"><img src="../photos/image-removebg-preview (1).png" alt="Adoptly"></a>
+    <a href="Welcome_page.php" class="logo"><img src="photos/logoNav.png" alt="Adoptly"></a>
 
     <nav class="main-nav" aria-label="Main">
       <?php foreach ($navLinks as $link): ?>
@@ -27,11 +34,11 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
     </nav>
 
     <div class="header-actions">
-<button class="fav" type="button" aria-label="View Saved Pets">
+<a class="fav" href="Html/heart.html" aria-label="View Saved Pets">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 4.5 6.4 4.5c2.1 0 3.8 1.2 5.6 3.3 1.8-2.1 3.5-3.3 5.6-3.3 3.7 0 5.5 3.9 4 7.3C19.5 16.4 12 21 12 21z"/>
   </svg>
-</button>
+</a>
       <button class="user-pill" type="button">
         <span class="avatar" id="hdr-avatar"><?= e($user['initials'] !== '' ? $user['initials'] : '👤') ?></span>
         <span class="user-pill__text">
@@ -45,7 +52,7 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
 
 <main class="container page">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="../php/index.php">Home</a><span>/</span><a href="#">Dashboard</a><span>/</span><b>Account Settings</b>
+    <a href="Welcome_page.php">Home</a><span>/</span><a href="Welcome_page.php">Dashboard</a><span>/</span><b>Account Settings</b>
   </nav>
 
   <section class="banner card">
@@ -55,25 +62,33 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
       <p>Keep your details up to date to ensure a smooth adoption process. Verified shelter partners rely on your updated information to approve applications promptly.</p>
     </div>
     <div class="readiness">
-      <div class="readiness__icon is-idle" id="rd-icon">○</div>
+      <div class="readiness__icon<?= $profileReadiness === 100 ? '' : ' is-idle' ?>" id="rd-icon"><?= $profileReadiness === 100 ? '✓' : '○' ?></div>
       <div>
-        <strong>Adopter Readiness <span class="badge is-idle" id="rd-badge">0% Complete</span></strong>
-        <div class="meter" id="rd-meter" role="progressbar" aria-label="Adopter readiness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="rd-fill"></span></div>
-        <small id="rd-text">Fill in your details to get started</small>
+      <strong>Adopter Readiness <span class="badge<?= $profileReadiness === 100 ? '' : ' is-idle' ?>" id="rd-badge"><?= $profileReadiness ?>% Complete</span></strong>
+      <div class="meter" id="rd-meter" role="progressbar" aria-label="Adopter readiness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="<?= $profileReadiness ?>"><span id="rd-fill" style="width: <?= $profileReadiness ?>%"></span></div>
+      <small id="rd-text"><?= $profileReadiness === 100 ? 'Your personal information is saved.' : 'Fill in your details and save to track your progress.' ?></small>
       </div>
     </div>
   </section>
+
+  <?php if (isset($_GET['blocked'])): ?>
+    <p class="card" role="alert" style="padding:12px 18px;margin-bottom:20px;color:#b8382e">Complete and save your personal information before continuing.</p>
+  <?php endif; ?>
+
+  <?php if ($profileSaved): ?>
+    <p class="card" role="status" style="padding:12px 18px;margin-bottom:20px;color:#2e9e6a">Your profile changes have been saved.</p>
+  <?php endif; ?>
 
   <div class="layout">
     <aside class="sidebar">
       <div class="card sidebar__nav">
         <p class="eyebrow">Navigation Menu</p>
         <?php foreach ($sidebar as $item): ?>
-          <button type="button" class="side-link<?= $item['active'] ? ' is-active' : '' ?>"><?= e($item['label']) ?></button>
+          <a class="side-link<?= $item['active'] ? ' is-active' : '' ?>" href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a>
         <?php endforeach; ?>
         <hr>
-        <button type="button" class="side-link side-link--small">Notification Settings</button>
-        <button type="button" class="side-link side-link--small side-link--danger">Sign Out</button>
+        <a href="Welcome_page.php" class="side-link side-link--small">Dashboard</a>
+        <a href="php/sign_out.php" class="side-link side-link--small side-link--danger">Sign Out</a>
       </div>
 
       <div class="callout">
@@ -89,14 +104,14 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
           <p>Manage your legal name, contact credentials, and verified contact address. Fields marked <i class="req">*</i> are required.</p>
         </div>
         <div class="photo">
-          <div class="photo__box wireframe" id="photo-box"><span id="photo-ph">[ PHOTO × ]</span></div>
+          <div class="photo__box wireframe<?= $user['photo'] !== '' ? ' has-photo' : '' ?>" id="photo-box"<?= $user['photo'] !== '' ? ' style="background-image:url(&quot;' . e($user['photo']) . '&quot;)"' : '' ?>><span id="photo-ph"<?= $user['photo'] !== '' ? ' hidden' : '' ?>>[ PHOTO × ]</span></div>
           <div class="photo__side">
             <strong>Profile Picture</strong>
             <button type="button" class="link" id="photo-btn" aria-haspopup="true" aria-expanded="false">Upload new photo</button>
             <div class="menu" id="photo-menu" hidden>
               <nav class="breadcrumb" aria-label="Photo options" style="margin:0;font-size:11px;font-weight:600;white-space:nowrap"><a href="#" id="opt-camera">Take a Photo</a><span>/</span><a href="#" id="opt-gallery">Choose from Gallery</a></nav>
             </div>
-            <p class="photo__status" id="photo-status" role="status"></p>
+            <p class="photo__status<?= isset($errors['photo']) ? ' is-bad' : '' ?>" id="photo-status" role="status"><?= e($errors['photo'] ?? '') ?></p>
           </div>
           <input type="file" id="pick-gallery" accept="image/*" hidden>
           <input type="file" id="pick-camera" accept="image/*" capture="user" hidden>
@@ -180,11 +195,11 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
           </div>
         </div>
 
-        <div class="prefs">
+        <div class="prefs" id="notification-preferences">
           <p class="eyebrow">Adoption Notification Preferences</p>
           <div class="grid grid--2">
             <?php foreach ($notifPrefs as $i => $label): ?>
-              <label class="pref"><input type="checkbox" name="pref[]" value="<?= $i ?>"> <?= e($label) ?></label>
+              <label class="pref"><input type="checkbox" name="pref[]" value="<?= $i ?>"<?= in_array($i, $user['preferences'], true) ? ' checked' : '' ?>> <?= e($label) ?></label>
             <?php endforeach; ?>
           </div>
         </div>
@@ -192,8 +207,9 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
         <div class="form-actions">
           <span class="secure">✔ All changes auto-encrypted and shared securely with certified shelters.</span>
           <div>
-            <a href="#" class="cancel">Cancel</a>
+            <a href="Welcome_page.php" class="cancel">Cancel</a>
             <button class="btn btn--coral" type="submit">Save Changes →</button>
+            <button class="btn btn--coral" type="submit" name="continue" value="1">Save &amp; Continue →</button>
           </div>
         </div>
         <p class="form-alert" id="form-alert" role="alert" hidden>Please complete the highlighted required fields before saving.</p>
@@ -213,7 +229,7 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <a href="#top" class="logo footer-logo"><img src="../photos/adoptly logo.png" alt="Adoptly"></a>
+      <a href="Welcome_page.php" class="logo footer-logo"><img src="photos/adoptly logo.png" alt="Adoptly"></a>
       <p>Adoptly is a non-profit companion animal rescue network dedicated to connecting shelter pets with safe, loving and permanent forever homes through nationwide solidarity.</p>
     </div>
     <?php foreach ($footerCols as $heading => $links): ?>
@@ -261,12 +277,10 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
     p.textContent = m; p.hidden = !m;
   };
 
-  /* ---------- readiness (required fields + photo + notification pref) ---------- */
+  /* ---------- readiness from required personal-information fields ---------- */
   function update() {
-    const total = req.length + 2;
-    let n = req.filter(el => !msg(el)).length;
-    if (photoInput.files.length || savedPhoto) n++;
-    if (form.querySelector('[name="pref[]"]:checked')) n++;
+    const total = req.length;
+    const n = req.filter(el => !msg(el)).length;
     const pct = Math.round(n / total * 100), st = pct === 0 ? 'is-idle' : pct === 100 ? 'is-done' : 'is-partial';
     $('rd-badge').textContent = pct + '% Complete';
     $('rd-fill').style.width = pct + '%';
@@ -296,14 +310,11 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
   form.addEventListener('input', onChange);
   form.addEventListener('change', onChange);
 
-  form.addEventListener('submit', ev => {
+  form.addEventListener('submit', () => {
     let first = null;
     req.forEach(el => { const m = msg(el); show(el, m); if (m && !first) first = el; });
-    if (first) {               // block save, keep all entered values
-      ev.preventDefault();
+    if (first) {
       $('form-alert').hidden = false;
-      first.scrollIntoView({ block: 'center', behavior: 'smooth' });
-      first.focus({ preventScroll: true });
     }
   });
 
@@ -384,4 +395,3 @@ $fullName = trim($user['first'] . ' ' . $user['last']);
 </script>
 </body>
 </html>
-

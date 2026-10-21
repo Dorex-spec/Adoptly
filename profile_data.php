@@ -6,10 +6,10 @@ if (!function_exists('e')) {
 }
 
 $navLinks = [
-    ['label' => 'Browse Pets',      'href' => '#', 'active' => false],
-    ['label' => 'Adoption Process', 'href' => '#', 'active' => false],
-    ['label' => 'Donate',           'href' => 'donate_page.php', 'active' => false],
-    ['label' => 'About',            'href' => '#', 'active' => false],
+    ['label' => 'Browse Pets',      'href' => 'Html/Browse_page.html', 'active' => false],
+    ['label' => 'Adoption Process', 'href' => 'Html/Adoption_process.html', 'active' => false],
+    ['label' => 'Donate',           'href' => 'Donation.php', 'active' => false],
+    ['label' => 'About',            'href' => 'About_us.php', 'active' => false],
 ];
 
 // No dummy applicant data: every field starts empty.
@@ -21,6 +21,35 @@ $user = [
     'coName' => '', 'coPhone' => '',
 ];
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
+$savedProfile = isset($_SESSION['adopter_profile']) && is_array($_SESSION['adopter_profile'])
+    ? $_SESSION['adopter_profile']
+    : [];
+$profileDraft = isset($_SESSION['adopter_profile_draft']) && is_array($_SESSION['adopter_profile_draft'])
+    ? $_SESSION['adopter_profile_draft']
+    : [];
+$savedProfile = array_merge($savedProfile, $profileDraft);
+$fullName = trim((string)($_SESSION['full_name'] ?? ''));
+if ($fullName !== '') {
+    $nameParts = preg_split('/\s+/', $fullName, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+    $user['first'] = array_shift($nameParts) ?? '';
+    $user['last'] = implode(' ', $nameParts);
+    $user['initials'] = strtoupper(substr($user['first'], 0, 1) . substr($user['last'], 0, 1));
+}
+$user['email'] = (string)($_SESSION['loggedInUser'] ?? '');
+$profileMap = [
+    'first' => 'first_name', 'last' => 'last_name', 'email' => 'email', 'phone' => 'phone',
+    'address' => 'address', 'city' => 'city', 'state' => 'state', 'zip' => 'zip',
+    'coName' => 'co_name', 'coPhone' => 'co_phone',
+];
+foreach ($profileMap as $userKey => $profileKey) {
+    if (isset($savedProfile[$profileKey])) {
+        $user[$userKey] = trim((string)$savedProfile[$profileKey]);
+    }
+}
+$user['preferences'] = array_values(array_filter(
+    array_map('intval', (array)($savedProfile['preferences'] ?? [])),
+    static fn (int $preference): bool => in_array($preference, [0, 1], true)
+));
 $user['photo'] = (string)($_SESSION['profile_photo'] ?? ''); // saved photo path, '' if none
 $verified = false; // set true only after real identity verification
 
@@ -31,6 +60,10 @@ if (!empty($profileOld) && is_array($profileOld)) {
             'address' => 'address', 'city' => 'city', 'state' => 'state', 'zip' => 'zip',
             'coName' => 'co_name', 'coPhone' => 'co_phone'];
     foreach ($map as $uk => $fk) { $user[$uk] = trim((string)($profileOld[$fk] ?? '')); }
+    $user['preferences'] = array_values(array_filter(
+        array_map('intval', (array)($profileOld['pref'] ?? [])),
+        static fn (int $preference): bool => in_array($preference, [0, 1], true)
+    ));
 }
 $errors = (isset($profileErrors) && is_array($profileErrors)) ? $profileErrors : [];
 
@@ -62,7 +95,7 @@ $required = [
     'state' => 'State / region', 'zip' => 'ZIP / postal code',
 ];
 
-/** Server-side validation. Call this in account.php BEFORE saving. Returns [field => message]. */
+/** Server-side validation. Call this before saving. Returns [field => message]. */
 function profile_validate(array $in, array $required, array $states): array
 {
     $errors = [];
@@ -81,7 +114,7 @@ function profile_validate(array $in, array $required, array $states): array
     return $errors;
 }
 
-/** Saves the uploaded profile photo. Call in account.php after validation passes.
+/** Saves the uploaded profile photo after validation passes.
  *  Returns [relativePath|null, errorMessage|null]; [null, null] means no photo was sent. */
 function profile_save_photo(array $f, string $dir = __DIR__ . '/uploads/profile'): array
 {
@@ -106,11 +139,11 @@ function field_error(array $errors, string $k): string
 }
 
 $sidebar = [
-    ['label' => "Applicant's Personal Information", 'active' => true],
-    ['label' => 'Adoption Information',   'active' => false],
-    ['label' => 'Household Information',  'active' => false],
-    ['label' => 'Security',               'active' => false],
-    ['label' => 'Other Document Requirements', 'active' => false],
+    ['label' => "Applicant's Personal Information", 'href' => 'Resume_profile.php', 'active' => true],
+    ['label' => 'Adoption Information',   'href' => 'php/Adoption_information.php', 'active' => false],
+    ['label' => 'Household Information',  'href' => 'Household.php', 'active' => false],
+    ['label' => 'Security',               'href' => 'Security.php', 'active' => false],
+    ['label' => 'Other Document Requirements', 'href' => 'php/requirements.php', 'active' => false],
 ];
 
 $notifPrefs = [
@@ -119,7 +152,16 @@ $notifPrefs = [
 ];
 
 $footerCols = [
-    'Quick Links' => [['Browse Pets', '#'], ['Adoption Process', '#'], ['Success Stories', '#'], ['About Us', '#']],
-    'Resources'   => [['FAQ', '#'], ['Pet Care Tips', '#'], ['Volunteer', '#'], ['Support Center', '#']],
+    'Quick Links' => [
+        ['Browse Pets', 'Html/Browse_page.html'],
+        ['Adoption Process', 'Html/Adoption_process.html'],
+        ['Success Stories', 'Donation.php'],
+        ['About Us', 'About_us.php'],
+    ],
+    'Resources'   => [
+        ['FAQ', 'Html/Adoption_process.html#faq'],
+        ['Pet Care Tips', 'Html/Adoption_process.html#faq'],
+        ['Volunteer', 'About_us.php'],
+        ['Support Center', 'mailto:support@adoptly.org'],
+    ],
 ];
-

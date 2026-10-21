@@ -1,11 +1,10 @@
 <?php
-require_once __DIR__ . '/profile_data.php';   // $user, $navLinks, $footerCols
+require_once dirname(__DIR__) . '/adoption_flow.php';
+adoption_flow_guard('adoption');
+require_once dirname(__DIR__) . '/profile_data.php';
 $fullName = trim($user['first'] . ' ' . $user['last']);
 
 /* ---------- 1. CONFIG ---------- */
-const DATA_DIR  = __DIR__ . '/data.php';
-const DATA_FILE = DATA_DIR . '/adoption.json';
-
 const CATEGORIES = [
     'dog' => ['🐕', "I'm applying to adopt a dog", 'Puppies, adult dogs, bonded pairs, or senior pups.'],
     'cat' => ['🐱', "I'm applying to adopt a cat", 'Kittens, indoor cats, or gentle seniors.'],
@@ -37,19 +36,6 @@ const REQUIRED = [
 /* ---------- 2. HELPERS ---------- */
 if (!function_exists('e')) {
     function e($v): string { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
-}
-
-function loadRecord(): array {
-    $data = is_file(DATA_FILE) ? json_decode(file_get_contents(DATA_FILE), true) : [];
-    return is_array($data) ? $data : [];
-}
-
-function saveRecord(array $record): bool {
-    if (!is_dir(DATA_DIR)) {
-        mkdir(DATA_DIR, 0755, true);
-        file_put_contents(DATA_DIR . '/.htaccess', "Require all denied\n"); // bawal buksan sa browser
-    }
-    return file_put_contents(DATA_FILE, json_encode($record, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX) !== false;
 }
 
 /** Linisin ang POST. Ang field lang na nasa submission ang isasama. */
@@ -84,28 +70,39 @@ function readiness(array $r): int {
 }
 
 /* ---------- 3. CONTROLLER ---------- */
-$saved  = loadRecord();
+$saved  = is_array($_SESSION['adoption_information'] ?? null) ? $_SESSION['adoption_information'] : [];
 $old    = $saved;   // values na ipapakita sa form
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $merged = array_merge($saved, sanitize($_POST));   // dating data + binago lang
     $errors = validate($merged);
+    $merged['updated_at'] = date('c');
+    $_SESSION['adoption_information'] = $merged;
     if (!$errors) {
         $merged['created_at'] = $saved['created_at'] ?? date('c');
-        $merged['updated_at'] = date('c');
-        if (saveRecord($merged)) {
-            header('Location: index.php?saved=1');      // iwas double-submit
-            exit;
-        }
-        $errors[] = 'Could not save. Please check write permission of the folder.';
+        $_SESSION['adoption_information'] = $merged;
+        header('Location: ../Household.php?unlocked=1');
+        exit;
     }
     $old = $merged;   // ibalik ang tinype ng user
 }
 
-$showForm  = $_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['edit']) || !$saved;
-$readiness = readiness($saved);
+$showForm  = $_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['edit']) || !adoption_flow_is_complete('adoption');
+$readiness = adoption_flow_percent('adoption');
 $val = fn(string $k): string => e($old[$k] ?? '');
+
+foreach ($navLinks as &$link) {
+    $link['href'] = '../' . $link['href'];
+}
+unset($link);
+foreach ($footerCols as &$links) {
+    foreach ($links as &$link) {
+        $link[1] = str_starts_with($link[1], 'mailto:') ? $link[1] : '../' . $link[1];
+    }
+    unset($link);
+}
+unset($links);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,13 +117,13 @@ $val = fn(string $k): string => e($old[$k] ?? '');
     colors: { brand: { coral: '#E05A4F', dark: '#1F1F1F', border: '#EAE5E3' } },
     fontFamily: { sans: ['Poppins', 'system-ui', 'sans-serif'] } } } };
 </script>
-<link rel="stylesheet" href="Css/style5.css">
+<link rel="stylesheet" href="../Css/style5.css">
 </head>
 <body class="flex flex-col min-h-screen">
 
 <header class="header">
   <div class="container header-row">
-    <a href="#top" class="logo"><img src="Photos/logoNav.png" alt="Adoptly"></a>
+    <a href="../Welcome_page.php" class="logo"><img src="../photos/logoNav.png" alt="Adoptly"></a>
 
     <nav class="main-nav" aria-label="Main">
       <?php foreach ($navLinks as $link): ?>
@@ -135,11 +132,11 @@ $val = fn(string $k): string => e($old[$k] ?? '');
     </nav>
 
     <div class="header-actions">
-      <button class="fav" type="button" aria-label="View Saved Pets">
+      <a class="fav" href="../Html/heart.html" aria-label="View Saved Pets">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
             <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
           </svg>
-        </button>
+        </a>
       <button class="user-pill" type="button">
         <span class="avatar<?= !empty($user['photo']) ? ' has-photo' : '' ?>"
               <?= !empty($user['photo']) ? 'style="background-image:url(\'' . e($user['photo']) . '\')"' : '' ?>><?= empty($user['photo']) ? e($user['initials'] !== '' ? $user['initials'] : '👤') : '' ?></span>
@@ -156,9 +153,9 @@ $val = fn(string $k): string => e($old[$k] ?? '');
 
 <!-- Breadcrumb -->
 <nav class="crumbs" aria-label="Breadcrumb">
-  <a href="index.php">Home</a><span>/</span>
-  <a href="dashboard.php">Dashboard</a><span>/</span>
-  <a href="account-settings.php">Account Settings</a><span>/</span>
+  <a href="../Welcome_page.php">Home</a><span>/</span>
+  <a href="../Welcome_page.php">Dashboard</a><span>/</span>
+  <a href="../Resume_profile.php">Account Settings</a><span>/</span>
   <strong>Adoption Information</strong>
 </nav>
 
@@ -193,17 +190,17 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             <nav class="card snav" aria-label="Account sections">
         <p class="snav__eyebrow">Navigation Menu</p>
         <?php foreach ([
-            ["Applicant's Personal Information" => 'Adoption_process_form.php'],
+            ["Applicant's Personal Information" => '../Resume_profile.php'],
             ['Adoption Information'             => 'Adoption_information.php'],
-            ['Household Information'            => 'Household.php'],
-            ['Security'                         => 'Security.php'],
-            ['Other Document Requirements'      => '#'],
+            ['Household Information'            => '../Household.php'],
+            ['Security'                         => '../Security.php'],
+            ['Other Document Requirements'      => 'requirements.php'],
         ] as $item): foreach ($item as $label => $href): ?>
-          <a href="<?= $href ?>" class="snav__link<?= $label === 'Adoption Information' ? ' is-active' : '' ?>"><?= e($label) ?></a>
+          <a href="<?= e($href) ?>" class="snav__link<?= $label === 'Adoption Information' ? ' is-active' : '' ?>"><?= e($label) ?></a>
         <?php endforeach; endforeach; ?>
         <hr>
-        <a href="#" class="snav__link snav__link--small">Notification Settings</a>
-        <a href="index.php" class="snav__link snav__link--small snav__link--danger">Sign Out</a>
+        <a href="../Welcome_page.php" class="snav__link snav__link--small">Dashboard</a>
+        <a href="sign_out.php" class="snav__link snav__link--small snav__link--danger">Sign Out</a>
       </nav>
       <div class="note-card">
         <h4 class="text-xs font-bold">Why Shelters Ask This</h4>
@@ -233,7 +230,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             <h2 class="text-lg font-bold">Saved Adoption Information</h2>
             <p class="text-xs text-gray-500 mt-0.5">Last updated: <?= e(date('M j, Y g:i A', strtotime($saved['updated_at'] ?? 'now'))) ?></p>
           </div>
-          <a href="index.php?edit=1" class="btn-primary">Edit Information</a>
+          <a href="Adoption_information.php?edit=1" class="btn-primary">Edit Information</a>
         </div>
         <?php if (isset($_GET['saved'])): ?>
           <div class="alert alert-success">Your information was saved successfully.</div>
@@ -247,7 +244,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
 
 <?php else: ?>
       <!-- ========== FORM (bago o edit) ========== -->
-      <form method="post" action="index.php" class="card p-6 sm:p-8 space-y-8">
+      <form method="post" action="Adoption_information.php" class="card p-6 sm:p-8 space-y-8">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-brand-border gap-2">
           <div>
             <h2 class="text-lg font-bold"><?= $saved ? 'Edit Adoption Information' : 'Adoption Preferences & Pet Profile' ?></h2>
@@ -269,7 +266,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             <?php foreach (CATEGORIES as $key => [$icon, $title, $desc]): ?>
               <div>
                 <input class="sr-only radio-card-input" type="radio" name="adoption_category" id="cat-<?= $key ?>"
-                       value="<?= $key ?>" required <?= ($old['adoption_category'] ?? '') === $key ? 'checked' : '' ?>>
+                       value="<?= $key ?>" <?= ($old['adoption_category'] ?? '') === $key ? 'checked' : '' ?>>
                 <label class="radio-card-label" for="cat-<?= $key ?>">
                   <span class="text-2xl"><?= $icon ?></span>
                   <span><b class="block text-sm"><?= e($title) ?></b><span class="block text-xs text-gray-500 mt-1"><?= e($desc) ?></span></span>
@@ -285,7 +282,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div class="space-y-1.5">
               <label class="label" for="shelter_location">Shelter Location <span class="req">*</span></label>
-              <select class="field" id="shelter_location" name="shelter_location" required>
+              <select class="field" id="shelter_location" name="shelter_location">
                 <option value="">Select a shelter...</option>
                 <?php foreach (SHELTERS as $k => $label): ?>
                   <option value="<?= e($k) ?>" <?= ($old['shelter_location'] ?? '') === $k ? 'selected' : '' ?>><?= e($label) ?></option>
@@ -294,7 +291,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             </div>
             <div class="space-y-1.5">
               <label class="label" for="pet_name">Pet you want to adopt <span class="req">*</span></label>
-              <input class="field" type="text" id="pet_name" name="pet_name" required value="<?= $val('pet_name') ?>"
+              <input class="field" type="text" id="pet_name" name="pet_name" value="<?= $val('pet_name') ?>"
                      placeholder="Pet name, microchip ID, or &quot;Open to shelter recommendation&quot;">
             </div>
           </div>
@@ -318,7 +315,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-5">
             <div class="sm:col-span-5 space-y-1.5">
               <label class="label" for="occupants_count">How many are you in the house? <span class="req">*</span></label>
-              <select class="field" id="occupants_count" name="occupants_count" required>
+              <select class="field" id="occupants_count" name="occupants_count">
                 <option value="">Select...</option>
                 <?php foreach (OCCUPANTS as $k => $label): ?>
                   <option value="<?= e($k) ?>" <?= ($old['occupants_count'] ?? '') === (string) $k ? 'selected' : '' ?>><?= e($label) ?></option>
@@ -327,7 +324,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             </div>
             <div class="sm:col-span-7 space-y-1.5">
               <label class="label" for="occupants_details">How old are they and who do they live with? <span class="req">*</span></label>
-              <input class="field" type="text" id="occupants_details" name="occupants_details" required value="<?= $val('occupants_details') ?>"
+              <input class="field" type="text" id="occupants_details" name="occupants_details" value="<?= $val('occupants_details') ?>"
                      placeholder="e.g., Adults: 28, 30; Children: 5 yrs old; live with partner">
             </div>
           </div>
@@ -341,7 +338,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <?php foreach (EXPERIENCE as $k => $label): ?>
                 <label class="choice">
-                  <input type="radio" name="experience_level" value="<?= $k ?>" required <?= ($old['experience_level'] ?? '') === $k ? 'checked' : '' ?>>
+                  <input type="radio" name="experience_level" value="<?= $k ?>" <?= ($old['experience_level'] ?? '') === $k ? 'checked' : '' ?>>
                   <span class="font-medium"><?= e($label) ?></span>
                 </label>
               <?php endforeach; ?>
@@ -349,7 +346,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
           </div>
           <div class="space-y-1.5">
             <label class="label" for="financial_responsibility">Who will be financially responsible for the rescue's ongoing care? <span class="req">*</span></label>
-            <input class="field" type="text" id="financial_responsibility" name="financial_responsibility" required
+            <input class="field" type="text" id="financial_responsibility" name="financial_responsibility"
                    value="<?= $val('financial_responsibility') ?>" placeholder="Full name and monthly care provision plan">
           </div>
         </div>
@@ -360,7 +357,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
             <label class="label" for="adoption_reason">Reason for Adopting <span class="req">*</span></label>
             <span class="hint">Min. 50 words recommended</span>
           </div>
-          <textarea class="field leading-relaxed" id="adoption_reason" name="adoption_reason" rows="4" required
+          <textarea class="field leading-relaxed" id="adoption_reason" name="adoption_reason" rows="4"
                     placeholder="Tell the shelter why you want to adopt, your daily routine, and the home you can offer..."><?= $val('adoption_reason') ?></textarea>
           <p class="text-right text-xs font-medium text-brand-coral">Word count: <span id="word-count">0</span></p>
         </div>
@@ -368,7 +365,7 @@ $val = fn(string $k): string => e($old[$k] ?? '');
         <!-- Actions -->
         <div class="pt-6 border-t border-brand-border flex items-center justify-end gap-3">
           <?php if ($saved): ?>
-            <a href="index.php" class="btn-ghost">Cancel</a>
+            <a href="Adoption_information.php" class="btn-ghost">Cancel</a>
           <?php else: ?>
             <button type="reset" class="btn-ghost">Clear</button>
           <?php endif; ?>
@@ -410,7 +407,7 @@ updateReadiness();
 <footer class="footer">
   <div class="container footer-grid">
     <div>
-      <a href="#top" class="logo footer-logo"><img src="footer logo.png" alt="Adoptly"></a>
+      <a href="../Welcome_page.php" class="logo footer-logo"><img src="../photos/adoptly logo.png" alt="Adoptly"></a>
       <p>Adoptly is a non-profit companion animal rescue network dedicated to connecting shelter pets with safe, loving and permanent forever homes through nationwide solidarity.</p>
     </div>
     <?php foreach ($footerCols as $heading => $links): ?>
@@ -437,4 +434,3 @@ updateReadiness();
 </footer>
 </body>
 </html>
-

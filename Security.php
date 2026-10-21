@@ -1,3 +1,31 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/adoption_flow.php';
+adoption_flow_guard('security');
+require_once __DIR__ . '/profile_data.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['security_complete'])) {
+    $backupEmail = trim((string)($_POST['backup_email'] ?? ''));
+    if ($backupEmail !== '' && !filter_var($backupEmail, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(422);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'Enter a valid backup email address or leave it blank.']);
+        exit;
+    }
+    $_SESSION['security_settings'] = [
+        'complete' => true,
+        'backup_email' => $backupEmail,
+        'updated_at' => date('c'),
+    ];
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode(['saved' => true]);
+    exit;
+}
+
+$securityPercent = adoption_flow_percent('security');
+$securitySettings = is_array($_SESSION['security_settings'] ?? null) ? $_SESSION['security_settings'] : [];
+$fullName = trim($user['first'] . ' ' . $user['last']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,7 +148,26 @@
      HEADER
      ========================================================= -->
 
-    <div id="navbar-placeholder"></div>
+    <header class="bg-white border-b border-warmBorder sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-h-20 gap-4">
+            <a class="flex items-center shrink-0" href="Welcome_page.php"><img src="photos/logoNav.png" alt="Adoptly" class="h-10 w-auto"></a>
+            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-700" aria-label="Main navigation">
+                <?php foreach ($navLinks as $link): ?>
+                    <a class="hover:text-coral-500 transition-colors" href="<?= e($link['href']) ?>"><?= e($link['label']) ?></a>
+                <?php endforeach; ?>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a class="fav" href="Html/heart.html" aria-label="View Saved Pets">♡</a>
+                <div class="flex items-center gap-3 pl-2 border-l border-warmBorder">
+                    <span class="w-10 h-10 rounded-full bg-coral-100 text-coral-600 font-semibold flex items-center justify-center text-sm"<?= $user['photo'] !== '' ? ' style="background-image:url(&quot;' . e($user['photo']) . '&quot;);background-size:cover;background-position:center"' : '' ?>><?= $user['photo'] === '' ? e($user['initials'] !== '' ? $user['initials'] : '👤') : '' ?></span>
+                    <span class="hidden lg:flex flex-col text-left text-xs">
+                        <strong class="font-semibold text-gray-900 leading-tight"><?= e($fullName !== '' ? $fullName : 'New Applicant') ?></strong>
+                        <small class="text-emerald-600 font-medium"><?= e($user['role']) ?></small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
 
 
     <!-- =========================================================
@@ -129,6 +176,9 @@
 
     <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
 
+        <?php if (isset($_GET['blocked'])): ?>
+            <div role="alert" class="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">Complete and save Security Settings before continuing to document requirements.</div>
+        <?php endif; ?>
 
         <!-- PAGE BANNER -->
 
@@ -184,14 +234,14 @@
 
                         <div class="flex-1">
 
-                            <div class="flex items-center justify-between">
+                            <div class="flex items-center justify-between gap-2">
 
                                 <span class="text-xs font-semibold text-gray-800">
                                     Account Security
                                 </span>
 
                                 <span class="text-xs font-bold text-emerald-700">
-                                    95% Configured
+                                    <?= $securityPercent ?>% Configured
                                 </span>
 
                             </div>
@@ -199,13 +249,13 @@
 
                             <div class="w-full bg-emerald-200 h-2 rounded-full mt-2 overflow-hidden">
 
-                                <div class="bg-emerald-500 h-full rounded-full" style="width:95%;"></div>
+                                <div class="bg-emerald-500 h-full rounded-full" style="width:<?= $securityPercent ?>%;"></div>
 
                             </div>
 
 
                             <p class="text-[11px] text-gray-500 mt-1.5">
-                                Enhanced Protection Active
+                                <?= $securityPercent === 100 ? 'Your security settings have been saved.' : 'Optional for now. You can continue without configuring security.' ?>
                             </p>
 
                         </div>
@@ -248,7 +298,7 @@
                         <li>
 
                             <a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-                                href="#">
+                                href="Resume_profile.php">
 
                                 <div class="flex items-center gap-3">
 
@@ -283,7 +333,7 @@
                         <li>
 
                             <a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-                                href="#">
+                                href="php/Adoption_information.php">
 
                                 <div class="flex items-center gap-3">
 
@@ -318,7 +368,7 @@
                         <li>
 
                             <a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-                                href="household.html">
+                                href="Household.php">
 
                                 <div class="flex items-center gap-3">
 
@@ -385,7 +435,7 @@
                         <li>
 
                             <a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-                                href="#">
+                                href="php/requirements.php">
 
                                 <div class="flex items-center gap-3">
 
@@ -424,7 +474,7 @@
                     <div class="space-y-1 text-sm font-medium">
 
                         <a class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-colors"
-                            href="#">
+                            href="Welcome_page.php">
 
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
@@ -434,13 +484,13 @@
 
                             </svg>
 
-                            Notifications & Alerts
+                            Dashboard
 
                         </a>
 
 
                         <a class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:text-coral-600 rounded-lg hover:bg-coral-50 transition-colors"
-                            href="#">
+                            href="php/sign_out.php">
 
                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
@@ -508,7 +558,7 @@
             <section class="lg:col-span-8">
 
 
-                <form id="securityForm"
+                <form id="securityForm" method="post" action="Security.php"
                     class="bg-white rounded-2xl border border-warmBorder p-6 sm:p-8 shadow-sm space-y-8">
 
 
@@ -564,8 +614,7 @@
                                 </h3>
 
                                 <p class="text-xs text-gray-500 mt-0.5">
-                                    Ensure your account uses a unique,
-                                    resilient passphrase.
+                                    Password changes are optional. Leave the fields blank to keep your current password.
                                 </p>
 
                             </div>
@@ -584,7 +633,6 @@
 
                             <label class="block text-xs font-semibold text-gray-700" for="current-password">
                                 Current Password
-                                <span class="text-coral-500">*</span>
                             </label>
 
 
@@ -592,7 +640,7 @@
 
                                 <input
                                     class="w-full rounded-xl border border-warmBorder bg-white text-sm py-2.5 px-3.5 pr-10 text-gray-800 input-focus-coral font-medium"
-                                    id="current-password" type="password" placeholder="Enter current password">
+                                    id="current-password" type="password" autocomplete="current-password" placeholder="Enter current password (only if changing it)">
 
 
                                 <button aria-label="Toggle Current Password Visibility"
@@ -615,6 +663,12 @@
 
                             </div>
 
+                            <p class="text-xs text-gray-500">
+                                Forgot your password?
+                                <a class="font-semibold text-coral-600 hover:underline" href="mailto:support@adoptly.org?subject=Password%20recovery">Contact support</a>.
+                                Secure self-service password recovery is not available yet.
+                            </p>
+
                         </div>
 
 
@@ -623,8 +677,7 @@
                         <div class="space-y-1.5">
 
                             <label class="block text-xs font-semibold text-gray-700" for="new-password">
-                                New Password
-                                <span class="text-coral-500">*</span>
+                                New Password <span class="font-normal text-gray-400">(optional)</span>
                             </label>
 
 
@@ -632,7 +685,7 @@
 
                                 <input
                                     class="w-full rounded-xl border border-warmBorder bg-white text-sm py-2.5 px-3.5 pr-10 text-gray-800 input-focus-coral font-medium"
-                                    id="new-password" type="password" placeholder="Enter new password">
+                                    id="new-password" type="password" autocomplete="new-password" placeholder="Enter new password">
 
 
                                 <button aria-label="Toggle New Password Visibility"
@@ -727,8 +780,7 @@
                             <div class="flex items-center justify-between">
 
                                 <label class="block text-xs font-semibold text-gray-700" for="confirm-password">
-                                    Confirm New Password
-                                    <span class="text-coral-500">*</span>
+                                    Confirm New Password <span class="font-normal text-gray-400">(optional)</span>
                                 </label>
 
 
@@ -744,7 +796,7 @@
 
                                 <input
                                     class="w-full rounded-xl border border-warmBorder bg-white text-sm py-2.5 px-3.5 pr-10 text-gray-800 input-focus-coral font-medium"
-                                    id="confirm-password" type="password" placeholder="Confirm new password">
+                                    id="confirm-password" type="password" autocomplete="new-password" placeholder="Confirm new password">
 
 
                                 <button aria-label="Toggle Confirm Password Visibility"
@@ -787,7 +839,7 @@
                             <p class="text-xs text-gray-500 mt-0.5">
                                 Provide a verified backup email to recover
                                 your adoption applications if you lose
-                                primary access.
+                                primary access. This is optional and verification is not configured yet.
                             </p>
 
                         </div>
@@ -796,8 +848,7 @@
                         <div class="space-y-2">
 
                             <label class="block text-xs font-semibold text-gray-700" for="backup-email">
-                                Backup Email Address
-                                <span class="text-coral-500">*</span>
+                                Backup Email Address <span class="font-normal text-gray-400">(optional)</span>
                             </label>
 
 
@@ -807,7 +858,7 @@
 
                                     <input
                                         class="w-full rounded-xl border border-warmBorder bg-surface text-sm py-2.5 px-3.5 text-gray-800 input-focus-coral font-medium"
-                                        id="backup-email" type="email" placeholder="Enter backup email">
+                                        id="backup-email" type="email" placeholder="Enter backup email" value="<?= e((string)($securitySettings['backup_email'] ?? '')) ?>">
 
                                 </div>
 
@@ -895,7 +946,7 @@
 
 
                         <a class="text-xs font-semibold text-coral-600 hover:text-coral-700 hover:underline whitespace-nowrap"
-                            href="#">
+                            href="Security.php#securityForm">
                             Manage 2FA & Backup Codes →
                         </a>
 
@@ -933,6 +984,12 @@
 
                         <div class="flex items-center gap-4 w-full sm:w-auto justify-end">
 
+                            <a
+                                class="text-xs sm:text-sm font-semibold text-coral-600 hover:text-coral-700 px-3 py-2 transition-colors"
+                                href="php/requirements.php">
+                                Skip security for now
+                            </a>
+
                             <button id="cancelButton"
                                 class="text-xs sm:text-sm font-semibold text-gray-500 hover:text-gray-800 px-3 py-2 transition-colors"
                                 type="button">
@@ -965,11 +1022,6 @@
         </div>
 
     </main>
-
-    <div id="footer-placeholder"></div>
-    <script src="js/Components.js"></script>
-
-
 
     <!-- =========================================================
      JAVASCRIPT – fully functional
@@ -1300,51 +1352,71 @@
            ========================================================= */
 
         if (securityForm) {
-            securityForm.addEventListener('submit', function (event) {
+            securityForm.addEventListener('submit', async function (event) {
                 event.preventDefault();
 
                 const current = currentPassword.value.trim();
                 const newPass = newPassword.value;
                 const confirmPass = confirmPassword.value;
+                const recoveryEmail = backupEmail.value.trim();
+                const passwordChangeRequested = Boolean(current || newPass || confirmPass);
 
-                // 1. Current password check
-                const storedPassword = localStorage.getItem('adoptlyPassword');
-                if (current !== storedPassword) {
-                    alert('Current password is incorrect.\n\n(Demo password: currentpassword123)');
-                    currentPassword.focus();
+                if (passwordChangeRequested) {
+                    if (!current || !newPass || !confirmPass) {
+                        alert('To change your password, enter your current password, a new password, and confirm the new password.');
+                        (!current ? currentPassword : !newPass ? newPassword : confirmPassword).focus();
+                        return;
+                    }
+
+                    const storedPassword = localStorage.getItem('adoptlyPassword');
+                    if (current !== storedPassword) {
+                        alert('Current password is incorrect.');
+                        currentPassword.focus();
+                        return;
+                    }
+
+                    const strength = getStrength(newPass);
+                    if (strength.score !== 4) {
+                        alert('Please complete all password requirements.');
+                        newPassword.focus();
+                        return;
+                    }
+
+                    if (newPass !== confirmPass) {
+                        alert('New password and confirmation password do not match.');
+                        confirmPassword.focus();
+                        return;
+                    }
+
+                    if (current === newPass) {
+                        alert('Your new password must be different from your current password.');
+                        return;
+                    }
+                }
+
+                if (recoveryEmail && !isValidEmail(recoveryEmail)) {
+7                    alert('Enter a valid backup email address to continue.');
+                    backupEmail.focus();
                     return;
                 }
 
-                // 2. Strength check
-                const strength = getStrength(newPass);
-                if (strength.score !== 4) {
-                    alert('Please complete all password requirements.');
-                    newPassword.focus();
+                try {
+                    const response = await fetch('Security.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({ security_complete: '1', backup_email: recoveryEmail })
+                    });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.error || 'Could not save security settings.');
+                } catch (error) {
+                    alert(error.message || 'Could not save security settings. Please try again.');
                     return;
                 }
 
-                // 3. Match check
-                if (newPass !== confirmPass) {
-                    alert('New password and confirmation password do not match.');
-                    confirmPassword.focus();
-                    return;
+                if (passwordChangeRequested) {
+                    localStorage.setItem('adoptlyPassword', newPass);
                 }
-
-                // 4. Must be different from current
-                if (current === newPass) {
-                    alert('Your new password must be different from your current password.');
-                    return;
-                }
-
-                // Save new password
-                localStorage.setItem('adoptlyPassword', newPass);
-
-                // Save backup email if provided
-                if (backupEmail.value.trim()) {
-                    localStorage.setItem('adoptlyBackupEmail', backupEmail.value.trim());
-                }
-
-                alert('Security settings updated successfully!');
+                localStorage.setItem('adoptlyBackupEmail', recoveryEmail);
 
                 // Clear password fields
                 currentPassword.value = '';
@@ -1352,6 +1424,7 @@
                 confirmPassword.value = '';
                 updatePasswordStrength();
                 updatePasswordMatch();
+                window.location.href = 'php/requirements.php';
             });
         }
 

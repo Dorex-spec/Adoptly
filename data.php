@@ -8,7 +8,7 @@ function e(string $value): string
 }
 
 $navLinks = [
-    ['label' => 'Browse pets',       'href' => 'Browse_page.php', 'active' => false],
+    ['label' => 'Browse pets',       'href' => 'Html/Browse_page.html', 'active' => false],
     ['label' => 'Adoption process',  'href' => 'Adoption_process.php', 'active' => false],
     ['label' => 'Donate',            'href' => 'Donation.php', 'active' => true],
     ['label' => 'About',             'href' => 'About_us.php', 'active' => false],

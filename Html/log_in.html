@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Adoptly - Log In &amp; Journey Continuation</title>
+  <base href="../Html/">
   <!-- Google Fonts & External CSS -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="Css/index.css">
-  <link rel="stylesheet" href="../php/log_in.php">
+  <link rel="stylesheet" href="../Css/index.css">
 
   <!-- Tailwind CSS v3 with Forms & Container Queries -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -109,7 +109,7 @@
           </div>
 
           <!-- Email Form -->
-          <form class="space-y-4" id="loginForm" action="Log_in.php" method="POST">
+          <form class="space-y-4" id="loginForm" action="../php/log_in.php" method="POST">
             <!-- Email Address Field -->
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal mb-1.5" for="email">
@@ -174,7 +174,7 @@
         <div class="pt-6 mt-6 border-t border-charcoal-border/70 text-center">
           <p class="text-sm text-charcoal-muted">
             Don't have an account yet?
-            <a class="font-bold text-brand hover:text-brand-hover hover:underline ml-1 inline-flex items-center gap-1" href="Sign_in.php">
+            <a class="font-bold text-brand hover:text-brand-hover hover:underline ml-1 inline-flex items-center gap-1" href="../php/sign_in.php">
               Create a free account →
             </a>
           </p>
@@ -196,7 +196,7 @@
 
           <!-- Rescue Pet Photo Section -->
           <div class="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-sm border border-charcoal-border">
-            <img src="photos/Log_in photo.webp" alt="Rescue pets with owners" class="w-full h-full object-cover">
+            <img src="../photos/for log in&amp;sign in/Log_in photo.webp" alt="Rescue pets with owners" class="w-full h-full object-cover">
 
             <!-- Certification Tag Pill Overlay -->
             <div class="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/95 backdrop-blur-sm text-emerald-700 border border-emerald-200 shadow-sm">
@@ -249,7 +249,7 @@
     <div class="popup-card">
       <h3 id="socialPromptTitle" style="font-size: 20px; font-weight: 800; color: #1c1917; margin: 0 0 8px 0;">Sign in with Google</h3>
       <p id="socialPromptMessage" style="font-size: 14px; color: #6b7280; margin: 0 0 16px 0;">Please enter your Google account to continue:</p>
-      <form action="Log_in.php" method="POST">
+      <form action="../php/log_in.php" method="POST">
         <input type="email" name="email" id="socialEmailInput" class="prompt-input" placeholder="e.g. user@gmail.com" required>
         <div style="display: flex; justify-content: flex-end; gap: 12px;">
           <button type="button" class="popup-cancel-btn" onclick="closeSocialPrompt()">Cancel</button>

@@ -499,7 +499,7 @@
               <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <!-- Primary CTA -> Browse Pet Page -->
                 <a class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#E05A4F] text-white font-semibold text-sm hover:bg-[#c94b41] active:scale-95 transition shadow-sm flex items-center justify-center gap-2"
-                  href="Browse_page.php">
+                  href="Html/Browse_page.html">
                   <span class="">Start Adopting</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

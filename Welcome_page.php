@@ -1,5 +1,17 @@
 <?php
 $pageTitle = 'Adoptly - Welcome Page';
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+$fullName = trim((string)($_SESSION['full_name'] ?? ''));
+$displayName = $fullName !== '' ? $fullName : 'New Adopter';
+$nameParts = preg_split('/\s+/', $fullName, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+$initials = '';
+foreach (array_slice($nameParts, 0, 2) as $part) {
+  $initials .= strtoupper(substr($part, 0, 1));
+}
+$initials = $initials !== '' ? $initials : 'NA';
+$escapedDisplayName = htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8');
 
 // 🖼️ ILAGAY DITO ANG IMAGE URL NG BAWAT PET
 $petImages = [
@@ -64,25 +76,25 @@ $footerCols = [
 <div class="max-w-[1440px] mx-auto px-8 h-20 flex items-center justify-between">
 <div class="flex items-center gap-2">
 <!-- Logo (same image/size as the Adoption Process page) -->
-<a class="block" href="#"><img src="../photos/image-removebg-preview (1).png" alt="Adoptly" class="h-11 max-sm:h-9 w-auto"></a>
+<a class="block" href="#"><img src="photos/logoNav.png" alt="Adoptly" class="h-11 max-sm:h-9 w-auto"></a>
 </div>
 <nav class="hidden md:flex items-center space-x-9 text-[15px] font-medium text-[#4A4A4A]">
-<a class="hover:text-brand-coral transition-colors" href="#">Browse Pets</a>
-<a class="hover:text-brand-coral transition-colors" href="../php/Adoption_process.php">Adoption Process</a>
+<a class="hover:text-brand-coral transition-colors" href="Html/Browse_page.html">Browse Pets</a>
+<a class="hover:text-brand-coral transition-colors" href="Html/Adoption_process.html">Adoption Process</a>
 <a class="hover:text-brand-coral transition-colors" href="#">Donate</a>
 <a class="hover:text-brand-coral transition-colors" href="#">About</a>
 </nav>
 <div class="flex items-center space-x-6">
 <!-- Heart icon (same style as the Adoption Process navigation) -->
-<a class="relative inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#FFE1DD] text-[#E05A4F] text-base leading-none hover:bg-[#E05A4F] hover:text-white transition-colors" href="#" title="Saved Animals" aria-label="Favorites">
+<a class="relative inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#FFE1DD] text-[#E05A4F] text-base leading-none hover:bg-[#E05A4F] hover:text-white transition-colors" href="Html/heart.html" title="Saved Animals" aria-label="Favorites">
 <span>❤</span>
 </a>
 <div class="h-8 w-[1px] bg-gray-200"></div>
 <div class="flex items-center gap-3 cursor-pointer group">
-<div class="w-10 h-10 rounded-full bg-brand-coral-light border border-brand-coral/30 flex items-center justify-center text-brand-coral font-bold text-sm tracking-wide">SJ</div>
+<div class="w-10 h-10 rounded-full bg-brand-coral-light border border-brand-coral/30 flex items-center justify-center text-brand-coral font-bold text-sm tracking-wide"><?= htmlspecialchars($initials, ENT_QUOTES, 'UTF-8') ?></div>
 <div class="text-left hidden sm:block">
 <div class="text-sm font-semibold text-gray-900 group-hover:text-brand-coral transition-colors flex items-center gap-1">
-Sarah Jenkins
+<?= $escapedDisplayName ?>
 <svg class="w-4 h-4 text-gray-400 group-hover:text-brand-coral" fill="currentColor" viewBox="0 0 20 20">
 <path clip-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" fill-rule="evenodd"></path>
 </svg>
@@ -105,7 +117,7 @@ Sarah Jenkins
 WELCOME TO THE ADOPTLY FAMILY • YOUR JOURNEY BEGINS
 </div>
 <h1 class="text-3xl sm:text-4xl md:text-[42px] font-bold text-gray-900 leading-tight mb-4 flex items-center flex-wrap gap-3">
-<span>Welcome to the Adoptly Family, Sarah!</span>
+<span>Welcome to the Adoptly Family, <?= $escapedDisplayName ?>!</span>
 <span class="inline-flex items-center text-brand-coral text-3xl">🐾</span>
 </h1>
 <p class="text-base sm:text-lg text-gray-600 max-w-3xl leading-relaxed mb-6">
@@ -144,7 +156,7 @@ We're so excited to help you find your new best friend. Your personalized dashbo
 <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden"><div class="bg-brand-coral h-2 rounded-full w-1/4"></div></div>
 </div>
 </div>
-<a class="w-full py-2.5 px-4 bg-brand-coral hover:bg-brand-coral-hover text-white text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5 shadow-sm" href="#"><span>Resume Profile</span><span>→</span></a>
+<a class="w-full py-2.5 px-4 bg-brand-coral hover:bg-brand-coral-hover text-white text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5 shadow-sm" href="Resume_profile.php"><span>Resume Profile</span><span>→</span></a>
 </article>
 
 <!-- Card 2 -->
@@ -157,7 +169,7 @@ We're so excited to help you find your new best friend. Your personalized dashbo
 <p class="text-xs text-gray-500 mb-4 leading-relaxed">Explore 14,200+ rescue dogs, cats, and companions waiting for a loving forever home.</p>
 <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50/80 border border-amber-200/50 text-[11px] font-medium text-amber-700 mb-6"><span>⚡ Verified Shelters</span></div>
 </div>
-<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="#"><span>Start Exploring</span><span>→</span></a>
+<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="Html/Browse_page.html"><span>Start Exploring</span><span>→</span></a>
 </article>
 
 <!-- Card 3 -->
@@ -170,7 +182,7 @@ We're so excited to help you find your new best friend. Your personalized dashbo
 <p class="text-xs text-gray-500 mb-4 leading-relaxed">Bookmark pets you love to receive real-time application queues and availability alerts.</p>
 <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gray-100 text-[11px] font-medium text-gray-600 mb-6"><span>0 animals saved yet</span></div>
 </div>
-<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="#"><span>View Saved Pets</span><span>→</span></a>
+<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="Html/heart.html"><span>View Saved Pets</span><span>→</span></a>
 </article>
 
 <!-- Card 4 -->
@@ -183,7 +195,7 @@ We're so excited to help you find your new best friend. Your personalized dashbo
 <p class="text-xs text-gray-500 mb-4 leading-relaxed">Learn the step-by-step roadmap from application screening to bringing your pet home.</p>
 <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-[11px] font-medium text-blue-600 mb-6"><span>📑 4 Simple Steps</span></div>
 </div>
-<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="#"><span>Explore Adoption Process</span><span>→</span></a>
+<a class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 text-center font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5" href="Html/Adoption_process.html"><span>Explore Adoption Process</span><span>→</span></a>
 </article>
 
 </div>
@@ -412,4 +424,3 @@ We're so excited to help you find your new best friend. Your personalized dashbo
 <!-- END: GlobalFooter -->
 </body>
 </html>
-

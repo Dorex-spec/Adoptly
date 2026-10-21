@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Adoptly - Sign In</title>
+    <base href="../Html/">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Google Fonts & Custom CSS -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Css/index.css">
-    <link rel="stylesheet" href="../php/sign_in.php">
+    <link rel="stylesheet" href="../Css/index.css">
 
     <!-- Tailwind Configuration -->
     <script>
@@ -65,7 +65,7 @@
                     <!-- Image Container with 100% Certified Shelters Badge -->
                     <div class="rounded-2xl h-56 sm:h-64 w-full relative flex flex-col items-center justify-end p-4 overflow-hidden bg-[#F5EFEB]">
                         <!-- Background Image -->
-                        <img src="photos/new_happy_dog.webp" alt="Happy rescue dog" class="absolute inset-0 w-full h-full object-cover object-bottom z-0" />
+                        <img src="../photos/for log in&amp;sign in/new_happy_dog.webp" alt="Happy rescue dog" class="absolute inset-0 w-full h-full object-cover object-bottom z-0" />
 
                         <!-- Trust Badge Overlaid at Bottom of Image -->
                         <div class="relative z-10 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm border border-[#34D399]/40 text-[#059669] text-xs font-semibold px-4 py-1.5 rounded-full shadow-sm">
@@ -127,8 +127,16 @@
                     </div>
 
                     <!-- Email Form -->
-                    <form action="Sign_in.php" method="POST" class="space-y-5">
+                    <form action="../php/sign_in.php" method="POST" class="space-y-5">
                         
+                        <!-- Full Name Input -->
+                        <div>
+                            <label class="block text-[13px] font-bold text-[#334155] uppercase tracking-wide mb-2" for="full-name">
+                                Full Name <span class="text-brand-coral">*</span>
+                            </label>
+                            <input class="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-[12px] px-4 py-3 text-[15px] text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-coral/20 focus:border-brand-coral transition" id="full-name" name="full_name" autocomplete="name" placeholder="e.g. Sarah Jenkins" required type="text">
+                        </div>
+
                         <!-- Email Input -->
                         <div>
                             <label class="block text-[13px] font-bold text-[#334155] uppercase tracking-wide mb-2" for="email">
@@ -202,7 +210,7 @@
         <div class="popup-card">
             <h3 id="socialPromptTitle" style="font-size: 20px; font-weight: 800; color: #1c1917; margin: 0 0 8px 0;">Sign in with Google</h3>
             <p id="socialPromptMessage" style="font-size: 14px; color: #6b7280; margin: 0 0 16px 0;">Please enter your Google account to continue:</p>
-            <form action="Sign_in.php" method="POST">
+            <form action="../php/sign_in.php" method="POST">
                 <input type="email" name="email" id="socialEmailInput" class="prompt-input" placeholder="e.g. user@gmail.com" required>
                 <div style="display: flex; justify-content: flex-end; gap: 12px;">
                     <button type="button" class="popup-cancel-btn" onclick="closeSocialPrompt()">Cancel</button>

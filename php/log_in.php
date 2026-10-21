@@ -5,40 +5,38 @@ $popupType = '';
 $popupTitle = '';
 $popupMessage = '';
 
-// 1. GET Request: Check if an account is already signed in for this session
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_SESSION['loggedInUser'])) {
-  $popupType = 'error';
-  $popupTitle = 'Already Signed In';
-  $popupMessage = 'Account has already signed in.';
-}
-
-// 2. POST Request: Process login form or social prompt submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-
-  if (isset($_SESSION['loggedInUser'])) {
-    $popupType = 'error';
-    $popupTitle = 'Log In Error';
-    $popupMessage = 'Account has already signed in.';
-  } elseif (empty($email) || !str_ends_with(strtolower($email), '@gmail.com')) {
-    $popupType = 'error';
-    $popupTitle = 'Log In Error';
-    $popupMessage = 'Invalid account. You must use an @gmail.com address.';
-  } else {
-    $_SESSION['loggedInUser'] = strtolower($email);
-    $popupType = 'success';
-    $popupTitle = 'Login Successful';
-    $popupMessage = '✔️ Your account is now logged in for this session.';
+if (!empty($_SESSION['loggedInUser'])) {
+  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    header('Location: ../Resume_profile.php');
+    exit;
   }
+
+  $email = strtolower(trim((string)($_POST['email'] ?? '')));
+  if ($email !== '' && hash_equals(strtolower((string)$_SESSION['loggedInUser']), $email)) {
+    header('Location: ../Resume_profile.php');
+    exit;
+  }
+
+  $popupType = 'error';
+  $popupTitle = 'Account Mismatch';
+  $popupMessage = 'This email does not match the account that signed in. Please use your signed-in account.';
+} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $popupType = 'error';
+  $popupTitle = 'Account Not Found';
+  $popupMessage = 'Please sign in to Adoptly first, then log in with the same account.';
 }
 
-// Load View
-include 'Log_in.html';
+include __DIR__ . '/../Html/log_in.html';
 ?>
 
 <?php if (!empty($popupType)): ?>
-  document.addEventListener('DOMContentLoaded', function() {
-  showPopup('<?php echo $popupType; ?>', '<?php echo addslashes($popupTitle); ?>',
-  '<?php echo addslashes($popupMessage); ?>');
-  });
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      showPopup(
+        <?= json_encode($popupType) ?>,
+        <?= json_encode($popupTitle) ?>,
+        <?= json_encode($popupMessage) ?>
+      );
+    });
+  </script>
 <?php endif; ?>

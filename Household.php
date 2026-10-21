@@ -1,3 +1,53 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/adoption_flow.php';
+adoption_flow_guard('household');
+require_once __DIR__ . '/profile_data.php';
+
+$householdOptions = [
+	'residence_type' => ['single_family', 'townhouse', 'apartment', 'rural', 'mobile', 'other'],
+	'residence_ownership' => ['own', 'rent', 'family', 'military', 'other'],
+	'household_agreement' => ['yes', 'discussion', 'hesitant'],
+	'allergies' => ['no', 'yes'],
+];
+$householdOld = is_array($_SESSION['household_information'] ?? null) ? $_SESSION['household_information'] : [];
+$householdErrors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$posted = [];
+	foreach ($householdOptions as $field => $choices) {
+		$value = (string)($_POST[$field] ?? '');
+		$posted[$field] = in_array($value, $choices, true) ? $value : '';
+	}
+	foreach (['adults', 'children', 'seniors', 'dogs', 'cats'] as $field) {
+		$posted[$field] = max(0, min(50, (int)($_POST[$field] ?? 0)));
+	}
+	$features = ['fenced_yard', 'enclosed_patio', 'pet_friendly_building', 'garden_access'];
+	$posted['property_features'] = array_values(array_intersect($features, (array)($_POST['property_features'] ?? [])));
+	$householdOld = array_merge($householdOld, $posted);
+	foreach (['residence_type', 'residence_ownership', 'household_agreement', 'allergies'] as $field) {
+		if ($householdOld[$field] === '') {
+			$householdErrors[] = 'Please complete all required household selections.';
+			break;
+		}
+	}
+	if (array_sum(array_intersect_key($householdOld, array_flip(['adults', 'children', 'seniors']))) < 1) {
+		$householdErrors[] = 'At least one household resident is required.';
+	}
+	$_SESSION['household_information'] = $householdOld;
+	if ($householdErrors === []) {
+		header('Location: Security.php?unlocked=1');
+		exit;
+	}
+}
+
+$householdPercent = adoption_flow_percent('household');
+$householdJson = htmlspecialchars(
+	json_encode($householdOld, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP) ?: '{}',
+	ENT_QUOTES,
+	'UTF-8'
+);
+$fullName = trim($user['first'] . ' ' . $user['last']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,26 +186,25 @@
 			<div class="flex items-center justify-between h-20">
 				<!-- Left Brand & Main Nav -->
 				<div class="flex items-center gap-10">
-					<a class="flex items-center" href="#">
-						<img src="../photos/image-removebg-preview (1).png" alt="Adoptly Logo" class="h-10 w-auto">
+					<a class="flex items-center" href="Welcome_page.php">
+						<img src="photos/logoNav.png" alt="Adoptly Logo" class="h-10 w-auto">
 					</a>
 					<nav class="hidden md:flex items-center space-x-7 text-[14px] font-medium text-gray-700">
-						<a class="hover:text-coral-500 transition-colors" href="#">Browse Pets</a>
-						<a class="hover:text-coral-500 transition-colors" href="#">Adoption Process</a>
-						<a class="hover:text-coral-500 transition-colors" href="#">Donate</a>
-						<a class="hover:text-coral-500 transition-colors" href="#">About</a>
+						<?php foreach ($navLinks as $link): ?>
+							<a class="hover:text-coral-500 transition-colors" href="<?= e($link['href']) ?>"><?= e($link['label']) ?></a>
+						<?php endforeach; ?>
 					</nav>
 				</div>
 				<!-- Right User Actions -->
 				<div class="flex items-center space-x-5">
 					<!-- Wishlist Heart -->
-					<button class="fav" type="button" aria-label="View Saved Pets">
+					<a class="fav" href="Html/heart.html" aria-label="View Saved Pets">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20"
 							height="20">
 							<path
 								d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
 						</svg>
-					</button>
+					</a>
 					<!-- Notification Bell -->
 					<button aria-label="Notifications"
 						class="relative p-2 text-gray-600 hover:text-coral-500 transition-colors">
@@ -170,14 +219,14 @@
 					<!-- User Pill -->
 					<div class="flex items-center gap-3 pl-2 border-l border-warmBorder">
 						<div
-							class="w-10 h-10 rounded-full bg-coral-100 text-coral-600 font-semibold flex items-center justify-center text-sm shadow-sm">
-							SJ
+							class="w-10 h-10 rounded-full bg-coral-100 text-coral-600 font-semibold flex items-center justify-center text-sm shadow-sm"<?= $user['photo'] !== '' ? ' style="background-image:url(&quot;' . e($user['photo']) . '&quot;);background-size:cover;background-position:center"' : '' ?>>
+							<?= $user['photo'] === '' ? e($user['initials'] !== '' ? $user['initials'] : '👤') : '' ?>
 						</div>
 						<div class="hidden lg:flex flex-col text-left text-xs">
-							<span class="font-semibold text-gray-900 leading-tight">Sarah Jenkins</span>
+							<span class="font-semibold text-gray-900 leading-tight"><?= e($fullName !== '' ? $fullName : 'New Applicant') ?></span>
 							<span class="text-emerald-600 font-medium flex items-center gap-1 text-[11px] mt-0.5">
 								<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-								Verified Adopter
+								<?= e($user['role']) ?>
 							</span>
 						</div>
 						<svg class="w-4 h-4 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,11 +241,11 @@
 		<div class="bg-surface border-t border-warmBorder/70 py-2.5">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<ol class="flex items-center space-x-2 text-xs text-gray-500 font-medium">
-					<li class=""><a class="hover:text-gray-800" href="../php/index.php">Home</a></li>
+					<li class=""><a class="hover:text-gray-800" href="Welcome_page.php">Home</a></li>
 					<li class=""><span class="">/</span></li>
-					<li class=""><a class="hover:text-gray-800" href="#">Dashboard</a></li>
+					<li class=""><a class="hover:text-gray-800" href="Welcome_page.php">Dashboard</a></li>
 					<li class=""><span class="">/</span></li>
-					<li class=""><a class="hover:text-gray-800" href="../php/Resume_profile.php">Account Settings</a>
+					<li class=""><a class="hover:text-gray-800" href="Resume_profile.php">Account Settings</a>
 					</li>
 					<li class=""><span class="">/</span></li>
 					<li class="text-gray-900 font-semibold">Household Information</li>
@@ -233,16 +282,16 @@
 							</svg>
 						</div>
 						<div class="flex-1">
-							<div class="flex items-center justify-between">
+							<div class="flex items-center justify-between gap-2">
 								<span class="text-xs font-semibold text-gray-800">Adopter Readiness</span>
-								<span class="text-xs font-bold text-emerald-700">90% Complete</span>
+								<span class="text-xs font-bold text-emerald-700"><?= $householdPercent ?>% Complete</span>
 							</div>
 							<!-- Progress Bar -->
 							<div class="w-full bg-emerald-200 h-2 rounded-full mt-2 overflow-hidden">
 								<div class="bg-emerald-500 h-full rounded-full transition-all duration-500"
-									style="width: 90%;"></div>
+									style="width: <?= $householdPercent ?>%;"></div>
 							</div>
-							<p class="text-[11px] text-gray-500 mt-1.5">Shelters prioritize fully verified applications
+							<p class="text-[11px] text-gray-500 mt-1.5">This step is <?= $householdPercent ?>% complete.
 							</p>
 						</div>
 					</div>
@@ -261,7 +310,7 @@
 						<!-- Item 1: Personal Info (Completed) -->
 						<li class="">
 							<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-								href="#">
+								href="Resume_profile.php">
 								<div class="flex items-center gap-3">
 									<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
 										stroke-width="1.8" viewBox="0 0 24 24">
@@ -278,7 +327,7 @@
 						<!-- Item 2: Adoption Information (Completed) -->
 						<li class="">
 							<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-								href="#">
+								href="php/Adoption_information.php">
 								<div class="flex items-center gap-3">
 									<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
 										stroke-width="1.8" viewBox="0 0 24 24">
@@ -311,7 +360,7 @@
 						<!-- Item 4: Security -->
 						<li>
 							<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-								href="Security.html">
+								href="Security.php">
 								<div class="flex items-center gap-3">
 									<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
 										stroke-width="1.8" viewBox="0 0 24 24">
@@ -327,7 +376,7 @@
 						<!-- Item 5: Other Document Requirements -->
 						<li class="">
 							<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
-								href="#">
+								href="php/requirements.php">
 								<div class="flex items-center gap-3">
 									<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
 										stroke-width="1.8" viewBox="0 0 24 24">
@@ -346,16 +395,16 @@
 					<!-- Secondary Actions -->
 					<div class="space-y-1 text-sm font-medium">
 						<a class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-colors"
-							href="#">
+							href="Welcome_page.php">
 							<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
 									stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 							</svg>
-							<span class="">Notifications &amp; Alerts</span>
+							<span class="">Dashboard</span>
 						</a>
 						<a class="flex items-center gap-3 px-3 py-2 text-gray-600 hover:text-coral-600 rounded-lg hover:bg-coral-50 transition-colors"
-							href="#">
+							href="php/sign_out.php">
 							<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
@@ -386,7 +435,23 @@
 			<!-- BEGIN: MainContentFormPanel -->
 			<section class="lg:col-span-8">
 				<form class="bg-white rounded-2xl border border-warmBorder p-6 sm:p-8 shadow-sm space-y-9"
-					onsubmit="event.preventDefault();">
+					method="post" action="Household.php" data-saved-household="<?= $householdJson ?>">
+					<?php if ($householdErrors !== []): ?>
+						<div role="alert" class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+							<?= e(implode(' ', $householdErrors)) ?>
+						</div>
+					<?php elseif (isset($_GET['saved'])): ?>
+						<div role="status" class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">Household information saved.</div>
+					<?php elseif (isset($_GET['unlocked'])): ?>
+						<div role="status" class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">Adoption Information is complete. Household Information is now unlocked.</div>
+					<?php elseif (isset($_GET['blocked'])): ?>
+						<div role="alert" class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">Complete and save Household Information before continuing.</div>
+					<?php endif; ?>
+					<input type="hidden" name="adults" id="adults-value" value="<?= (int)($householdOld['adults'] ?? 0) ?>">
+					<input type="hidden" name="children" id="children-value" value="<?= (int)($householdOld['children'] ?? 0) ?>">
+					<input type="hidden" name="seniors" id="seniors-value" value="<?= (int)($householdOld['seniors'] ?? 0) ?>">
+					<input type="hidden" name="dogs" id="dogs-value" value="<?= (int)($householdOld['dogs'] ?? 0) ?>">
+					<input type="hidden" name="cats" id="cats-value" value="<?= (int)($householdOld['cats'] ?? 0) ?>">
 					<!-- Form Header -->
 					<div class="border-b border-warmBorder pb-5">
 						<div class="flex flex-wrap items-center justify-between gap-2">
@@ -550,26 +615,26 @@
 								<label
 									class="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-warmBorder/80 cursor-pointer hover:border-coral-300">
 									<input class="w-4 h-4 rounded border-gray-300 text-coral-500 focus:ring-coral-500"
-										type="checkbox">
+										type="checkbox" name="property_features[]" value="fenced_yard">
 									<span class="text-gray-800 font-medium">Fully Fenced Yard</span>
 									<span class="ml-auto text-[10px] text-gray-400">6ft privacy fence</span>
 								</label>
 								<label
 									class="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-warmBorder/80 cursor-pointer hover:border-coral-300">
 									<input class="w-4 h-4 rounded border-gray-300 text-coral-500 focus:ring-coral-500"
-										type="checkbox">
+										type="checkbox" name="property_features[]" value="enclosed_patio">
 									<span class="text-gray-800 font-medium">Enclosed Balcony / Patio</span>
 								</label>
 								<label
 									class="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-warmBorder/80 cursor-pointer hover:border-coral-300">
 									<input class="w-4 h-4 rounded border-gray-300 text-coral-500 focus:ring-coral-500"
-										type="checkbox">
+										type="checkbox" name="property_features[]" value="pet_friendly_building">
 									<span class="text-gray-800 font-medium">Pet-Friendly Building / Complex</span>
 								</label>
 								<label
 									class="flex items-center gap-2.5 p-2 rounded-lg bg-white border border-warmBorder/80 cursor-pointer hover:border-coral-300">
 									<input class="w-4 h-4 rounded border-gray-300 text-coral-500 focus:ring-coral-500"
-										type="checkbox">
+										type="checkbox" name="property_features[]" value="garden_access">
 									<span class="text-gray-800 font-medium">Dog Door / Direct Garden Access</span>
 								</label>
 							</div>
@@ -591,7 +656,8 @@
 						<div class="relative mt-1">
 							<select
 								class="w-full rounded-xl border border-warmBorder bg-white text-gray-800 text-sm py-3 px-4 pr-10 input-focus-coral transition-colors appearance-none font-medium"
-								id="residence-ownership">
+								id="residence-ownership" name="residence_ownership">
+								<option value="">Select residence ownership...</option>
 								<option value="own">Own (Single Family Home / Free &amp; Clear / Mortgaged)</option>
 								<option value="rent">Rent (Landlord approval letter required)</option>
 								<option value="family">Live with Parents / Family Members</option>
@@ -755,7 +821,7 @@
 								<div class="flex items-center gap-4 mt-2">
 									<label
 										class="inline-flex items-center gap-1.5 text-xs text-gray-700 cursor-pointer">
-										<input checked="" class="text-coral-500 focus:ring-coral-500" name="allergies"
+										<input class="text-coral-500 focus:ring-coral-500" name="allergies"
 											type="radio" value="no">
 										<span>No known allergies</span>
 									</label>
@@ -820,11 +886,7 @@
 							<button
 								class="inline-flex items-center justify-center gap-2 bg-coral-500 hover:bg-coral-600 text-white font-medium text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-transform active:scale-95"
 								type="submit">
-								<a class="mt-4 text-xs font-semibold text-coral hover:underline inline-flex items-center gap-1"
-									href="../php/Security.php">
-									Save &amp; Continue to Security
-								</a>
-								<span class="text-base font-normal">→</span>
+								Save &amp; Continue to Security <span class="text-base font-normal">→</span>
 							</button>
 						</div>
 					</div>
@@ -835,6 +897,23 @@
 	
 	<!-- Scripts -->
 	<script data-purpose="form-interactions">
+		const householdForm = document.querySelector('form[data-saved-household]');
+		const householdSaved = JSON.parse(householdForm.dataset.savedHousehold || '{}');
+		const householdChoices = ['residence_type', 'residence_ownership', 'household_agreement', 'allergies'];
+		householdChoices.forEach(name => {
+			const value = householdSaved[name];
+			if (value) {
+				const field = householdForm.querySelector(`[name="${name}"][value="${value}"]`);
+				if (field) field.checked = true;
+				const select = householdForm.querySelector(`select[name="${name}"]`);
+				if (select) select.value = value;
+			}
+		});
+		(householdSaved.property_features || []).forEach(value => {
+			const field = householdForm.querySelector(`[name="property_features[]"][value="${value}"]`);
+			if (field) field.checked = true;
+		});
+
 		document.querySelectorAll('input[name="residence_type"]').forEach(radio => {
 			radio.addEventListener('change', function () {
 				document.querySelectorAll('input[name="residence_type"]').forEach(r => {
@@ -858,14 +937,17 @@
 					}
 				});
 			});
+			if (radio.checked) radio.dispatchEvent(new Event('change'));
 		});
 	</script>
 	<script>
 		(function () {
 			// ===== Household Members =====
-			let adults = 0;
-			let children = 0;
-			let seniors = 0;
+			const form = document.querySelector('form[data-saved-household]');
+			const saved = JSON.parse(form.dataset.savedHousehold || '{}');
+			let adults = Number(saved.adults || 0);
+			let children = Number(saved.children || 0);
+			let seniors = Number(saved.seniors || 0);
 			const totalEl = document.getElementById('total-count');
 			const adultsEl = document.getElementById('adults-count');
 			const childrenEl = document.getElementById('children-count');
@@ -877,6 +959,9 @@
 				adultsEl.textContent = adults;
 				childrenEl.textContent = children;
 				seniorsEl.textContent = seniors;
+				document.getElementById('adults-value').value = adults;
+				document.getElementById('children-value').value = children;
+				document.getElementById('seniors-value').value = seniors;
 			}
 
 			document.querySelectorAll('.counter-btn[data-target]').forEach(btn => {
@@ -916,8 +1001,9 @@
 	</script>
 	<script>
 		(function () {
-			let dogs = 0;
-			let cats = 0;
+			const saved = JSON.parse(document.querySelector('form[data-saved-household]').dataset.savedHousehold || '{}');
+			let dogs = Number(saved.dogs || 0);
+			let cats = Number(saved.cats || 0);
 			const dogsEl = document.getElementById('dogs-count');
 			const catsEl = document.getElementById('cats-count');
 			const addPetButton = document.getElementById('addPetButton');
@@ -937,6 +1023,8 @@
 
 				const total = dogs + cats + additionalTotal;
 				totalPetsDisplay.textContent = total + (total === 1 ? ' Pet' : ' Pets');
+				document.getElementById('dogs-value').value = dogs;
+				document.getElementById('cats-value').value = cats;
 			}
 
 			document.querySelectorAll('.counter-btn[data-pet]').forEach(function (btn) {

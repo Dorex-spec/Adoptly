@@ -27,8 +27,8 @@ require __DIR__ . '/data.php';
 
       <div class="header-actions">
         <a class="fav" href="Heart.php" aria-label="View Saved Pets">❤</a>
-        <a class="header-actions__login" href="Log_in.php">Login</a>
-        <a class="btn btn--coral btn--sm" href="Sign_in.php">Sign in</a>
+        <a class="header-actions__login" href="php/log_in.php">Login</a>
+        <a class="btn btn--coral btn--sm" href="php/sign_in.php">Sign in</a>
       </div>
     </div>
   </header>
@@ -239,4 +239,3 @@ require __DIR__ . '/data.php';
 
 </body>
 </html>
-
